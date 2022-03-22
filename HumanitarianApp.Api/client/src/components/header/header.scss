@@ -1,0 +1,62 @@
+@import '../../styles/variables.scss';
+
+.header {
+  background-color: #577BC1;
+  &__wrapper {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__logo {
+    display: block;
+    width: 200px;
+    height: 25px;
+    &--img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__buttons {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &__button {
+    width: 125px;
+    height: 100%;
+    color: $white;
+    background-color: transparent;
+    font-size: 15px;
+    border: none;
+    border-left: 3px solid $white;
+    transition: all .3s ease;
+    cursor: pointer;
+    &:last-child {
+      border-right: 3px solid $white;
+    }
+    &:hover {
+      transition: all .3s ease;
+      background-color: $white;
+      color: $blue;
+    }
+  }
+  &__burger {
+    width: 50px;
+    height: 40px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    &--line {
+      height: 8px;
+      width: 100%;
+      background-color: $yellow;
+      border-radius: 5px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

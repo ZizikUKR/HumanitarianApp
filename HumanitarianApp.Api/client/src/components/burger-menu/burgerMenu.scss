@@ -1,0 +1,65 @@
+@import '../../styles/variables.scss';
+
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $blue;
+  padding: 100px 0;
+  animation-name: toDown;
+  animation-duration: .3s;
+  &__wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__close {
+    position: absolute;
+    width: 40px;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: $white;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    &:hover {
+      color: $red;
+      transition: all .3s ease;
+    }
+  }
+  &__button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    color: $white;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .3s ease;
+    &:hover {
+      background-color: $yellow;
+      transition: all .3s ease;
+      color: $blue;
+    }
+  }
+}
+
+@keyframes toDown {
+  from {
+    top: -100%
+  }
+  to {
+    top: 0;
+  }
+}

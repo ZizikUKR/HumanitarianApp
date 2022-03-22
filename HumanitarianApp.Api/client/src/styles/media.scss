@@ -1,0 +1,43 @@
+@media (max-width: 1200px) {
+  .container {
+    width: 960px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    width: 720px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 540px;
+  }
+  .header {
+    &__buttons {
+      display: none;
+    }
+    &__burger {
+      display: flex;
+    }
+  }
+  .pop-up {
+    &__wrapper {
+      width: 540px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+  .pop-up {
+    padding: 0 15px;
+    &__wrapper {
+      width: 100%;
+    }
+  }
+}
