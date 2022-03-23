@@ -1,9 +1,13 @@
 @import '../../styles/variables.scss';
 
 .header {
+  margin: 0 auto;
   background-color: #577BC1;
+  max-width: 1200px;
+  border-radius: 15px 15px 0 0;
+  user-select: none;
   &__wrapper {
-    height: 60px;
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;

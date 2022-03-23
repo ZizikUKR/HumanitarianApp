@@ -25,10 +25,12 @@
     padding: 15px;
     width: 720px;
     border: 5px solid $blue;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: $white;
     z-index: 2;
     overflow: auto;
+    animation-name: popUpSCale;
+    animation-duration: .3s;
   }
   &__close {
     position: absolute;
@@ -91,5 +93,14 @@
       background-color: $yellow;
       color: $blue;
     }
+  }
+}
+
+@keyframes popUpSCale {
+  from {
+    transform: scale(0.1);
+  }
+  to {
+    transform: scale(1);
   }
 }
