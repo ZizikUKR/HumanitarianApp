@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.footer {
+  margin: 0 auto;
+  margin-top: 15px;
+  max-width: 1200px;
+  background-color: $blue;
+  border-radius: 0 0 15px 15px;
+  &__wrapper {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    color: $white;
+  }
+}

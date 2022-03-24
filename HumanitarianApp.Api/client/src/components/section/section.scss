@@ -1,16 +1,39 @@
 @import '../../styles/variables.scss';
 
 .section {
+  position: relative;
   margin: 0 auto;
   margin-top: 15px;
   max-width: 1200px;
-  padding: 15px;
-  background-color: $blue;
-  user-select: none;
+  &__info {
+    padding: 15px;
+    background-color: $blue;
+    user-select: none;
+  }
   &__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  &__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  &__search {
+    height: 30px;
+    border: 2px solid $white;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 0 10px;
+    outline: none;
+    caret-color: $white;
+    color: $white;
+    font-size: 15px;
+    &::placeholder {
+      color: $white;
+    }
   }
   &__button {
     padding: 10px;
@@ -42,6 +65,20 @@
         transform: none;
         background-color: $white;
       }
+    }
+  }
+  &__open {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: $blue;
+    cursor: pointer;
+    &-line {
+      display: block;
+      margin: 0 auto;
+      margin-top: 2px;
+      height: 1px;
+      width: 100px;
+      background-color: $white;
     }
   }
 }

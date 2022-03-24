@@ -1,11 +1,30 @@
 import './popUp.scss';
 
-const PopUp = ({title, namePlaceholder, closePopUp, areaPlaceholder}) => {
+const PopUp = ({title, namePlaceholder, closePopUp, areaPlaceholder, selects}) => {
   const onSubmit = e => {
     e.preventDefault();
     console.log('Submit is ok!');
     e.target.reset();
-  }
+  };
+
+  const options = selects.map(select => {
+    if (select.id !== 0) {
+      return (
+        <option key={select.id - 1} value={select.id - 1}>{select.name}</option>
+      );
+    }
+  });
+
+  const selectList = () => {
+    if (selects.length !== 0) {
+      return (
+        <select className="pop-up__input pop-up__select" name="select" required>
+          <option value="">*Виберіть категорію</option>
+          {options}
+        </select>
+      )
+    }
+  };
 
   return (
     <div className="pop-up">
@@ -13,21 +32,32 @@ const PopUp = ({title, namePlaceholder, closePopUp, areaPlaceholder}) => {
         <button className="pop-up__close" onClick={closePopUp}>&times;</button>
         <h2 className="subtitle">{title}</h2>
         <form className="pop-up__form" action="#" onSubmit={e => onSubmit(e)}>
+          {selectList()}
           <input className="pop-up__input" 
-            name="name" type="text"
+            name="name"
+            type="text"
             required
             placeholder={'*' + namePlaceholder} />
           <input className="pop-up__input" 
-            name="telephone" type="number"
+            name="telephone"
+            type="number"
             inputMode='numeric'
             maxLength={25}
-            required placeholder="*Ваш телефон..." />
+            required
+            placeholder="*Телефон..." />
           <input className="pop-up__input" 
-            name="email" type="email"
-            placeholder="Ваша Email-адреса..." />
+            name="email"
+            type="email"
+            placeholder="Email-адреса..." />
           <input className="pop-up__input" 
-            name="address" type="text"
-            placeholder="Ваша адреса..." />
+            name="city"
+            type="text"
+            required
+            placeholder="*Місто" />
+          <input className="pop-up__input" 
+            name="address"
+            type="text"
+            placeholder="Адреса..." />
           <textarea className="pop-up__input pop-up__input--services"
             name="services"
             maxLength={500}
