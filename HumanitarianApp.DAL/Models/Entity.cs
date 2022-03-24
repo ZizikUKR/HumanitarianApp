@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HumanitarianApp.DAL.Models
 {
-    public class Entity
+    public class Entity : BaseModel
     {
         [Key]
-        public Guid  EntityId { get; set; }
+        [Required]
+        [Column("EntityId")]
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
