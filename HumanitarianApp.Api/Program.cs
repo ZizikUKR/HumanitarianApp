@@ -15,6 +15,12 @@ builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbConte
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<HumanitarianApp.DAL.HumanityDb.HumanitarianDbContext>();
+    dataContext.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
