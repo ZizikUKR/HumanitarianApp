@@ -15,61 +15,36 @@
     justify-content: space-between;
     align-items: center;
   }
-  &__block {
+  &__filters {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    gap: 20px;
+    gap: 238px;
   }
   &__search {
+    width: 220px;
     height: 30px;
-    border: 2px solid $white;
+    border: none;
     border-radius: 10px;
-    background-color: transparent;
+    background-color: $white;
     padding: 0 10px;
     outline: none;
-    caret-color: $white;
-    color: $white;
     font-size: 15px;
-    &::placeholder {
-      color: $white;
-    }
   }
-  &__button {
-    padding: 10px;
-    border: 2px solid $white;
-    margin-right: 4px;
-    background-color: $blue;
-    color: $white;
+  &__categories {
+    width: 220px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: $white;
+    padding: 0 10px;
+    outline: none;
     font-size: 15px;
     cursor: pointer;
-    transition: all .3s ease;
-    &:first-child {
-      border-radius: 10px 0 0 10px;
-
-    }
-    &:last-child {
-      border-radius: 0 10px 10px 0;
-      margin-right: 0;
-    }
-    &:hover {
-      transition: all .3s ease;
-      transform: scale(1.05);
-      background-color: rgba($white, .3);
-    }
-    &--active {
-      background-color: $white;
-      color: $black;
-      cursor: auto;
-      &:hover {
-        transform: none;
-        background-color: $white;
-      }
-    }
   }
   &__open {
     margin-top: 10px;
     padding: 10px;
+    border: none;
     background-color: $blue;
     cursor: pointer;
     &-line {

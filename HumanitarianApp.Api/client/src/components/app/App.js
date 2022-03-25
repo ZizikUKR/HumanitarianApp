@@ -28,9 +28,9 @@ class App extends Component {
           id: 0,
           name: 'Список волонтерів',
           searchResult: '',
-          filter: 'Усі',
+          filter: 'Усі категорії',
           filterButtons: [
-            {id: 0, name: 'Усі'},
+            {id: 0, name: 'Усі категорії'},
             {id: 1, name: 'Перевезення'},
             {id: 2, name: 'Медицина'},
             {id: 3, name: 'Гуманітарна допомога'},
@@ -79,7 +79,7 @@ class App extends Component {
           id: 1,
           name: 'Список підприємств',
           searchResult: '',
-          filter: 'Усі',
+          filter: 'Усі категорії',
           filterButtons: [],
           ads: [
             {
@@ -96,9 +96,9 @@ class App extends Component {
           id: 2,
           name: 'Список оголошень',
           searchResult: '',
-          filter: 'Усі',
+          filter: 'Усі категорії',
           filterButtons: [
-            {id: 0, name: 'Усі'},
+            {id: 0, name: 'Усі категорії'},
             {id: 1, name: 'Шукаю'},
             {id: 2, name: 'Знайшов'},
             {id: 3, name: 'Продам'},
@@ -162,7 +162,7 @@ class App extends Component {
       };
 
       const select = (items, filter) => {
-        if (filter === 'Усі') {
+        if (filter === 'Усі категорії') {
           return items;
         } else {
           return items.filter(item => item.select === filter);
