@@ -1,3 +1,4 @@
+using HumanitarianApp.BLL.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("HumanitarianConnection"), 
         b => b.MigrationsAssembly("HumanitarianApp.Api")));
+
+builder.Services.AddScoped<IEntityService, EntityService>();
+builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IEntityRepository, HumanitarianApp.DAL.Repository.EntityRepository > ();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
