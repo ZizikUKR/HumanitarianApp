@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Reflection.Metadata.Ecma335;
-using HumanitarianApp.BLL.DTO;
+﻿using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.BLL.Services;
-using HumanitarianApp.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HumanitarianApp.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class EntityController : Controller
+    public class EntityController : ControllerBase
     {
         private readonly IEntityService _entityService;
 
@@ -18,70 +15,68 @@ namespace HumanitarianApp.Api.Controllers
             _entityService = entityService;
         }
 
-        [HttpPost, Route("/CreateEntity")]
-        public ActionResult CreateEntity(EntityDto entityDto)
+        [HttpPost]
+        public async Task<ActionResult> CreateEntity(EntityDto entityDto)
         {
-            if (entityDto != null)
-            {
-                _entityService.AddEntity(entityDto);
-
-                return Ok();
-            }
-            else
+            if (entityDto == null)
             {
                 return NoContent();
+                
             }
-        }
-
-        [HttpGet, Route("/GetAllEntity")]
-        public IEnumerable<EntityDto> GetAllEntity()
-        {
-            return _entityService.GetAllEntities();
-        }
-
-        [HttpGet, Route("/GetByType")]
-        public ActionResult<List<EntityDto>> GetByType(byte type)
-        {
-            return _entityService.GetAllEntitiesByType(type).ToList();
-        }
-
-
-        [HttpGet, Route("/GetById")]
-        public ActionResult<EntityDto> EntityById(Guid id)
-        {
-            return _entityService.GetById(id);
-        }
-
-        [HttpGet, Route("/GetEntityByName")]
-        public EntityDto GetEntityByName(string name)
-        {
-            return _entityService.GetByName(name);
-        }
-
-        [HttpGet, Route("/GetEntityByAddress")]
-        public EntityDto GetEntityByAddress(string address)
-        {
-            return _entityService.GetByAddress(address);
-        }
-
-        [HttpGet, Route("/GetEntityByEmail")]
-        public EntityDto GetEntityByEmail(string email)
-        {
-            return _entityService.GetByEmail(email);
-        }
-
-        [HttpPost, Route("/UpdateEntity")]
-        public ActionResult UpdateEntity(EntityDto entity)
-        {
-            _entityService.UpdateEntity(entity);
+            await _entityService.AddEntity(entityDto);
 
             return Ok();
         }
 
-        [HttpDelete, Route("/DeleteEntity")]
-        public ActionResult DeleteEntity(EntityDto entity)
+        [HttpGet]
+        public async Task<IEnumerable<EntityDto>> GetAllEntity()
         {
-            _entityService.DeleteEntity(entity);
+            return await _entityService.GetAllEntities();
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<EntityDto>> GetEntityByType(byte type)
+        {
+            return  await _entityService.GetAllEntitiesByType(type);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult<EntityDto>> EntityById(Guid id)
+        {
+            return  Ok(await  _entityService.GetById(id));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<EntityDto>> GetEntityByName(string name)
+        {
+            return Ok(await _entityService.GetByName(name));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<EntityDto>> GetEntityByAddress(string address)
+        {
+            return Ok(await _entityService.GetByAddress(address));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<EntityDto>> GetEntityByEmail(string email)
+        {
+            return  Ok(await _entityService.GetByEmail(email));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateEntity(EntityDto entity)
+        {
+            await _entityService.UpdateEntity(entity);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteEntity(Guid id)
+        {
+           await _entityService.DeleteEntity(id);
 
             return Ok();
         }

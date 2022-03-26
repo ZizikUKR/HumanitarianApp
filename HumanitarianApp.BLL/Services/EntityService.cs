@@ -9,27 +9,36 @@ namespace HumanitarianApp.BLL.Services
     public class EntityService : IEntityService
     {
         private readonly IEntityRepository _entityRepository;
+        private readonly IBankDetailRepository _bankDetailRepository;
         private readonly IMapper _mapper;
         private readonly HumanitarianDbContext _dbContext;
 
-        public EntityService(IEntityRepository entityRepository, IMapper mapper, HumanitarianDbContext dbContext)
+        public EntityService(IEntityRepository entityRepository, IBankDetailRepository bankDetailRepository, IMapper mapper, HumanitarianDbContext dbContext)
         {
             _entityRepository = entityRepository;
+            _bankDetailRepository = bankDetailRepository;
             _mapper = mapper;
             _dbContext = dbContext;
         }
 
-        public void AddEntity(EntityDto entity)
+        public async Task AddEntity(EntityDto entity)
         {
             var entityForCreate = _mapper.Map<Entity>(entity);
+            var bankDetails = _mapper.Map<BankDetail>(entity.BankDetails);
 
-            if (entityForCreate != null)
+            if (entityForCreate == null)
             {
-                _entityRepository.Create(entityForCreate);
+                throw new Exception("Entity doesn't map");
+            }
+            _entityRepository.Create(entityForCreate);
+
+            if (bankDetails != null)
+            {
+                _bankDetailRepository.Create(bankDetails);
             }
         }
 
-        public IEnumerable<EntityDto> GetAllEntities()
+        public async Task<IEnumerable<EntityDto>> GetAllEntities()
         {
             var entitiesDto = new List<EntityDto>();
             var entities = _entityRepository.GetAll();
@@ -43,7 +52,7 @@ namespace HumanitarianApp.BLL.Services
             return entitiesDto;
         }
 
-        public IEnumerable<EntityDto> GetAllEntitiesByType(byte type)
+        public async Task<IEnumerable<EntityDto>> GetAllEntitiesByType(byte type)
         {
             var entitiesDto = new List<EntityDto>();
             IEnumerable<Entity> entities = new List<Entity>();
@@ -62,7 +71,6 @@ namespace HumanitarianApp.BLL.Services
 
             }
 
-
             foreach (var entity in entities)
             {
                 var entityDto = _mapper.Map<EntityDto>(entity);
@@ -72,92 +80,87 @@ namespace HumanitarianApp.BLL.Services
             return entitiesDto;
         }
 
-        public EntityDto GetById(Guid id)
+        public async Task<EntityDto> GetById(Guid id)
         {
             var entity = _entityRepository.GetById(id);
 
-            if (entity != null)
+            if (entity == null)
             {
-                var entityDto = _mapper.Map<EntityDto>(entity);
-
-                return entityDto;
+                throw new Exception("Entity doesn't  found");
             }
+            var entityDto = _mapper.Map<EntityDto>(entity);
 
-            throw new Exception("Entity doesn't  found");
+            return entityDto;
+
         }
 
-        public EntityDto GetByName(string name)
+        public async Task<EntityDto> GetByName(string name)
         {
             var entity = _dbContext.Entities.FirstOrDefault(e => e.Name.Contains(name));
 
-            if (entity != null)
+            if (entity == null)
             {
-                var entityDto = _mapper.Map<EntityDto>(entity);
-
-                return entityDto;
+                throw new Exception("Entity doesn't  found");
             }
+            var entityDto = _mapper.Map<EntityDto>(entity);
 
-            throw new Exception("Entity doesn't  found");
+            return entityDto;
+
         }
 
-        public EntityDto GetByEmail(string email)
+        public async Task<EntityDto> GetByEmail(string email)
         {
             var entity = _dbContext.Entities.FirstOrDefault(e => e.Email.Contains(email));
 
-            if (entity != null)
+            if (entity == null)
             {
-                var entityDto = _mapper.Map<EntityDto>(entity);
-
-                return entityDto;
+                throw new Exception("Entity doesn't  found");
             }
+            var entityDto = _mapper.Map<EntityDto>(entity);
 
-            throw new Exception("Entity doesn't  found");
+            return entityDto;
+
         }
 
-        public EntityDto GetByAddress(string address)
+        public async Task<EntityDto> GetByAddress(string address)
         {
             var entity = _dbContext.Entities.FirstOrDefault(e => e.Address.Contains(address));
 
-            if (entity != null)
+            if (entity == null)
             {
-                var entityDto = _mapper.Map<EntityDto>(entity);
-
-                return entityDto;
+                throw new Exception("Entity doesn't  found");
             }
+            var entityDto = _mapper.Map<EntityDto>(entity);
 
-            throw new Exception("Entity doesn't  found");
+            return entityDto;
         }
 
-        public void UpdateEntity(EntityDto entityDto)
+        public async Task UpdateEntity(EntityDto entityDto)
         {
-            if (entityDto.Id != null)
-            {
-                var entity = _entityRepository.GetById(entityDto.Id);
+            var entity = _entityRepository.GetById(entityDto.Id);
 
-                if (entity != null)
-                {
-                    entity.Type =entityDto.Type;
-                    entity.Email =entityDto.Email;
-                    entity.PhoneNumber =entityDto.PhoneNumber;
-                    entity.Name =entityDto.Name;
-                    entity.Address =entityDto.Address;
-                    entity.Message =entityDto.Message;
-                    _entityRepository.Update(entity);
-                }
+            if (entity == null)
+            {
+                throw new Exception("Entity doesn't exist");
             }
+            entity.Type = entityDto.Type;
+            entity.Email = entityDto.Email;
+            entity.PhoneNumber = entityDto.PhoneNumber;
+            entity.Name = entityDto.Name;
+            entity.Address = entityDto.Address;
+            entity.Message = entityDto.Message;
+            _entityRepository.Update(entity);
         }
 
-        public void DeleteEntity(EntityDto entityDto)
+        public async Task DeleteEntity(Guid id)
         {
-            if (entityDto.Id != null)
-            {
-                var entity = _entityRepository.GetById(entityDto.Id);
+            var entity = _entityRepository.GetById(id);
 
-                if (entity != null)
-                {
-                    _entityRepository.Delete(entity);
-                }
+            if (entity == null)
+            {
+                throw new Exception("Entity was deleted already");
             }
+            _entityRepository.Delete(entity);
         }
     }
 }

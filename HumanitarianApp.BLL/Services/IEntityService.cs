@@ -1,18 +1,17 @@
 ﻿using HumanitarianApp.BLL.DTO;
-using HumanitarianApp.DAL.Models;
 
 namespace HumanitarianApp.BLL.Services
 {
     public interface IEntityService
     {
-        void AddEntity(EntityDto entity);
-        IEnumerable<EntityDto> GetAllEntities();
-        IEnumerable<EntityDto> GetAllEntitiesByType(byte type);
-        EntityDto GetById(Guid id);
-        EntityDto GetByName(string name);
-        EntityDto GetByEmail(string email);
-        EntityDto GetByAddress(string address);
-        public void UpdateEntity(EntityDto entity);
-        public void DeleteEntity(EntityDto entity);
+        Task AddEntity(EntityDto entity);
+        Task<IEnumerable<EntityDto>> GetAllEntities();
+        Task<IEnumerable<EntityDto>> GetAllEntitiesByType(byte type);
+        Task<EntityDto> GetById(Guid id);
+        Task<EntityDto> GetByName(string name);
+        Task<EntityDto> GetByEmail(string email);
+        Task<EntityDto> GetByAddress(string address);
+        public Task UpdateEntity(EntityDto entity);
+        public Task DeleteEntity(Guid id);
     }
 }

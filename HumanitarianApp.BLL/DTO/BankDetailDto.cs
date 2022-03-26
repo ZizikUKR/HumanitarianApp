@@ -2,7 +2,7 @@
 
 namespace HumanitarianApp.Bll.DTO
 {
-    public class BankDetailDto : EntityDto
+    public class BankDetailDto 
     {
         public string FullBankName { get; set; } // полное имя банка
         public string ShortBankName { get; set; } // сокращенное имя банка 
@@ -11,5 +11,6 @@ namespace HumanitarianApp.Bll.DTO
         public string MFO { get; set; } // МФО 
         public string EDRPO { get; set; } //ЕДРПО
         public string CardNumber { get; set; } //номер карт
+        public Guid  EntityId { get; set; }
     }
 }

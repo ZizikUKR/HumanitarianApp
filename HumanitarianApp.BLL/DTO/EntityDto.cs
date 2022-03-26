@@ -1,4 +1,5 @@
-﻿using HumanitarianApp.DAL.Models;
+﻿using HumanitarianApp.Bll.DTO;
+using HumanitarianApp.DAL.Models;
 
 namespace HumanitarianApp.BLL.DTO
 {
@@ -11,5 +12,6 @@ namespace HumanitarianApp.BLL.DTO
         public string Address { get; set; }
         public string Message { get; set; }
         public EntityType Type { get; set; }
+        public BankDetailDto? BankDetails{ get; set; }
     }
 }

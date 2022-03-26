@@ -1,4 +1,5 @@
-﻿using HumanitarianApp.BLL.DTO;
+﻿using HumanitarianApp.Bll.DTO;
+using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.DAL.Models;
 
 namespace HumanitarianApp.BLL.Profile
@@ -9,6 +10,8 @@ namespace HumanitarianApp.BLL.Profile
         {
             CreateMap<EntityDto, Entity>();
             CreateMap<Entity, EntityDto>();
+            CreateMap<BankDetail, BankDetailDto>();
+            CreateMap<BankDetailDto, BankDetail>();
         }
     }
 }

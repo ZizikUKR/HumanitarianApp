@@ -16,6 +16,7 @@ builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbConte
 
 builder.Services.AddScoped<IEntityService, EntityService>();
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IEntityRepository, HumanitarianApp.DAL.Repository.EntityRepository > ();
+builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IBankDetailRepository, HumanitarianApp.DAL.Repository.BankDetailRepository> ();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
