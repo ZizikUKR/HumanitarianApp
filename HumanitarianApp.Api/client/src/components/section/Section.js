@@ -6,30 +6,25 @@ import './section.scss';
 
 class Section extends Component {
   state = {
-    activeButton: 0,
-    openAdList: false,
     searchValue: ''
   }
   
-  createButtons = () => {
-    const buttons = this.props.filterButtons.map(button => {
+  createCategories = () => {
+    const categories = this.props.filterButtons.map(button => {
       const {id, name} = button;
-      
-      const active = this.props.filter === name;
-      const clazz = active ? 'section__button--active' : '';
   
       return (
-        <button className={`section__button ${clazz}`} key={id} onClick={() => this.props.onFilterSelect(name)}>{name}</button>
+        <option key={id} value={name}>{name}</option>
       );
     });
 
-    return buttons;
-  }
-
-  changeActiveButton = (id) => {
-    this.setState({
-      activeButton: id
-    });
+    const selectCategories = <select className="section__categories" onChange={(e) => this.props.onFilterSelect(e.target.value)}>{categories}</select>;
+    
+    if (selectCategories.props.children.length === 0) {
+      return null;
+    } else {
+      return selectCategories;
+    }
   }
 
   onOpenSection = () => {
@@ -50,18 +45,16 @@ class Section extends Component {
         <div className="section__info">
           <div className="container">
             <div className="section__wrapper">
-              <div className="section__block">
-                <h2 className="subtitle--white">{this.props.name}</h2>
+              <h2 className="subtitle subtitle--white">{this.props.name}</h2>
+              <div className="section__filters">
+                {this.createCategories()}
                 <input
                   className="section__search"
                   type="text"
                   placeholder="Пошук за містом..."
                   value={this.state.searchResult}
                   onChange={(e) => this.onUpdateSearch(e)} />
-              </div>
-              <div className="section__buttons">
-                {this.createButtons()}
-              </div>
+                </div>
             </div>
           </div>
         </div>
