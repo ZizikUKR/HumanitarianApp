@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using HumanitarianApp.DAL.HumanityDb;
+﻿using HumanitarianApp.DAL.HumanityDb;
 using HumanitarianApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 

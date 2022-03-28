@@ -1,6 +1,5 @@
 ﻿using HumanitarianApp.DAL.HumanityDb;
 using HumanitarianApp.DAL.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace HumanitarianApp.DAL.Repository
 {

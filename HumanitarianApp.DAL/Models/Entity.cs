@@ -17,6 +17,6 @@ namespace HumanitarianApp.DAL.Models
         public EntityType Type { get; set; }
 
         //Reverse Navigation
-        public virtual ICollection<BankDetail> BankDetails { get; set; }
+        public virtual ICollection<BankDetail>? BankDetails { get; set; }
     }
 }
