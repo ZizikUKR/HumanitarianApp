@@ -4,7 +4,7 @@ namespace HumanitarianApp.BLL.Services
 {
     public interface IEntityService
     {
-        Task AddEntity(EntityDto entity);
+        Task AddEntity(CreateEntityDto entity);
         Task<IEnumerable<EntityDto>> GetAllEntities();
         Task<IEnumerable<EntityDto>> GetAllEntitiesByType(byte type);
         Task<EntityDto> GetById(Guid id);

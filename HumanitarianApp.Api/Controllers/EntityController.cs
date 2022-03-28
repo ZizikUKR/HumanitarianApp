@@ -16,7 +16,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEntity(EntityDto entityDto)
+        public async Task<ActionResult> CreateEntity(CreateEntityDto entityDto)
         {
             if (entityDto == null)
             {

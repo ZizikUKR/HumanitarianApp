@@ -10,7 +10,8 @@ namespace HumanitarianApp.Bll.DTO
         public string AccountNumber { get; set; } //расчётный счёт 
         public string MFO { get; set; } // МФО 
         public string EDRPO { get; set; } //ЕДРПО
-        public string CardNumber { get; set; } //номер карт
-        public Guid  EntityId { get; set; }
+        public string CardNumber { get; set; } //номер карты 
+
+        public Guid EntityId { get; set; }
     }
 }

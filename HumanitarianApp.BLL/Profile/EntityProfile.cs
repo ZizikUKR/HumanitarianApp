@@ -10,6 +10,8 @@ namespace HumanitarianApp.BLL.Profile
         {
             CreateMap<EntityDto, Entity>();
             CreateMap<Entity, EntityDto>();
+            CreateMap<Entity, CreateEntityDto>();
+            CreateMap<CreateEntityDto, Entity>();
             CreateMap<BankDetail, BankDetailDto>();
             CreateMap<BankDetailDto, BankDetail>();
         }

@@ -3,6 +3,8 @@ using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.DAL.HumanityDb;
 using HumanitarianApp.DAL.Models;
 using HumanitarianApp.DAL.Repository;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using EntityType = HumanitarianApp.DAL.Models.EntityType;
 
 namespace HumanitarianApp.BLL.Services
 {
@@ -21,10 +23,9 @@ namespace HumanitarianApp.BLL.Services
             _dbContext = dbContext;
         }
 
-        public async Task AddEntity(EntityDto entity)
+        public async Task AddEntity(CreateEntityDto entity)
         {
             var entityForCreate = _mapper.Map<Entity>(entity);
-            var bankDetails = _mapper.Map<BankDetail>(entity.BankDetails);
 
             if (entityForCreate == null)
             {
@@ -32,10 +33,6 @@ namespace HumanitarianApp.BLL.Services
             }
             _entityRepository.Create(entityForCreate);
 
-            if (bankDetails != null)
-            {
-                _bankDetailRepository.Create(bankDetails);
-            }
         }
 
         public async Task<IEnumerable<EntityDto>> GetAllEntities()
