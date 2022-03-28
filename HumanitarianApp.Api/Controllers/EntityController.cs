@@ -38,6 +38,12 @@ namespace HumanitarianApp.Api.Controllers
         public async Task<IEnumerable<EntityDto>> GetEntityByType(byte type)
         {
             return  await _entityService.GetAllEntitiesByType(type);
+        } 
+        
+        [HttpGet]
+        public async Task<IEnumerable<EntityDto>> GetEntityByCity(string city)
+        {
+            return  await _entityService.GetEntityByCity(city);
         }
 
 

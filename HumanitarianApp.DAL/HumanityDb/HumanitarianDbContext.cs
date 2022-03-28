@@ -11,6 +11,7 @@ namespace HumanitarianApp.DAL.HumanityDb
         }
         public DbSet<Entity> Entities { get; set; }
         public DbSet<BankDetail> BankDetails { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,6 +19,11 @@ namespace HumanitarianApp.DAL.HumanityDb
                 .HasMany(p => p.BankDetails)
                 .WithOne(b => b.Entity)
                 .HasForeignKey(c => c.EntityId);
+
+            modelBuilder.Entity<Entity>()
+                .HasOne(e => e.Category)
+                .WithOne(c => c.Entity)
+                .HasForeignKey<Category>(c=>c.EntityId);
         }
     }
 }

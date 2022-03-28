@@ -6,6 +6,7 @@ namespace HumanitarianApp.BLL.Services
     {
         Task AddEntity(CreateEntityDto entity);
         Task<IEnumerable<EntityDto>> GetAllEntities();
+        Task<IEnumerable<EntityDto>> GetEntityByCity(string city);
         Task<IEnumerable<EntityDto>> GetAllEntitiesByType(byte type);
         Task<EntityDto> GetById(Guid id);
         Task<EntityDto> GetByName(string name);

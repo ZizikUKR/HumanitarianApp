@@ -3,7 +3,7 @@ using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.DAL.HumanityDb;
 using HumanitarianApp.DAL.Models;
 using HumanitarianApp.DAL.Repository;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
 using EntityType = HumanitarianApp.DAL.Models.EntityType;
 
 namespace HumanitarianApp.BLL.Services
@@ -44,6 +44,22 @@ namespace HumanitarianApp.BLL.Services
             {
                 var entityDto = _mapper.Map<EntityDto>(entity);
                 entitiesDto.Add(entityDto);
+            }
+
+            return entitiesDto;
+        }
+
+        public async Task<IEnumerable<EntityDto>> GetEntityByCity(string city)
+        {
+            var entities = _dbContext.Entities
+                .Include(e => e.Category)
+                .Include(e => e.BankDetails)
+                .Where(e=>e.City.Contains(city));
+            var entitiesDto = new List<EntityDto>();
+
+            foreach (var entity in entities)
+            {
+                entitiesDto.Add(_mapper.Map<EntityDto>(entity));
             }
 
             return entitiesDto;
@@ -93,7 +109,10 @@ namespace HumanitarianApp.BLL.Services
 
         public async Task<EntityDto> GetByName(string name)
         {
-            var entity = _dbContext.Entities.FirstOrDefault(e => e.Name.Contains(name));
+            var entity = _dbContext.Entities
+                .Include(e => e.Category)
+                .Include(e => e.BankDetails)
+                .FirstOrDefault(e => e.Name.Contains(name));
 
             if (entity == null)
             {
@@ -107,7 +126,10 @@ namespace HumanitarianApp.BLL.Services
 
         public async Task<EntityDto> GetByEmail(string email)
         {
-            var entity = _dbContext.Entities.FirstOrDefault(e => e.Email.Contains(email));
+            var entity = _dbContext.Entities
+                .Include(e => e.Category)
+                .Include(e => e.BankDetails)
+                .FirstOrDefault(e => e.Email.Contains(email));
 
             if (entity == null)
             {
@@ -121,7 +143,10 @@ namespace HumanitarianApp.BLL.Services
 
         public async Task<EntityDto> GetByAddress(string address)
         {
-            var entity = _dbContext.Entities.FirstOrDefault(e => e.Address.Contains(address));
+            var entity = _dbContext.Entities
+                .Include(e => e.Category)
+                .Include(e => e.BankDetails)
+                .FirstOrDefault(e => e.Address.Contains(address));
 
             if (entity == null)
             {
@@ -144,6 +169,7 @@ namespace HumanitarianApp.BLL.Services
             entity.Email = entityDto.Email;
             entity.PhoneNumber = entityDto.PhoneNumber;
             entity.Name = entityDto.Name;
+            entity.City = entityDto.City;
             entity.Address = entityDto.Address;
             entity.Message = entityDto.Message;
             _entityRepository.Update(entity);
