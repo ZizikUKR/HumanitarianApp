@@ -18,6 +18,22 @@ builder.Logging.AddSerilog(logger);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// ConfigureCors
+{
+    IConfigurationSection corsOptions = builder.Configuration.GetSection("Cors");
+    string origins = corsOptions["Origins"];
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("OriginPolicy", builder =>
+        {
+            builder.WithOrigins(origins.Split(",", StringSplitOptions.RemoveEmptyEntries).ToArray())
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+    });
+}
+
 builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("HumanitarianConnection"), 
         b => b.MigrationsAssembly("HumanitarianApp.Api")));
@@ -41,6 +57,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpStatusCodeExceptionMiddleware();
+
+app.UseCors("OriginPolicy");
 
 app.UseHttpsRedirection();
 
