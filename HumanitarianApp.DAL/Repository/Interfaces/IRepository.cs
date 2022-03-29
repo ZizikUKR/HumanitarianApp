@@ -1,6 +1,4 @@
-﻿using HumanitarianApp.DAL.Models;
-
-namespace HumanitarianApp.DAL.Repository
+﻿namespace HumanitarianApp.DAL.Repository
 {
     public interface IRepository<TEntity>
     {

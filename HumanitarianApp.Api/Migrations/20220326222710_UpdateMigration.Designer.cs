@@ -4,6 +4,7 @@ using HumanitarianApp.DAL.HumanityDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HumanitarianApp.Api.Migrations
 {
     [DbContext(typeof(HumanitarianDbContext))]
-    partial class HumanitarianDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220326222710_UpdateMigration")]
+    partial class UpdateMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,33 +69,6 @@ namespace HumanitarianApp.Api.Migrations
                     b.ToTable("BankDetails");
                 });
 
-            modelBuilder.Entity("HumanitarianApp.DAL.Models.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CategoryId");
-
-                    b.Property<byte?>("EnterpriseCategory")
-                        .HasColumnType("tinyint");
-
-                    b.Property<Guid>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte?>("NoticeCategory")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte?>("VolunteerCategory")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityId")
-                        .IsUnique();
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("HumanitarianApp.DAL.Models.Entity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -105,16 +80,9 @@ namespace HumanitarianApp.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -147,22 +115,9 @@ namespace HumanitarianApp.Api.Migrations
                     b.Navigation("Entity");
                 });
 
-            modelBuilder.Entity("HumanitarianApp.DAL.Models.Category", b =>
-                {
-                    b.HasOne("HumanitarianApp.DAL.Models.Entity", "Entity")
-                        .WithOne("Category")
-                        .HasForeignKey("HumanitarianApp.DAL.Models.Category", "EntityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Entity");
-                });
-
             modelBuilder.Entity("HumanitarianApp.DAL.Models.Entity", b =>
                 {
                     b.Navigation("BankDetails");
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
