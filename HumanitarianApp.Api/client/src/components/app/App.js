@@ -1,11 +1,12 @@
 import { Component } from "react";
 
 import BurgerMenu from "../burger-menu/BurgerMenu";
-import PopUp from "../pop-up/PopUp";
 
 import Header from "../header/Header";
 import Section from "../section/Section";
 import Footer from "../footer/Footer";
+
+import Service from '../../services/Service';
 
 import './app.scss';
 
@@ -14,19 +15,17 @@ class App extends Component {
     super(props);
     this.state = {
       headerButtons: [
-        {id: 0, name: 'Волонтерам', popUp: () => this.onVolunteerPopUp(true)},
-        {id: 1, name: 'Підприємствам', popUp: () => this.onCompanyPopUp(true)},
-        {id: 2, name: 'Оголошення', popUp: () => this.onAdPopUp(true)},
-        // {id: 3, name: 'Допомогти', popUp: null}
+        {id: 0, name: 'Волонтери'},
+        {id: 1, name: 'Підприємства'},
+        {id: 2, name: 'Оголошення'},
+        // {id: 3, name: 'Допомогти'}
       ],
-      volunteerPopUp: false,
-      companyPopUp: false,
-      adPopUp: false,
       visibleBurgerMenu: false,
+      activeSection: 0,
       sectionsData: [
         {
           id: 0,
-          name: 'Список волонтерів',
+          name: 'Волонтери',
           searchResult: '',
           filter: 'Усі категорії',
           filterButtons: [
@@ -77,7 +76,7 @@ class App extends Component {
         },
         {
           id: 1,
-          name: 'Список підприємств',
+          name: 'Підприємства',
           searchResult: '',
           filter: 'Усі категорії',
           filterButtons: [],
@@ -94,7 +93,7 @@ class App extends Component {
         },
         {
           id: 2,
-          name: 'Список оголошень',
+          name: 'Оголошення',
           searchResult: '',
           filter: 'Усі категорії',
           filterButtons: [
@@ -113,42 +112,27 @@ class App extends Component {
     }
   }
 
-  onVolunteerPopUp = (volunteerPopUp) => {
-    this.setState({volunteerPopUp});
-  }
-
-  onCompanyPopUp = (companyPopUp) => {
-    this.setState({companyPopUp});
-  }
-
-  onAdPopUp = (adPopUp) => {
-    this.setState({adPopUp});
-  }
-
-  closePopUp = () => {
-    this.setState({
-      volunteerPopUp: false,
-      companyPopUp: false,
-      adPopUp: false
-    });
-  }
-
   visibleBurger = (visibleBurgerMenu) => {
     this.setState({visibleBurgerMenu});
   }
 
-  renderSections = (arr) => {
-    const sections = arr.map(item => {
-      const {id, name, filterButtons, ads, searchResult, filter} = item;
+  selectSection = (id) => {
+    this.setState({
+      activeSection: id
+    })
+  }
+
+  renderSection = (section) => {
+    const {id, name, filterButtons, ads, searchResult, filter} = section;
 
       const onUpdateSearch = searchResult => {
-        item.searchResult = searchResult;
-        this.setState({item});
+        section.searchResult = searchResult;
+        this.setState({section});
       };
 
       const onFilterSelect = (filter) => {
-        item.filter = filter;
-        this.setState({item});
+        section.filter = filter;
+        this.setState({section});
       };
 
       const search = (items, searchResult) => {
@@ -182,29 +166,45 @@ class App extends Component {
           filter={filter}
           onFilterSelect={onFilterSelect} />
       );
-    })
+  }
 
-    return sections;
+  // Вызов метода гет
+  // Обязательно передавать все поля, если поле пусто, то просто - ''
+  service = new Service();
+  componentDidMount() {
+    this.service.get('url')
+        .then(response => {
+          let obj = {
+            "select": response.select,
+            "name": response.name,
+            "telephone": response.telephone,
+            "email": response.email,
+            "city": response.city,
+            "address": response.address,
+            "text": response.title
+          }
+
+          // Пока что новые записи вставляются в конец списка, потом изменю.
+          const newAd = this.state.sectionsData[0].ads.push(obj); // 0 - волонтеры, 1 - предприятия, 2 - объявления
+
+          this.setState({newAd});
+        })
   }
 
   render() {
-    const {volunteerPopUp, companyPopUp, adPopUp, headerButtons, visibleBurgerMenu, sectionsData} = this.state;
+    const {headerButtons, visibleBurgerMenu, sectionsData, activeSection} = this.state;
     
     return (
       <>
         <Header
           headerButtons={headerButtons}
-          onVolunteerPopUp={this.onVolunteerPopUp}
-          onCompanyPopUp={this.onCompanyPopUp}
-          onAdPopUp={this.onAdPopUp}
           visibleBurger={this.visibleBurger}
+          activeSection={this.state.activeSection}
+          selectSection={this.selectSection}
         />
         <main>
-          {volunteerPopUp ? <PopUp title={'Анкета волонтера'} namePlaceholder={'Введіть ПІБ...'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={sectionsData[0].filterButtons} /> : null}
-          {companyPopUp ? <PopUp title={'Анкета підприємства'} namePlaceholder={'Назва підприємства...'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={sectionsData[1].filterButtons} /> : null}
-          {adPopUp ? <PopUp title={'Додати оголошення'} namePlaceholder={'Введіть ПІБ...'} closePopUp={this.closePopUp} areaPlaceholder={'Введить текст оголошення...'} selects={sectionsData[2].filterButtons} /> : null}
-          {visibleBurgerMenu ? <BurgerMenu headerButtons={headerButtons} visibleBurger={this.visibleBurger} /> : null}
-          {this.renderSections(sectionsData)}
+          {visibleBurgerMenu ? <BurgerMenu headerButtons={headerButtons} visibleBurger={this.visibleBurger} selectSection={this.selectSection} /> : null}
+          {this.renderSection(sectionsData[activeSection])}
         </main>
         <Footer />
       </>

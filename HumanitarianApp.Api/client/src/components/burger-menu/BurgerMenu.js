@@ -1,12 +1,9 @@
-
-
 import './burgerMenu.scss';
 
-const BurgerMenu = ({headerButtons, visibleBurger}) => {
+const BurgerMenu = ({headerButtons, visibleBurger, selectSection}) => {
   const buttons = headerButtons.map(item => {
-    
     return (
-      <button className="burger-menu__button" type='button' key={item.id} onClick={() => {visibleBurger(false); item.popUp();}}>{item.name}</button>
+      <button className="burger-menu__button" type='button' key={item.id} onClick={() => {visibleBurger(false); selectSection(item.id);}}>{item.name}</button>
     );
   });
 

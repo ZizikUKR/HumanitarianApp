@@ -1,16 +1,8 @@
-import { Component } from 'react';
-
 import logo from '../../assets/icons/humanitarian_logo.svg';
 
 import './header.scss';
 
-const Header = ({headerButtons, visibleBurger}) => {
-  const buttons = headerButtons.map(item => {
-    return (
-      <button className="header__button" type='button' key={item.id} onClick={item.popUp}>{item.name}</button>
-    );
-  })
-  
+const Header = ({headerButtons, activeSection, selectSection, visibleBurger}) => { 
   return (
     <header className="header">
       <div className="container">
@@ -19,7 +11,7 @@ const Header = ({headerButtons, visibleBurger}) => {
             <img className="header__logo-img" src={logo} alt="Logo" />
           </a>
           <div className="header__buttons">
-            {buttons}
+            <HeaderButton headerButtons={headerButtons} activeSection={activeSection} selectSection={selectSection} />
           </div>
           <div className="header__burger" onClick={() => visibleBurger(true)}>
             <span className="header__burger--line"></span>
@@ -31,5 +23,17 @@ const Header = ({headerButtons, visibleBurger}) => {
     </header>
   );
 };
+
+const HeaderButton = ({headerButtons, activeSection, selectSection}) => {
+  const buttons = headerButtons.map(item => {
+    const clazz = activeSection === item.id ? 'header__button header__button--active' : 'header__button';
+
+    return (
+      <button className={clazz} type='button' key={item.id} onClick={() => {selectSection(item.id)}}>{item.name}</button>
+    );
+  });
+
+  return buttons;
+}
 
 export default Header;

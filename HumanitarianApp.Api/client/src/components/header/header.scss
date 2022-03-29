@@ -28,22 +28,26 @@
     align-items: center;
   }
   &__button {
-    width: 125px;
-    height: 100%;
+    padding: 10px;
+    height: 40px;
     color: $white;
     background-color: transparent;
     font-size: 15px;
-    border: none;
-    border-left: 3px solid $white;
+    border: 1px solid $white;
     transition: all .3s ease;
     cursor: pointer;
     &:last-child {
-      border-right: 3px solid $white;
+      border-top-right-radius: 8px;
     }
     &:hover {
       transition: all .3s ease;
       background-color: $white;
       color: $blue;
+    }
+    &--active {
+      background-color: $white;
+      color: $blue;
+      cursor: auto;
     }
   }
   &__burger {
