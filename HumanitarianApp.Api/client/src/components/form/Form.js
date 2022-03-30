@@ -1,6 +1,6 @@
 import './form.scss';
 
-const Form = ({namePlaceholder, areaPlaceholder, selects}) => {
+const Form = ({id, title, namePlaceholder, areaPlaceholder, selects}) => {
   const onSubmit = e => {
     e.preventDefault();
     console.log('Submit is ok!');
@@ -9,8 +9,9 @@ const Form = ({namePlaceholder, areaPlaceholder, selects}) => {
 
   return (
     <form className="form" action="#" onSubmit={e => onSubmit(e)}>
+      <h2 className="subtitle">{title}</h2>
       <div className="form__inputs">
-        <Categories selects={selects} />
+        <FormCategories selects={selects} />
         <input className="form__input" 
           name="name"
           type="text"
@@ -22,7 +23,7 @@ const Form = ({namePlaceholder, areaPlaceholder, selects}) => {
           inputMode='numeric'
           maxLength={25}
           required
-          placeholder="*Телефон..." />
+          placeholder="*Телефон" />
         <input className="form__input" 
           name="email"
           type="email"
@@ -35,8 +36,9 @@ const Form = ({namePlaceholder, areaPlaceholder, selects}) => {
         <input className="form__input" 
           name="address"
           type="text"
-          placeholder="Адреса..." />
+          placeholder="Адреса" />
       </div>
+      {id === 0 ? <FormBankAccount /> : null}
       <textarea className="form__input form__input--services"
         name="services"
         maxLength={500}
@@ -47,7 +49,7 @@ const Form = ({namePlaceholder, areaPlaceholder, selects}) => {
   );
 };
 
-const Categories = ({selects}) => {
+const FormCategories = ({selects}) => {
   const options = selects.map(select => {
     if (select.id !== 0) {
       return (
@@ -68,12 +70,52 @@ const Categories = ({selects}) => {
   return null;
 };
 
-const BankAccount = () => {
+const FormBankAccount = () => {
   return (
-    <select className="form__input form__select" name="bank">
-      <option value="0">Номер банківської картки</option>
-      <option value="1">Номер банківського рахунку</option>
-    </select>
+    <div className="form__bank-block">
+      <input className="form__input"
+          name="cardnumber"
+          type="text"
+          minLength={16}
+          maxLength={16}
+          placeholder="Номер банківської картки" />
+      <p className="form__bank-data">Банківські реквізити</p>
+      <div className="form__bank-account">
+        <input className="form__input" 
+          name="fullbankname"
+          type="text"
+          placeholder="Повне ім'я банку" />
+        <input className="form__input" 
+          name="shortbankname"
+          type="text"
+          placeholder="Скорочене ім'я банку" />
+        <input className="form__input" 
+          name="mfo"
+          type="number"
+          inputMode='numeric'
+          minLength={6}
+          maxLength={6}
+          placeholder="МФО" />
+        <input className="form__input" 
+          name="iban"
+          type="number"
+          inputMode='numeric'
+          maxLength={31}
+          placeholder="IBAN" />
+        <input className="form__input" 
+          name="edrpou"
+          type="number"
+          inputMode='numeric'
+          minLength={8}
+          maxLength={10}
+          placeholder="ІПН/ЄДРПОУ" />
+        <input className="form__input" 
+          name="accountnumber"
+          type="number"
+          inputMode='numeric'
+          placeholder="Розрахунковий рахунок" />
+      </div>
+    </div>
   );
 };
 

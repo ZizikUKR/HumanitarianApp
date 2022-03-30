@@ -43,7 +43,14 @@ class App extends Component {
               "email": "petrov@qwerty.com",
               "city": "Київ",
               "address": "м. Перемоги, 1",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas."
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas.",
+              "cardnumber": "12345678901234",
+              "fullbankname": "GgggMmmmBbbbHhhh Bank",
+              "shortbankname": "GMBH Bank",
+              "mfo": "8465",
+              "iban": "2546542544",
+              "edrpou": "12345678",
+              "accountnumber": "484654654465454845"
             },
             {
               "select": "Гуманітарна допомога",
@@ -52,7 +59,14 @@ class App extends Component {
               "email": "oleksandrov@qwerty.com",
               "city": "Днепр",
               "address": "пр. Свободи, 47/12",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiis."
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiis.",
+              "cardnumber": "",
+              "fullbankname": "",
+              "shortbankname": "",
+              "mfo": "",
+              "iban": "",
+              "edrpou": "",
+              "accountnumber": ""
             },
             {
               "select": "Інше",
@@ -61,16 +75,30 @@ class App extends Component {
               "email": "fomin@qwerty.com",
               "city": "Запоріжжя",
               "address": "",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiisa nulla ipsa sapiente doloribus officiis qwertyuiopas."
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiisa nulla ipsa sapiente doloribus officiis qwertyuiopas.",
+              "cardnumber": "",
+              "fullbankname": "",
+              "shortbankname": "",
+              "mfo": "",
+              "iban": "",
+              "edrpou": "",
+              "accountnumber": ""
             },
             {
               "select": "Гуманітарна допомога",
-              "name": "Петров Щлуксандр Васильович",
+              "name": "Петров Александр Васильович",
               "telephone": "+380687778899",
-              "email": "petrov@qwerty.com",
+              "email": "",
               "city": "Днепр",
               "address": "",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiis."
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiis.",
+              "cardnumber": "43219876543210",
+              "fullbankname": "",
+              "shortbankname": "",
+              "mfo": "8465",
+              "iban": "2546542544",
+              "edrpou": "0123456789",
+              "accountnumber": "484654654465454845"
             }
           ]
         },
@@ -164,7 +192,9 @@ class App extends Component {
           onUpdateSearch={onUpdateSearch}
           searchResult={searchResult}
           filter={filter}
-          onFilterSelect={onFilterSelect} />
+          onFilterSelect={onFilterSelect}
+          activeSection={this.state.activeSection}
+          id={id} />
       );
   }
 

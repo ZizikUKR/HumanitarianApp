@@ -1,6 +1,6 @@
 @media (max-width: 1200px) {
   .container {
-    width: 960px;
+    width: 950px;
   }
   .section {
     &__info {
@@ -8,6 +8,11 @@
     }
     &__filters {
       gap: 148px;
+    }
+  }
+  .form {
+    &__input--services {
+      width: 737px;
     }
   }
 }
@@ -19,6 +24,20 @@
   .section {
     &__filters {
       gap: 28px;
+    }
+  }
+  .form {
+    &__inputs {
+      column-gap: 14px;
+    }
+    &__input {
+      width: 340px;
+    }
+    &__input--services {
+      width: 100%;;
+    }
+    &__bank-account {
+      column-gap: 14px;
     }
   }
 }
@@ -47,6 +66,14 @@
       gap: 10px;
     }
   }
+  .form {
+    &__input {
+      width: 250px;
+    }
+    &__input--services {
+      width: 100%;
+    }
+  }
 }
 
 @media (max-width: 576px) {
@@ -57,6 +84,11 @@
   .pop-up {
     padding: 0 10px;
     &__wrapper {
+      width: 100%;
+    }
+  }
+  .form {
+    &__input {
       width: 100%;
     }
   }
