@@ -8,7 +8,8 @@ import './section.scss';
 
 class Section extends Component {
   state = {
-    searchValue: ''
+    searchValue: '',
+    openForm: false
   }
 
   onUpdateSearch = e => {
@@ -17,15 +18,33 @@ class Section extends Component {
     this.props.onUpdateSearch(searchValue)
   }
 
+  openButtonName = () => {
+    switch (this.props.activeSection) {
+      case 0:
+        return 'волонтера';
+      case 1:
+        return 'підприємство';
+      case 2:
+        return 'оголошення';
+    }
+  }
+
+  onOpenForm = () => {
+    this.setState({
+      openForm: !this.state.openForm
+    })
+  }
+
   render() {
     return(
       <section className="section">
         <div className="section__form">
           <div className="container">
-          {this.props.name === 'Волонтери' ? <Form title={'Анкета волонтера'} namePlaceholder={'Введіть ПІБ...'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={this.props.filterButtons} /> : null}
-          {this.props.name === 'Підприємства' ? <Form title={'Анкета підприємства'} namePlaceholder={'Назва підприємства...'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={this.props.filterButtons} /> : null}
-          {this.props.name === 'Оголошення' ? <Form title={'Додати оголошення'} namePlaceholder={'Введіть ПІБ...'} closePopUp={this.closePopUp} areaPlaceholder={'Введить текст оголошення...'} selects={this.props.filterButtons} /> : null}
+          {this.state.openForm ? (this.props.name === 'Волонтери' ? <Form id={this.props.id} title={'Анкета волонтера'} namePlaceholder={'Введіть ПІБ'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={this.props.filterButtons} /> : null) : null}
+          {this.state.openForm ? (this.props.name === 'Підприємства' ? <Form id={this.props.id} title={'Анкета підприємства'} namePlaceholder={'Назва підприємства'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={this.props.filterButtons} /> : null) : null}
+          {this.state.openForm ? (this.props.name === 'Оголошення' ? <Form id={this.props.id} title={'Додати оголошення'} namePlaceholder={'Введіть ПІБ'} closePopUp={this.closePopUp} areaPlaceholder={'Введить текст оголошення'} selects={this.props.filterButtons} /> : null) : null}
           </div>
+          <button className="section__open" onClick={this.onOpenForm}>Додати {this.openButtonName()}</button>
         </div>
         <div className="section__info">
           <div className="container">
@@ -44,7 +63,7 @@ class Section extends Component {
           </div>
         </div>
         <div className="container">
-          <AdList ads={this.props.ads} />
+          <AdList id={this.props.id} ads={this.props.ads} />
         </div>
       </section>
     );
@@ -67,6 +86,6 @@ const SectionCategories = ({filterButtons, onFilterSelect}) => {
   } else {
     return selectCategories;
   }
-}
+};
 
 export default Section;
