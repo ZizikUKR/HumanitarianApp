@@ -16,6 +16,18 @@ namespace HumanitarianApp.BLL.Profile
 
             CreateMap<BankDetail, BankDetailDto>();
             CreateMap<BankDetailDto, BankDetail>();
+
+            CreateMap<Organization, OrganizationDto>();
+            CreateMap<OrganizationDto, Organization>();
+
+            CreateMap<Organization, UpdateOrganizationDto>();
+            CreateMap<UpdateOrganizationDto, Organization>();
+
+            CreateMap<Announcement, AnnouncementDto>();
+            CreateMap<AnnouncementDto, Announcement>();
+
+            CreateMap<Announcement, UpdateAnnouncementDto>();
+            CreateMap<UpdateAnnouncementDto, Announcement>();
         }
     }
 }

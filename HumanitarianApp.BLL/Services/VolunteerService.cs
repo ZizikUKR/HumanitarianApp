@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.DAL.Models;
+using HumanitarianApp.DAL.Models.Enums;
 using HumanitarianApp.DAL.Repository;
 
 namespace HumanitarianApp.BLL.Services
@@ -111,6 +112,7 @@ namespace HumanitarianApp.BLL.Services
             entity.City = entityDto.City;
             entity.Address = entityDto.Address;
             entity.Description = entityDto.Description;
+            entity.Category = (VolunteerCategory)entityDto.Category;
 
             await _volunteerRepository.Update(entity);
         }
