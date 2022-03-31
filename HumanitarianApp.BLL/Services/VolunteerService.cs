@@ -21,6 +21,7 @@ namespace HumanitarianApp.BLL.Services
         public async Task AddEntity(CreateVolunteerDto entity)
         {
             var entityForCreate = _mapper.Map<Volunteer>(entity);
+            entityForCreate.CreationDate = DateTime.Now;
 
             if (entityForCreate == null)
             {
@@ -109,7 +110,7 @@ namespace HumanitarianApp.BLL.Services
             entity.Name = entityDto.Name;
             entity.City = entityDto.City;
             entity.Address = entityDto.Address;
-            entity.Message = entityDto.Message;
+            entity.Description = entityDto.Description;
 
             await _volunteerRepository.Update(entity);
         }

@@ -13,6 +13,6 @@ namespace HumanitarianApp.DAL.Models
         public virtual VolunteerCategory Category { get; set; }
 
         //Reverse Navigation
-        public virtual ICollection<BankDetail>? BankDetails { get; set; }
+        public  ICollection<BankDetail>? BankDetails { get; set; }
     }
 }
