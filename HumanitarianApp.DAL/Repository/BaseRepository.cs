@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HumanitarianApp.DAL.Repository
 {
-    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, BaseModel
+    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseModel
     {
         private readonly HumanitarianDbContext _dbContext;
 
@@ -13,32 +13,32 @@ namespace HumanitarianApp.DAL.Repository
             _dbContext = dbContext;
         }
 
-        public void Create(TEntity entity)
+        public async Task Create(TEntity entity)
         {
             _dbContext.Add(entity);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public TEntity GetById(Guid id)
+        public async Task<TEntity> GetById(Guid id)
         {
-            return _dbContext.Set<TEntity>().FirstOrDefault(e => e.Id == id);
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void Delete(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             _dbContext.Remove(entity);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
