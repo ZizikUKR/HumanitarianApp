@@ -12,6 +12,10 @@ class Service {
   post = async (url, data) => {
     let result = await fetch(url, {
         method: 'Post',
+        headers: {
+          accept: 'application/json',
+          "content-type": 'application/json'
+        },
         body: data
     });
 

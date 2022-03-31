@@ -6,8 +6,7 @@ import './form.scss';
 
 class Form extends Component {
   postObj = {
-    type: this.props.id,
-    bankDetails: []
+    // bankDetails: []
   };
 
   postService = new Service();
@@ -28,7 +27,11 @@ class Form extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.postService.post('url', this.postObj)
+    console.log(this.postObj)
+
+    const json = JSON.stringify(this.postObj)
+
+    this.postService.post('https://localhost:7057/api/Volunteer/CreateEntity', json)
 
     this.postObj = {};
     e.target.reset();
@@ -36,9 +39,11 @@ class Form extends Component {
 
   onUpdateMainForm = e => {
     const key = e.target.name;
-    const value = e.target.value;
+    let value = e.target.value;
+    if (key === 'category') {
+      value = +value;
+    }
     this.postObj[key] = value;
-    console.log(this.postObj)
   }
 
   onUpdateBankForm = e => {
@@ -105,7 +110,7 @@ class Form extends Component {
         </div>
         {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
         <textarea className="form__input form__input--services"
-          name="message"
+          name="description"
           maxLength={500}
           required
           placeholder={'*' + (areaPlaceholder || 'Напишіть, які послуги надаєте...')}
@@ -141,7 +146,7 @@ const FormBankAccount = ({onUpdateBankForm}) => {
   return (
     <div className="form__bank-block">
       <input className="form__input"
-          name="cardnumber"
+          name="cardNumber"
           type="text"
           minLength={16}
           maxLength={16}
@@ -150,12 +155,12 @@ const FormBankAccount = ({onUpdateBankForm}) => {
       <p className="form__bank-data">Банківські реквізити</p>
       <div className="form__bank-account">
         <input className="form__input" 
-          name="fullbankname"
+          name="fullBankName"
           type="text"
           placeholder="Повне ім'я банку"
           onChange={e => onUpdateBankForm(e)} />
         <input className="form__input" 
-          name="shortbankname"
+          name="shortBankName"
           type="text"
           placeholder="Скорочене ім'я банку"
           onChange={e => onUpdateBankForm(e)} />
@@ -175,7 +180,7 @@ const FormBankAccount = ({onUpdateBankForm}) => {
           placeholder="IBAN"
           onChange={e => onUpdateBankForm(e)} />
         <input className="form__input" 
-          name="edrpou"
+          name="edrpo"
           type="number"
           inputMode='numeric'
           minLength={8}
@@ -183,7 +188,7 @@ const FormBankAccount = ({onUpdateBankForm}) => {
           placeholder="ІПН/ЄДРПОУ"
           onChange={e => onUpdateBankForm(e)} />
         <input className="form__input" 
-          name="accountnumber"
+          name="accountNumber"
           type="number"
           inputMode='numeric'
           placeholder="Розрахунковий рахунок"
