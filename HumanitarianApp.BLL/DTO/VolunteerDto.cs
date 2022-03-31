@@ -1,9 +1,10 @@
 ﻿using HumanitarianApp.Bll.DTO;
+using HumanitarianApp.BLL.DTO.Enums;
 using HumanitarianApp.DAL.Models;
 
 namespace HumanitarianApp.BLL.DTO
 {
-    public class EntityDto
+    public class VolunteerDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -12,8 +13,7 @@ namespace HumanitarianApp.BLL.DTO
         public string City { get; set; }
         public string Address { get; set; }
         public string Message { get; set; }
-        public EntityType Type { get; set; }
-        public CategoryDto Category { get; set; }
+        public VolunteerCategoryEnumDto Category { get; set; }
         public ICollection<BankDetailDto>? BankDetails{ get; set; }
     }
 }

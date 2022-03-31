@@ -202,8 +202,9 @@ class App extends Component {
   // Обязательно передавать все поля, если поле пусто, то просто - ''
   service = new Service();
   componentDidMount() {
-    this.service.get('url')
+    this.service.get('https://localhost:7057/api/entity/GetEntityByType?type=0')
         .then(response => {
+          debugger;
           let obj = {
             "select": response.select,
             "name": response.name,
@@ -215,9 +216,9 @@ class App extends Component {
           }
 
           // Пока что новые записи вставляются в конец списка, потом изменю.
-          const newAd = this.state.sectionsData[0].ads.push(obj); // 0 - волонтеры, 1 - предприятия, 2 - объявления
+          // const newAd = this.state.sectionsData[0].ads.push(obj); // 0 - волонтеры, 1 - предприятия, 2 - объявления
 
-          this.setState({newAd});
+          // this.setState({newAd});
         })
   }
 

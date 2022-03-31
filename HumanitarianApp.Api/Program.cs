@@ -38,8 +38,8 @@ builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbConte
     opt.UseSqlServer(builder.Configuration.GetConnectionString("HumanitarianConnection"), 
         b => b.MigrationsAssembly("HumanitarianApp.Api")));
 
-builder.Services.AddScoped<IEntityService, EntityService>();
-builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IEntityRepository, HumanitarianApp.DAL.Repository.EntityRepository > ();
+builder.Services.AddScoped<IVolunteerService, VolunteerService>();
+builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IVolunteerRepository, HumanitarianApp.DAL.Repository.VolunteerRepository > ();
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IBankDetailRepository, HumanitarianApp.DAL.Repository.BankDetailRepository> ();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
