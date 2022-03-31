@@ -221,6 +221,8 @@ class App extends Component {
         })
   }
 
+  
+
   render() {
     const {headerButtons, visibleBurgerMenu, sectionsData, activeSection} = this.state;
     
