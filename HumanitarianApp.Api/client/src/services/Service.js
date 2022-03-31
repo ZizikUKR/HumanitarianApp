@@ -19,7 +19,7 @@ class Service {
         body: data
     });
 
-    return await result.json();
+    return await result;
 };
 }
 

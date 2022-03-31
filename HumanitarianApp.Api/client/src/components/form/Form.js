@@ -6,7 +6,7 @@ import './form.scss';
 
 class Form extends Component {
   postObj = {
-    // bankDetails: []
+    bankDetails: []
   };
 
   postService = new Service();
@@ -27,11 +27,10 @@ class Form extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    console.log(this.postObj)
-
     const json = JSON.stringify(this.postObj)
 
     this.postService.post('https://localhost:7057/api/Volunteer/CreateEntity', json)
+    .then(response => console.log(response));
 
     this.postObj = {};
     e.target.reset();
