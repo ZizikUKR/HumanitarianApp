@@ -2,7 +2,7 @@
 
 namespace HumanitarianApp.DAL.Repository
 {
-    public interface IEntityRepository : IRepository<Entity>
+    public interface IAnnouncementRepository :IRepository<Announcement>
     {
     }
 }

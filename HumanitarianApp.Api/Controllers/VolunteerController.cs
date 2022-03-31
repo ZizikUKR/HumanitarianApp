@@ -6,17 +6,17 @@ namespace HumanitarianApp.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class EntityController : ControllerBase
+    public class VolunteerController : ControllerBase
     {
-        private readonly IEntityService _entityService;
+        private readonly IVolunteerService _entityService;
 
-        public EntityController(IEntityService entityService)
+        public VolunteerController(IVolunteerService entityService)
         {
             _entityService = entityService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEntity(CreateEntityDto entityDto)
+        public async Task<ActionResult> CreateEntity(CreateVolunteerDto entityDto)
         {
             if (entityDto == null)
             {
@@ -29,50 +29,37 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<EntityDto>> GetAllEntity()
+        public async Task<IEnumerable<VolunteerDto>> GetAllEntity()
         {
             return await _entityService.GetAllEntities();
         }
 
         [HttpGet]
-        public async Task<IEnumerable<EntityDto>> GetEntityByType(byte type)
-        {
-            return  await _entityService.GetAllEntitiesByType(type);
-        } 
-        
-        [HttpGet]
-        public async Task<IEnumerable<EntityDto>> GetEntityByCity(string city)
-        {
-            return  await _entityService.GetEntityByCity(city);
-        }
-
-
-        [HttpGet]
-        public async Task<ActionResult<EntityDto>> EntityById(Guid id)
+        public async Task<ActionResult<VolunteerDto>> EntityById(Guid id)
         {
             return  Ok(await  _entityService.GetById(id));
         }
 
         [HttpGet]
-        public async Task<ActionResult<EntityDto>> GetEntityByName(string name)
+        public async Task<ActionResult<VolunteerDto>> GetEntityByName(string name)
         {
             return Ok(await _entityService.GetByName(name));
         }
 
         [HttpGet]
-        public async Task<ActionResult<EntityDto>> GetEntityByAddress(string address)
+        public async Task<ActionResult<VolunteerDto>> GetEntityByAddress(string address)
         {
             return Ok(await _entityService.GetByAddress(address));
         }
 
         [HttpGet]
-        public async Task<ActionResult<EntityDto>> GetEntityByEmail(string email)
+        public async Task<ActionResult<VolunteerDto>> GetEntityByEmail(string email)
         {
             return  Ok(await _entityService.GetByEmail(email));
         }
 
         [HttpPost]
-        public async Task<ActionResult> UpdateEntity(EntityDto entity)
+        public async Task<ActionResult> UpdateEntity(VolunteerDto entity)
         {
             await _entityService.UpdateEntity(entity);
 
