@@ -4,6 +4,7 @@ using HumanitarianApp.DAL.HumanityDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HumanitarianApp.Api.Migrations
 {
     [DbContext(typeof(HumanitarianDbContext))]
-    partial class HumanitarianDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220330124900_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,55 +24,12 @@ namespace HumanitarianApp.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HumanitarianApp.DAL.Models.Announcement", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Announcements");
-                });
-
             modelBuilder.Entity("HumanitarianApp.DAL.Models.BankDetail", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("BankId");
 
                     b.Property<string>("AccountNumber")
                         .IsRequired()
@@ -80,12 +39,12 @@ namespace HumanitarianApp.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("EDRPO")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FullBankName")
                         .IsRequired()
@@ -95,9 +54,6 @@ namespace HumanitarianApp.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("MFO")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -106,78 +62,52 @@ namespace HumanitarianApp.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("VolunteerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("VolunteerId");
+                    b.HasIndex("EntityId");
 
                     b.ToTable("BankDetails");
                 });
 
-            modelBuilder.Entity("HumanitarianApp.DAL.Models.Organization", b =>
+            modelBuilder.Entity("HumanitarianApp.DAL.Models.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CategoryId");
+
+                    b.Property<byte?>("EnterpriseCategory")
+                        .HasColumnType("tinyint");
+
+                    b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte?>("NoticeCategory")
+                        .HasColumnType("tinyint");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte?>("VolunteerCategory")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organizations");
+                    b.HasIndex("EntityId")
+                        .IsUnique();
+
+                    b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("HumanitarianApp.DAL.Models.Volunteer", b =>
+            modelBuilder.Entity("HumanitarianApp.DAL.Models.Entity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("EntityId");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Category")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -188,6 +118,10 @@ namespace HumanitarianApp.Api.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -196,9 +130,12 @@ namespace HumanitarianApp.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte>("Type")
+                        .HasColumnType("tinyint");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Volontiers");
+                    b.ToTable("Entities");
                 });
 
             modelBuilder.Entity("HumanitarianApp.DAL.Models.User", b =>
@@ -303,8 +240,8 @@ namespace HumanitarianApp.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9bf1f9fb-69d6-4eb4-93d0-c09b498155d0",
-                            ConcurrencyStamp = "0fabcd7d-4dc5-4a1e-8a9e-e1414647b181",
+                            Id = "12a764ca-fffe-464e-8e4e-05721285087d",
+                            ConcurrencyStamp = "ddccf434-c182-45d2-be0d-5210ee8db366",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -418,13 +355,24 @@ namespace HumanitarianApp.Api.Migrations
 
             modelBuilder.Entity("HumanitarianApp.DAL.Models.BankDetail", b =>
                 {
-                    b.HasOne("HumanitarianApp.DAL.Models.Volunteer", "Volunteer")
+                    b.HasOne("HumanitarianApp.DAL.Models.Entity", "Entity")
                         .WithMany("BankDetails")
-                        .HasForeignKey("VolunteerId")
+                        .HasForeignKey("EntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Volunteer");
+                    b.Navigation("Entity");
+                });
+
+            modelBuilder.Entity("HumanitarianApp.DAL.Models.Category", b =>
+                {
+                    b.HasOne("HumanitarianApp.DAL.Models.Entity", "Entity")
+                        .WithOne("Category")
+                        .HasForeignKey("HumanitarianApp.DAL.Models.Category", "EntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Entity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -478,9 +426,11 @@ namespace HumanitarianApp.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HumanitarianApp.DAL.Models.Volunteer", b =>
+            modelBuilder.Entity("HumanitarianApp.DAL.Models.Entity", b =>
                 {
                     b.Navigation("BankDetails");
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

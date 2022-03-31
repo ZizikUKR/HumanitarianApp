@@ -1,5 +1,8 @@
 using HumanitarianApp.Api.Middlewares;
 using HumanitarianApp.BLL.Services;
+using HumanitarianApp.DAL.HumanityDb;
+using HumanitarianApp.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -35,7 +38,7 @@ builder.Services.AddSwaggerGen();
 }
 
 builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("HumanitarianConnection"), 
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("HumanitarianConnection"),
         b => b.MigrationsAssembly("HumanitarianApp.Api")));
 
 builder.Services.AddScoped<IVolunteerService, VolunteerService>();
@@ -46,6 +49,9 @@ builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IOrganizationReposito
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IAnnouncementRepository, HumanitarianApp.DAL.Repository.AnnouncementRepository > ();
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IBankDetailRepository, HumanitarianApp.DAL.Repository.BankDetailRepository> ();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<HumanitarianDbContext>();
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -65,6 +71,8 @@ app.UseHttpStatusCodeExceptionMiddleware();
 app.UseCors("OriginPolicy");
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

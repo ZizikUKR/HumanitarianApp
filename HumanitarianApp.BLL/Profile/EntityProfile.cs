@@ -1,5 +1,6 @@
 ﻿using HumanitarianApp.Bll.DTO;
 using HumanitarianApp.BLL.DTO;
+using HumanitarianApp.BLL.Models;
 using HumanitarianApp.DAL.Models;
 
 namespace HumanitarianApp.BLL.Profile
@@ -28,6 +29,11 @@ namespace HumanitarianApp.BLL.Profile
 
             CreateMap<Announcement, UpdateAnnouncementDto>();
             CreateMap<UpdateAnnouncementDto, Announcement>();
+
+            CreateMap<UserRegistrationDto, User>()
+                .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
+            CreateMap<User, UserRegistrationDto>();
+
         }
     }
 }
