@@ -40,9 +40,9 @@ class Section extends Component {
       <section className="section">
         <div className="section__form">
           <div className="container">
-          {this.state.openForm ? (this.props.name === 'Волонтери' ? <Form id={this.props.id} title={'Анкета волонтера'} namePlaceholder={'Введіть ПІБ'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={this.props.filterButtons} /> : null) : null}
-          {this.state.openForm ? (this.props.name === 'Підприємства' ? <Form id={this.props.id} title={'Анкета підприємства'} namePlaceholder={'Назва підприємства'} closePopUp={this.closePopUp} areaPlaceholder={null} selects={this.props.filterButtons} /> : null) : null}
-          {this.state.openForm ? (this.props.name === 'Оголошення' ? <Form id={this.props.id} title={'Додати оголошення'} namePlaceholder={'Введіть ПІБ'} closePopUp={this.closePopUp} areaPlaceholder={'Введить текст оголошення'} selects={this.props.filterButtons} /> : null) : null}
+          {this.state.openForm ? (this.props.name === 'Волонтери' ? <Form id={this.props.id} title={'Анкета волонтера'} namePlaceholder={'Введіть ПІБ'} areaPlaceholder={null} selects={this.props.filterButtons} /> : null) : null}
+          {this.state.openForm ? (this.props.name === 'Підприємства' ? <Form id={this.props.id} title={'Анкета підприємства'} namePlaceholder={'Назва підприємства'} areaPlaceholder={null} selects={this.props.filterButtons} /> : null) : null}
+          {this.state.openForm ? (this.props.name === 'Оголошення' ? <Form id={this.props.id} title={'Додати оголошення'} namePlaceholder={'Введіть ПІБ'} areaPlaceholder={'Введить текст оголошення'} selects={this.props.filterButtons} /> : null) : null}
           </div>
           <button className="section__open" onClick={this.onOpenForm}>Додати {this.openButtonName()}</button>
         </div>

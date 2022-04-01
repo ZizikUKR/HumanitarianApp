@@ -12,7 +12,7 @@ class AdList extends Component {
 
       return (
         <li key={this.keyCount++} className="ad-list__item">
-          <h3 className="subtitle">{select || name}</h3>
+          <h3 className="subtitle">{select || name} - {city}</h3>
           <p className="ad-list__text">{text}</p>
           <div className="ad-list__contacts">
             <p className="ad-list__contact"><span className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>

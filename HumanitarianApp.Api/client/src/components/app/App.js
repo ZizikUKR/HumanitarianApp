@@ -200,27 +200,27 @@ class App extends Component {
 
   // Вызов метода гет
   // Обязательно передавать все поля, если поле пусто, то просто - ''
-  service = new Service();
-  componentDidMount() {
-    this.service.get('https://localhost:7057/api/entity/GetEntityByType?type=0')
-        .then(response => {
-          debugger;
-          let obj = {
-            "select": response.select,
-            "name": response.name,
-            "telephone": response.telephone,
-            "email": response.email,
-            "city": response.city,
-            "address": response.address,
-            "text": response.title
-          }
+  // service = new Service();
+  // componentDidMount() {
+  //   this.service.get('https://localhost:7057/api/entity/GetEntityByType?type=0')
+  //       .then(response => {
+  //         debugger;
+  //         let obj = {
+  //           "select": response.select,
+  //           "name": response.name,
+  //           "telephone": response.telephone,
+  //           "email": response.email,
+  //           "city": response.city,
+  //           "address": response.address,
+  //           "text": response.title
+  //         }
 
-          // Пока что новые записи вставляются в конец списка, потом изменю.
-          // const newAd = this.state.sectionsData[0].ads.push(obj); // 0 - волонтеры, 1 - предприятия, 2 - объявления
+  //         // Пока что новые записи вставляются в конец списка, потом изменю.
+  //         // const newAd = this.state.sectionsData[0].ads.push(obj); // 0 - волонтеры, 1 - предприятия, 2 - объявления
 
-          // this.setState({newAd});
-        })
-  }
+  //         // this.setState({newAd});
+  //       })
+  // }
 
   
 

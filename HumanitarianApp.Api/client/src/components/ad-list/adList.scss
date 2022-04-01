@@ -16,10 +16,10 @@
   &__contacts {
     margin-top: 10px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 5px;
+    column-gap: 25px;
+    row-gap: 5px;
   }
   &__contact {
     font-size: 15px;
