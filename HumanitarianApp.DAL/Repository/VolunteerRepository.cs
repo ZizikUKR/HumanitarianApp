@@ -13,24 +13,46 @@ namespace HumanitarianApp.DAL.Repository
             _dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<Volunteer>> GetAll()
+        {
+            return await _dbContext.Set<Volunteer>()
+                .Include(c=>c.BankDetails)
+                .ToListAsync();
+        }
+
+        public async Task<Volunteer> GetById(Guid id)
+        {
+            return await _dbContext.Set<Volunteer>()
+                .Include(c => c.BankDetails)
+                    .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
         public async Task<Volunteer> GetByName(string name)
         {
-            return await _dbContext.Set<Volunteer>().FirstOrDefaultAsync(e => e.Name == name);
+            return await _dbContext.Set<Volunteer>()
+                .Include(c => c.BankDetails)
+                .FirstOrDefaultAsync(e => e.Name == name);
         }
 
         public async Task<Volunteer> GetByPhoneNumber(string phoneNumber)
         {
-            return await _dbContext.Set<Volunteer>().FirstOrDefaultAsync(e => e.PhoneNumber == phoneNumber);
+            return await _dbContext.Set<Volunteer>()
+                .Include(c => c.BankDetails)
+                .FirstOrDefaultAsync(e => e.PhoneNumber == phoneNumber);
         }
 
         public async Task<Volunteer> GetByEmail(string email)
         {
-            return await _dbContext.Set<Volunteer>().FirstOrDefaultAsync(e => e.Email == email);
+            return await _dbContext.Set<Volunteer>()
+                .Include(c => c.BankDetails)
+                .FirstOrDefaultAsync(e => e.Email == email);
         }
 
         public async Task<Volunteer> GetByAddress(string address)
         {
-            return await _dbContext.Set<Volunteer>().FirstOrDefaultAsync(e => e.Address == address);
+            return await _dbContext.Set<Volunteer>()
+                .Include(c => c.BankDetails)
+                .FirstOrDefaultAsync(e => e.Address == address);
         }
 
     }

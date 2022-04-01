@@ -36,72 +36,9 @@ class App extends Component {
             {id: 4, name: 'Інше'}
           ],
           ads: [
-            {
-              "select": "Перевезення",
-              "name": "Петров Іван Сергійович",
-              "telephone": "+38099112233",
-              "email": "petrov@qwerty.com",
-              "city": "Київ",
-              "address": "м. Перемоги, 1",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas.",
-              "cardnumber": "12345678901234",
-              "fullbankname": "GgggMmmmBbbbHhhh Bank",
-              "shortbankname": "GMBH Bank",
-              "mfo": "8465",
-              "iban": "2546542544",
-              "edrpou": "12345678",
-              "accountnumber": "484654654465454845"
-            },
-            {
-              "select": "Гуманітарна допомога",
-              "name": "Олександров Василь Петрович",
-              "telephone": "+380669998877",
-              "email": "oleksandrov@qwerty.com",
-              "city": "Днепр",
-              "address": "пр. Свободи, 47/12",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiis.",
-              "cardnumber": "",
-              "fullbankname": "",
-              "shortbankname": "",
-              "mfo": "",
-              "iban": "",
-              "edrpou": "",
-              "accountnumber": ""
-            },
-            {
-              "select": "Інше",
-              "name": "Фомін Віталій Володимирович",
-              "telephone": "+380674445566",
-              "email": "fomin@qwerty.com",
-              "city": "Запоріжжя",
-              "address": "",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiisa nulla ipsa sapiente doloribus officiis qwertyuiopas.",
-              "cardnumber": "",
-              "fullbankname": "",
-              "shortbankname": "",
-              "mfo": "",
-              "iban": "",
-              "edrpou": "",
-              "accountnumber": ""
-            },
-            {
-              "select": "Гуманітарна допомога",
-              "name": "Петров Александр Васильович",
-              "telephone": "+380687778899",
-              "email": "",
-              "city": "Днепр",
-              "address": "",
-              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiis.",
-              "cardnumber": "43219876543210",
-              "fullbankname": "",
-              "shortbankname": "",
-              "mfo": "8465",
-              "iban": "2546542544",
-              "edrpou": "0123456789",
-              "accountnumber": "484654654465454845"
-            }
+
           ]
-        },
+          },
         {
           id: 1,
           name: 'Підприємства',
@@ -198,28 +135,92 @@ class App extends Component {
       );
   }
 
+  onInit = e=>{
+    this.service.get('https://localhost:7057/api/Volunteer/GetAllEntity')
+    .then(response => {
+      debugger;
+      var volonteers = [];
+
+      for (let i = 0; i < response.length; ++i) {
+       var volonteer =
+        {
+          //"select": `${response[i].category}`,
+          "select": "Перевезення",
+          "name": response[i].name,
+          "telephone": response[i].phoneNumber,
+          "email": response[i].email,
+          "city": response[i].city,
+          "address": response[i].address,
+          "text": response[i].description,
+          "bankDetils": []
+        }
+       
+         if (response[i].bankDetails != null) {
+
+          for (let j=0; j<response[i].bankDetails.length; j++) {
+             let bankDetil =
+            {
+              "cardnumber": response[i].bankDetails[j].cardNumber,
+              "fullbankname": response[i].bankDetails[j].fullBankName,
+              "shortbankname": response[i].bankDetails[j].shortBankName,
+              "mfo": response[i].bankDetails[j].mfo,
+              "iban": response[i].bankDetails[j].iban,
+              "edrpou": response[i].bankDetails[j].edrpo,
+              "accountnumber": response[i].bankDetails[j].accountNumber
+            }
+            volonteer.bankDetils.push(bankDetil);
+          }
+          volonteers.push(volonteer);
+        }
+      }
+      debugger;
+      console.log(volonteers);
+      return volonteers
+  })};
   // Вызов метода гет
   // Обязательно передавать все поля, если поле пусто, то просто - ''
   service = new Service();
   componentDidMount() {
-    this.service.get('https://localhost:7057/api/entity/GetEntityByType?type=0')
-        .then(response => {
-          debugger;
-          let obj = {
-            "select": response.select,
-            "name": response.name,
-            "telephone": response.telephone,
-            "email": response.email,
-            "city": response.city,
-            "address": response.address,
-            "text": response.title
+    this.service.get('https://localhost:7057/api/Volunteer/GetAllEntity')
+      .then(response => {
+     //   debugger;
+        const newAd = this.state.sectionsData[0].ads;
+
+        for (let i = 0; i < response.length; ++i) {
+         var volonteer =
+          {
+            "select": response[i].category,
+            "name": response[i].name,
+             "telephone": response[i].phoneNumber,
+            "email": response[i].email,
+            "city": response[i].city,
+            "address": response[i].address,
+            "text": response[i].description,
+            "bankDetils": []
           }
+         
+           if (response[i].bankDetails != null) {
 
-          // Пока что новые записи вставляются в конец списка, потом изменю.
-          // const newAd = this.state.sectionsData[0].ads.push(obj); // 0 - волонтеры, 1 - предприятия, 2 - объявления
+            for (let j=0; j<response[i].bankDetails.length; j++) {
+               let bankDetil =
+              {
+                "cardnumber": response[i].bankDetails[j].cardNumber,
+                "fullbankname": response[i].bankDetails[j].fullBankName,
+                "shortbankname": response[i].bankDetails[j].shortBankName,
+                "mfo": response[i].bankDetails[j].mfo,
+                "iban": response[i].bankDetails[j].iban,
+                "edrpou": response[i].bankDetails[j].edrpo,
+                "accountnumber": response[i].bankDetails[j].accountNumber
+              }
+              volonteer.bankDetils.push(bankDetil);
+            }
+            newAd.push(volonteer);
+          }
+        }
 
-          // this.setState({newAd});
-        })
+       //   this.setState({newAd}); провоцирует ворнингWarning: unstable_flushDiscreteUpdates: Cannot flush updates when React is already
+      })
+
   }
 
   
