@@ -99,6 +99,22 @@ class App extends Component {
               "iban": "2546542544",
               "edrpou": "0123456789",
               "accountnumber": "484654654465454845"
+            },
+            {
+              "select": "Медицина",
+              "name": "Дубровський Георгій В'ячеславович",
+              "telephone": "+380633211221",
+              "email": "heorhii@qwerty.com",
+              "city": "Хмельницький",
+              "address": "мм. Квітневий, 27/80",
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiisa nulla ipsa sapiente doloribus officiis qwertyuiopas.",
+              "cardnumber": "12345678",
+              "fullbankname": "йфяцічувскамепинртгоьшлбщд",
+              "shortbankname": "йфяцічусскам",
+              "mfo": "123456566654546",
+              "iban": "64654654465465465465",
+              "edrpou": "0123456789",
+              "accountnumber": "апу65+5+65ппукпук5п565пку546"
             }
           ]
         },
