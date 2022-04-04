@@ -162,7 +162,7 @@ class App extends Component {
 
   getAllVolunteers = () => {
     this.service
-      .get("https://localhost:7057/api/Volunteer/GetAll")
+      .get("https://localhost:7057/api/Volunteer/GetAll?pageNumber=1")
       .then((response) => {
         const volonteers = response.map((item) => {
           return {
@@ -194,7 +194,7 @@ class App extends Component {
 
   getAllOrganizations = () => {
     this.service
-      .get("https://localhost:7057/api/Organization/GetAll")
+      .get("https://localhost:7057/api/Organization/GetAll?pageNumber=1")
       .then((response) => {
         const organizations = response.map((item) => {
           return {
@@ -218,7 +218,7 @@ class App extends Component {
 
   getAllAnnouncements = () => {
     this.service
-      .get("https://localhost:7057/api/Announcement/GetAll")
+      .get("https://localhost:7057/api/Announcement/GetAll?pageNumber=1")
       .then((response) => {
         const announcements = response.map((item) => {
           return {
