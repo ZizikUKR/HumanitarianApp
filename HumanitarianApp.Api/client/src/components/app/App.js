@@ -156,6 +156,8 @@ class App extends Component {
   componentDidMount() {
     debugger;
     this.getAllVolunteers();
+    this.getAllOrganizations();
+    this.getAllAnnouncements();
   }
 
   getAllVolunteers = () => {
@@ -187,6 +189,57 @@ class App extends Component {
 
         this.setState({ sectionsData: newsectionsData });
       });
+
+      
+  };
+
+  getAllOrganizations = () => {
+    this.service
+      .get("https://localhost:7057/api/Organization/GetAllEntity")
+      .then((response) => {
+        debugger;
+        const organizations = response.map((item) => {
+          return {
+            name: item.name,
+            telephone: item.phoneNumber,
+            email: item.email,
+            city: item.city,
+            address: item.address,
+            text: item.description,
+          };
+        });
+
+        let newsectionsData = Object.assign({}, this.state.sectionsData);
+        newsectionsData[1].ads = organizations;
+
+        this.setState({ sectionsData: newsectionsData });
+      });
+
+      
+  };
+
+  getAllAnnouncements = () => {
+    this.service
+      .get("https://localhost:7057/api/Announcement/GetAllEntity")
+      .then((response) => {
+        debugger;
+        const announcements = response.map((item) => {
+          return {
+            select: this.setAnnouncementCategory(item.category),
+            name: item.name,
+            telephone: item.phoneNumber,
+            email: item.email,
+            city: item.city,
+            address: item.address,
+            text: item.description,
+          };
+        });
+
+        let newsectionsData = Object.assign({}, this.state.sectionsData);
+        newsectionsData[2].ads = announcements;
+
+        this.setState({ sectionsData: newsectionsData });
+      });
   };
 
   setVolunteersCategory = (category) => {
@@ -209,6 +262,40 @@ class App extends Component {
 
     return "";
   };
+
+  setAnnouncementCategory = (category) => {
+    debugger;
+    if (category == 0) {
+      return "Шукаю";
+    }
+
+    if (category == 1) {
+      return "Знайшов";
+    }
+
+    if (category == 2) {
+      return "Продам";
+    }
+
+    if (category == 3) {
+      return "Придбаю";
+    }
+
+    if (category == 4) {
+      return "Вiддам";
+    }
+
+    if (category == 5) {
+      return "Прийму";
+    }
+
+    if (category == 6) {
+      return "Iнше";
+    }
+
+    return "";
+  };
+
   render() {
     const { headerButtons, visibleBurgerMenu, sectionsData, activeSection } =
       this.state;
