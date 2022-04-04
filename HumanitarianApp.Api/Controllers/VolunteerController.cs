@@ -16,7 +16,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEntity(CreateVolunteerDto entityDto)
+        public async Task<ActionResult> Create(CreateVolunteerDto entityDto)
         {
             if (entityDto == null)
             {
@@ -29,37 +29,37 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VolunteerDto>> GetAllEntity()
+        public async Task<IEnumerable<VolunteerDto>> GetAll(int pageNumber)
         {
-            return await _entityService.GetAllEntities();
+            return await _entityService.GetAll(pageNumber);
         }
 
         [HttpGet]
-        public async Task<ActionResult<VolunteerDto>> EntityById(Guid id)
+        public async Task<ActionResult<VolunteerDto>> GetById(Guid id)
         {
             return  Ok(await  _entityService.GetById(id));
         }
 
         [HttpGet]
-        public async Task<ActionResult<VolunteerDto>> GetEntityByName(string name)
+        public async Task<ActionResult<VolunteerDto>> GetByName(string name)
         {
             return Ok(await _entityService.GetByName(name));
         }
 
         [HttpGet]
-        public async Task<ActionResult<VolunteerDto>> GetEntityByAddress(string address)
+        public async Task<ActionResult<VolunteerDto>> GetByAddress(string address)
         {
             return Ok(await _entityService.GetByAddress(address));
         }
 
         [HttpGet]
-        public async Task<ActionResult<VolunteerDto>> GetEntityByEmail(string email)
+        public async Task<ActionResult<VolunteerDto>> GetByEmail(string email)
         {
             return  Ok(await _entityService.GetByEmail(email));
         }
 
         [HttpPost]
-        public async Task<ActionResult> UpdateEntity(VolunteerDto entity)
+        public async Task<ActionResult> Update(VolunteerDto entity)
         {
             await _entityService.UpdateEntity(entity);
 
@@ -67,7 +67,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteEntity(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
            await _entityService.DeleteEntity(id);
 
