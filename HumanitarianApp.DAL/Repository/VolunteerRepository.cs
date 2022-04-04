@@ -13,10 +13,12 @@ namespace HumanitarianApp.DAL.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Volunteer>> GetAll()
+        public async Task<IEnumerable<Volunteer>> GetAll(int pageNumber)
         {
             return await _dbContext.Set<Volunteer>()
                 .Include(c=>c.BankDetails)
+                .Skip((pageNumber - 1) * 10)
+                .Take(10)
                 .ToListAsync();
         }
 

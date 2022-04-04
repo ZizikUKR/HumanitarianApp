@@ -155,7 +155,6 @@ class App extends Component {
   // Обязательно передавать все поля, если поле пусто, то просто - ''
   service = new Service();
   componentDidMount() {
-    debugger;
     this.getAllVolunteers();
     this.getAllOrganizations();
     this.getAllAnnouncements();
@@ -163,9 +162,8 @@ class App extends Component {
 
   getAllVolunteers = () => {
     this.service
-      .get("https://localhost:7057/api/Volunteer/GetAllEntity")
+      .get("https://localhost:7057/api/Volunteer/GetAll")
       .then((response) => {
-        debugger;
         const volonteers = response.map((item) => {
           return {
             select: this.setVolunteersCategory(item.category),
@@ -175,13 +173,13 @@ class App extends Component {
             city: item.city,
             address: item.address,
             text: item.description,
-            cardnumber: item.bankDetails[0].cardNumber,
-            fullbankname: item.bankDetails[0].fullBankName,
-            shortbankname: item.bankDetails[0].shortBankName,
-            mfo: item.bankDetails[0].mfo,
-            iban: item.bankDetails[0].iban,
-            edrpou: item.bankDetails[0].edrpo,
-            accountnumber: item.bankDetails[0].accountNumber,
+            cardnumber: item.bankDetails?.cardNumber,
+            fullbankname: item.bankDetails?.fullBankName,
+            shortbankname: item.bankDetails?.shortBankName,
+            mfo: item.bankDetails?.mfo,
+            iban: item.bankDetails?.iban,
+            edrpou: item.bankDetails?.edrpo,
+            accountnumber: item.bankDetails?.accountNumber,
           };
         });
 
@@ -196,9 +194,8 @@ class App extends Component {
 
   getAllOrganizations = () => {
     this.service
-      .get("https://localhost:7057/api/Organization/GetAllEntity")
+      .get("https://localhost:7057/api/Organization/GetAll")
       .then((response) => {
-        debugger;
         const organizations = response.map((item) => {
           return {
             name: item.name,
@@ -221,9 +218,8 @@ class App extends Component {
 
   getAllAnnouncements = () => {
     this.service
-      .get("https://localhost:7057/api/Announcement/GetAllEntity")
+      .get("https://localhost:7057/api/Announcement/GetAll")
       .then((response) => {
-        debugger;
         const announcements = response.map((item) => {
           return {
             select: this.setAnnouncementCategory(item.category),
@@ -244,7 +240,6 @@ class App extends Component {
   };
 
   setVolunteersCategory = (category) => {
-    debugger;
     if (category == 1) {
       return "Перевезення";
     }
@@ -265,7 +260,6 @@ class App extends Component {
   };
 
   setAnnouncementCategory = (category) => {
-    debugger;
     if (category == 0) {
       return "Шукаю";
     }

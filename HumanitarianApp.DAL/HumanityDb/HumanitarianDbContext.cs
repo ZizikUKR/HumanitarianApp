@@ -21,10 +21,11 @@ namespace HumanitarianApp.DAL.HumanityDb
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Volunteer>()
-                .HasMany(p => p.BankDetails)
+                .HasOne(b=>b.BankDetails)
                 .WithOne(b => b.Volunteer)
-                .HasForeignKey(c => c.VolunteerId);
+                .HasForeignKey<BankDetail>(c => c.VolunteerId);
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }

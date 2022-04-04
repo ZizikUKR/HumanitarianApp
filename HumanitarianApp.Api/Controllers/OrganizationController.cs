@@ -16,7 +16,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEntity(OrganizationDto organizationDto)
+        public async Task<ActionResult> Create(OrganizationDto organizationDto)
         {
             if (organizationDto == null)
             {
@@ -30,19 +30,19 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<OrganizationDto>> GetAllEntity()
+        public async Task<IEnumerable<OrganizationDto>> GetAll(int pageNumber)
         {
-            return await _organizationService.GetAllOrganizations();
+            return await _organizationService.GetAllOrganizations(pageNumber);
         }
 
         [HttpGet]
-        public async Task<ActionResult<OrganizationDto>> EntityById(Guid id)
+        public async Task<ActionResult<OrganizationDto>> GetById(Guid id)
         {
             return Ok(await _organizationService.GetById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult> UpdateEntity(UpdateOrganizationDto entity)
+        public async Task<ActionResult> Update(UpdateOrganizationDto entity)
         {
             await _organizationService.UpdateOrganization(entity);
 
@@ -50,7 +50,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteEntity(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             await _organizationService.DeleteOrganization(id);
 
