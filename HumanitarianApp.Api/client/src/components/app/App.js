@@ -51,8 +51,8 @@ class App extends Component {
               iban: "2546542544",
               edrpou: "12345678",
               accountnumber: "484654654465454845",
-            },
-          ],
+            }
+          ]
         },
         {
           id: 1,
@@ -150,6 +150,7 @@ class App extends Component {
       />
     );
   };
+
   // Вызов метода гет
   // Обязательно передавать все поля, если поле пусто, то просто - ''
   service = new Service();
