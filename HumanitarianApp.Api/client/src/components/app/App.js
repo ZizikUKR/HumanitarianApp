@@ -154,35 +154,40 @@ class App extends Component {
   // Обязательно передавать все поля, если поле пусто, то просто - ''
   service = new Service();
   componentDidMount() {
-    this.service
-      .get("https://localhost:7057/api/Volunteer/GetAllEntity")
-      .then((response) => {
-        debugger;
-        const volonteers = response.map((item) => {
-          return {
-            select: item.category,
-            name: item.name,
-            telephone: item.phoneNumber,
-            email: item.email,
-            city: item.city,
-            address: item.address,
-            text: item.description,
-            cardnumber: item.bankDetails[0].cardNumber,
-            fullbankname: item.bankDetails[0].fullBankName,
-            shortbankname: item.bankDetails[0].shortBankName,
-            mfo: item.bankDetails[0].mfo,
-            iban: item.bankDetails[0].iban,
-            edrpou: item.bankDetails[0].edrpo,
-            accountnumber: item.bankDetails[0].accountNumber,
-          };
-        });
-
-        let newsectionsData = Object.assign({}, this.state.sectionsData);
-        newsectionsData[0].ads = volonteers;
-
-        this.setState({ sectionsData: newsectionsData });
-      });
+    debugger;
+    this.getAllVolunteers();
   }
+
+  getAllVolunteers = () => {
+    this.service
+    .get("https://localhost:7057/api/Volunteer/GetAllEntity")
+    .then((response) => {
+      debugger;
+      const volonteers = response.map((item) => {
+        return {
+          select: item.category,
+          name: item.name,
+          telephone: item.phoneNumber,
+          email: item.email,
+          city: item.city,
+          address: item.address,
+          text: item.description,
+          cardnumber: item.bankDetails[0].cardNumber,
+          fullbankname: item.bankDetails[0].fullBankName,
+          shortbankname: item.bankDetails[0].shortBankName,
+          mfo: item.bankDetails[0].mfo,
+          iban: item.bankDetails[0].iban,
+          edrpou: item.bankDetails[0].edrpo,
+          accountnumber: item.bankDetails[0].accountNumber,
+        };
+      });
+
+      let newsectionsData = Object.assign({}, this.state.sectionsData);
+      newsectionsData[0].ads = volonteers;
+
+      this.setState({ sectionsData: newsectionsData });
+    });
+  };
 
   render() {
     const { headerButtons, visibleBurgerMenu, sectionsData, activeSection } =
