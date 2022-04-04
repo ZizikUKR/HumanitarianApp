@@ -160,35 +160,55 @@ class App extends Component {
 
   getAllVolunteers = () => {
     this.service
-    .get("https://localhost:7057/api/Volunteer/GetAllEntity")
-    .then((response) => {
-      debugger;
-      const volonteers = response.map((item) => {
-        return {
-          select: item.category,
-          name: item.name,
-          telephone: item.phoneNumber,
-          email: item.email,
-          city: item.city,
-          address: item.address,
-          text: item.description,
-          cardnumber: item.bankDetails[0].cardNumber,
-          fullbankname: item.bankDetails[0].fullBankName,
-          shortbankname: item.bankDetails[0].shortBankName,
-          mfo: item.bankDetails[0].mfo,
-          iban: item.bankDetails[0].iban,
-          edrpou: item.bankDetails[0].edrpo,
-          accountnumber: item.bankDetails[0].accountNumber,
-        };
+      .get("https://localhost:7057/api/Volunteer/GetAllEntity")
+      .then((response) => {
+        debugger;
+        const volonteers = response.map((item) => {
+          return {
+            select: this.setVolunteersCategory(item.category),
+            name: item.name,
+            telephone: item.phoneNumber,
+            email: item.email,
+            city: item.city,
+            address: item.address,
+            text: item.description,
+            cardnumber: item.bankDetails[0].cardNumber,
+            fullbankname: item.bankDetails[0].fullBankName,
+            shortbankname: item.bankDetails[0].shortBankName,
+            mfo: item.bankDetails[0].mfo,
+            iban: item.bankDetails[0].iban,
+            edrpou: item.bankDetails[0].edrpo,
+            accountnumber: item.bankDetails[0].accountNumber,
+          };
+        });
+
+        let newsectionsData = Object.assign({}, this.state.sectionsData);
+        newsectionsData[0].ads = volonteers;
+
+        this.setState({ sectionsData: newsectionsData });
       });
-
-      let newsectionsData = Object.assign({}, this.state.sectionsData);
-      newsectionsData[0].ads = volonteers;
-
-      this.setState({ sectionsData: newsectionsData });
-    });
   };
 
+  setVolunteersCategory = (category) => {
+    debugger;
+    if (category == 1) {
+      return "Перевезення";
+    }
+
+    if (category == 2) {
+      return "Медицина";
+    }
+
+    if (category == 3) {
+      return "Гуманітарна допомога";
+    }
+
+    if (category == 4) {
+      return "Інше";
+    }
+
+    return "";
+  };
   render() {
     const { headerButtons, visibleBurgerMenu, sectionsData, activeSection } =
       this.state;
