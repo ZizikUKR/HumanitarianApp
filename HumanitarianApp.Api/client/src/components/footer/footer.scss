@@ -14,4 +14,11 @@
     gap: 50px;
     color: $white;
   }
+  &__copyright {
+    color: $yellow;
+  }
+  &__email {
+    text-decoration: none;
+    color: $yellow;
+  }
 }

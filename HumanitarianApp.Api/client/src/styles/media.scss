@@ -91,6 +91,17 @@
     &__input {
       width: 100%;
     }
+    &__submit {
+      flex-direction: column;
+    }
+    &__checkbox {
+      &-link {
+        font-size: 14px;
+      }
+    }
+    &__button {
+      width: 100%;
+    }
   }
 }
 

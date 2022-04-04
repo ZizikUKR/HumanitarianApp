@@ -1,7 +1,11 @@
 import { Component } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
+import leftArrow from '../../assets/icons/left_arrow.svg';
+import rightArrow from '../../assets/icons/right_arrow.svg';
+
 import './adList.scss';
+import './carousel.scss';
 
 class AdList extends Component {
   keyCount = 0;
@@ -40,15 +44,15 @@ class AdList extends Component {
     this.adsBlocks = [];
     let afterArray = this.createAdsElements();
     let array = [];
-    let stop = 2;
+    let numberAdsPages = 2;
     let count = 0;
 
     afterArray.forEach((element, i) => {
-      if (i % stop === 0) {
+      if (i % numberAdsPages === 0) {
         for (let i = 0; i < afterArray.length; i++) {
           array.push(afterArray[count])
           count++;
-          if (array.length % stop === 0) {
+          if (array.length % numberAdsPages === 0) {
             break;
           };
         }
@@ -80,7 +84,19 @@ class AdList extends Component {
           showIndicators={false}
           dynamicHeight={true}
           swipeable={false}
-          statusFormatter={(current, total) => `Стор. ${current} - ${total}`}>
+          statusFormatter={(current, total) => `Стор. ${current} - ${total}`}
+          renderArrowPrev={(onClickHandler, hasPrev, label) => hasPrev && (
+              <button className="ad-list__carousel-button ad-list__carousel-button--prev" type="button" onClick={onClickHandler} title={label}>
+                <img src={leftArrow} alt="Arrow left" />
+              </button>
+            )
+          }
+          renderArrowNext={(onClickHandler, hasNext, label) => hasNext && (
+              <button className="ad-list__carousel-button ad-list__carousel-button--next" type="button" onClick={onClickHandler} title={label}>
+                <img src={rightArrow} alt="Arrow right" />
+              </button>
+            )
+          }>
           {this.renderPages()}
         </Carousel>
       </>

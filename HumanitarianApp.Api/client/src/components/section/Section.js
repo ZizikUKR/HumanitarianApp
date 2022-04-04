@@ -9,7 +9,7 @@ import './section.scss';
 class Section extends Component {
   state = {
     searchValue: '',
-    openForm: false
+    openForm: false,
   }
 
   onUpdateSearch = e => {
@@ -44,7 +44,9 @@ class Section extends Component {
           {this.state.openForm ? (this.props.name === 'Підприємства' ? <Form id={this.props.id} title={'Анкета підприємства'} namePlaceholder={'Назва підприємства'} areaPlaceholder={null} selects={this.props.filterButtons} /> : null) : null}
           {this.state.openForm ? (this.props.name === 'Оголошення' ? <Form id={this.props.id} title={'Додати оголошення'} namePlaceholder={'Введіть ПІБ'} areaPlaceholder={'Введить текст оголошення'} selects={this.props.filterButtons} /> : null) : null}
           </div>
-          <button className="section__open" onClick={this.onOpenForm}>Додати {this.openButtonName()}</button>
+          <button className="section__open" onClick={this.onOpenForm}>
+            {this.state.openForm ? 'Закрити форму' : 'Додати ' + this.openButtonName()}
+          </button>
         </div>
         <div className="section__info">
           <div className="container">
@@ -63,7 +65,7 @@ class Section extends Component {
           </div>
         </div>
         <div className="container">
-          <AdList id={this.props.id} ads={this.props.ads} />
+          <AdList id={this.props.id} ads={this.props.ads} numberAdsOfPages={this.props.numberAdsOfPages} />
         </div>
       </section>
     );

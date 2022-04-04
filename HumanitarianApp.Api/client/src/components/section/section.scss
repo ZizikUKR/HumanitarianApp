@@ -55,9 +55,8 @@
     transition: all .3s ease;
     cursor: pointer;
     &:hover {
+      padding: 25px 25px;
       transition: all .3s ease;
-      background-color: $blue;
-      color: $white;
     }
   }
 }

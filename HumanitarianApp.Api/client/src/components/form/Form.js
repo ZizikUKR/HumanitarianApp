@@ -5,24 +5,21 @@ import Service from '../../services/Service';
 import './form.scss';
 
 class Form extends Component {
+  state = {
+    activeSubmit: false
+  }
+
   postObj = {
     bankDetails: []
   };
 
-  postService = new Service();
+  onActiveSubmit = () => {
+    this.setState(({activeSubmit}) => ({
+      activeSubmit: !activeSubmit
+    }))
+  }
 
-  // "bankDetails": [
-  //   {
-  //     "fullBankName": "string",
-  //     "shortBankName": "string",
-  //     "iban": "string",
-  //     "accountNumber": "string",
-  //     "mfo": "string",
-  //     "edrpo": "string",
-  //     "cardNumber": "string",
-  //     "entityId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-  //   }
-  // ]
+  postService = new Service();
 
   onSubmit = e => {
     e.preventDefault();
@@ -114,7 +111,20 @@ class Form extends Component {
           required
           placeholder={'*' + (areaPlaceholder || 'Напишіть, які послуги надаєте...')}
           onChange={e => this.onUpdateMainForm(e)} />
-        <button className="form__button" type="submit">Додати</button>
+        <div className="form__submit">
+          <div className="form__rules">
+            <input
+              className="form__checkbox"
+              name="checkbox"
+              required
+              type="checkbox"
+              onChange={this.onActiveSubmit} />
+            <label htmlFor="" className="form__checkbox-label">
+              <a href="#" className="form__checkbox-link">Я прочитав та погоджуюсь</a>
+            </label>
+          </div>
+          {this.state.activeSubmit ? <button className="form__button" type="submit">Додати</button> : null}
+        </div>
       </form>
     );
   }
