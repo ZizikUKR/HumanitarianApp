@@ -74,7 +74,7 @@ namespace HumanitarianApp.BLL.Services
 
         public async Task<VolunteerDto> GetByEmail(string email)
         {
-            var entity = _volunteerRepository.GetByEmail(email);
+            var entity = await _volunteerRepository.GetByEmail(email);
 
             if (entity == null)
             {
@@ -87,7 +87,7 @@ namespace HumanitarianApp.BLL.Services
 
         public async Task<VolunteerDto> GetByAddress(string address)
         {
-            var entity = _volunteerRepository.GetByAddress(address);
+            var entity = await _volunteerRepository.GetByAddress(address);
 
             if (entity == null)
             {
