@@ -52,8 +52,15 @@
     column-gap: 10px;
   }
   &__checkbox {
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    &-label {
+      cursor: pointer;
+      span {
+        font-weight: 700;
+        text-decoration: underline;
+      }
+    }
   }
   &__button {
     width: 200px;

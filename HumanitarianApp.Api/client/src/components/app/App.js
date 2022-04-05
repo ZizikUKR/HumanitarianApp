@@ -5,6 +5,7 @@ import BurgerMenu from "../burger-menu/BurgerMenu";
 import Header from "../header/Header";
 import Section from "../section/Section";
 import Footer from "../footer/Footer";
+import Agreement from "../../agreement/Agreement";
 
 import Service from '../../services/Service';
 
@@ -22,6 +23,7 @@ class App extends Component {
       ],
       visibleBurgerMenu: false,
       activeSection: 0,
+      openAgreement: false,
       sectionsData: [
         {
           id: 0,
@@ -156,6 +158,8 @@ class App extends Component {
     }
   }
 
+  body = document.querySelector('body');
+
   visibleBurger = (visibleBurgerMenu) => {
     this.setState({visibleBurgerMenu});
   }
@@ -210,7 +214,8 @@ class App extends Component {
           filter={filter}
           onFilterSelect={onFilterSelect}
           activeSection={this.state.activeSection}
-          id={id} />
+          id={id}
+          onOpenAgreement={this.onOpenAgreement} />
       );
   }
 
@@ -238,10 +243,20 @@ class App extends Component {
   //       })
   // }
 
-  
+  onOpenAgreement = () => {
+    this.setState(({openAgreement}) => ({
+      openAgreement: !openAgreement
+    }))
+  }
 
   render() {
-    const {headerButtons, visibleBurgerMenu, sectionsData, activeSection} = this.state;
+    const {headerButtons, visibleBurgerMenu, sectionsData, activeSection, openAgreement} = this.state;
+
+    if (visibleBurgerMenu || openAgreement) {
+      this.body.style.overflow = 'hidden';
+    } else {
+      this.body.removeAttribute('style');
+    }
     
     return (
       <>
@@ -253,6 +268,7 @@ class App extends Component {
         />
         <main>
           {visibleBurgerMenu ? <BurgerMenu headerButtons={headerButtons} visibleBurger={this.visibleBurger} selectSection={this.selectSection} /> : null}
+          {openAgreement ? <Agreement onOpenAgreement={this.onOpenAgreement} /> : null}
           {this.renderSection(sectionsData[activeSection])}
         </main>
         <Footer />

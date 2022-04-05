@@ -119,8 +119,8 @@ class Form extends Component {
               required
               type="checkbox"
               onChange={this.onActiveSubmit} />
-            <label htmlFor="" className="form__checkbox-label">
-              <a href="#" className="form__checkbox-link">Я прочитав та погоджуюсь</a>
+            <label className="form__checkbox-label">
+              Я ознайомився з <span className="form__condition" onClick={() => this.props.onOpenAgreement()}>умовами</span> та погоджуюсь
             </label>
           </div>
           {this.state.activeSubmit ? <button className="form__button" type="submit">Додати</button> : null}

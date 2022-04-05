@@ -7,9 +7,9 @@ const Header = ({headerButtons, activeSection, selectSection, visibleBurger}) =>
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
-          <a className="header__logo" href="#">
+          <div className="header__logo">
             <img className="header__logo-img" src={logo} alt="Logo" />
-          </a>
+          </div>
           <div className="header__buttons">
             <HeaderButton headerButtons={headerButtons} activeSection={activeSection} selectSection={selectSection} />
           </div>

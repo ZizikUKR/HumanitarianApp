@@ -73,6 +73,12 @@
     &__input--services {
       width: 100%;
     }
+    &__submit {
+      flex-direction: column;
+    }
+    &__button {
+      width: 100%;
+    }
   }
 }
 
@@ -91,16 +97,10 @@
     &__input {
       width: 100%;
     }
-    &__submit {
-      flex-direction: column;
-    }
     &__checkbox {
-      &-link {
-        font-size: 14px;
+      &-label {
+        font-size: 15px;
       }
-    }
-    &__button {
-      width: 100%;
     }
   }
 }
