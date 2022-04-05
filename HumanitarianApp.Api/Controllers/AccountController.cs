@@ -25,7 +25,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
-        // [ValidateAntiForgeryToken] //используется для сравнения Cookie формы и ендпоинта, если они не совпадают то не дает доступ к данным
+        [ValidateAntiForgeryToken] //используется для сравнения Cookie формы и ендпоинта, если они не совпадают то не дает доступ к данным
         public async Task<IActionResult> Registration(UserRegistrationDto registrationDto)
         {
             if (!ModelState.IsValid)
@@ -51,7 +51,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserLoginDto userLogin)
         {
             if (!ModelState.IsValid)
