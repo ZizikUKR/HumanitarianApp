@@ -9,9 +9,35 @@ class Form extends Component {
     activeSubmit: false
   }
 
+  choiceUrl = () => {
+    switch (this.props.id) {
+      case 0:
+        return 'https://localhost:7057/api/Volunteer/Create';
+      case 1:
+        return 'https://localhost:7057/api/Organization/Create';
+      case 2:
+        return 'https://localhost:7057/api/Announcement/Create';
+    }
+  }
+
   postObj = {
-    bankDetails: []
-  };
+    name: '',
+    phoneNumber: '',
+    email: '',
+    city: '',
+    address: '',
+    description: '',
+    category: '',
+    bankDetails: {
+      fullBankName: '',
+      shortBankName: '',
+      iban: '',
+      accountNumber: '',
+      mfo: '',
+      edrpo: '',
+      cardNumber: ''
+    }
+  };  
 
   onActiveSubmit = () => {
     this.setState(({activeSubmit}) => ({
@@ -26,7 +52,7 @@ class Form extends Component {
 
     const json = JSON.stringify(this.postObj)
 
-    this.postService.post('https://localhost:7057/api/Volunteer/CreateEntity', json)
+    this.postService.post(this.choiceUrl(), json)
     .then(response => console.log(response));
 
     this.postObj = {};
@@ -40,33 +66,43 @@ class Form extends Component {
       value = +value;
     }
     this.postObj[key] = value;
+    console.log(this.postObj);
   }
 
   onUpdateBankForm = e => {
     const key = e.target.name;
     const value = e.target.value;
-    const obj = {};
-    let flag = 'false';
-    obj[key] = value;
-
-    if (this.postObj.bankDetails.length > 0) {
-      this.postObj.bankDetails.forEach((detail, i) => {
-        if (Object.entries(detail)[0][0] === Object.entries(obj)[0][0]) {
-          flag = i;
-        }
-      })
-    }
-
-    if (flag !== 'false') {
-      this.postObj.bankDetails[flag] = obj;
-      flag = false;
-    } else {
-      this.postObj.bankDetails.push(obj);
-    }
+    this.postObj.bankDetails[key] = value;
+    console.log(this.postObj);
   }
+
+  // onUpdateBankForm = e => {
+  //   const key = e.target.name;
+  //   const value = e.target.value;
+  //   const obj = {};
+  //   let flag = 'false';
+  //   obj[key] = value;
+
+  //   if (this.postObj.bankDetails.length > 0) {
+  //     this.postObj.bankDetails.forEach((detail, i) => {
+  //       if (Object.entries(detail)[0][0] === Object.entries(obj)[0][0]) {
+  //         flag = i;
+  //       }
+  //     })
+  //   }
+
+  //   if (flag !== 'false') {
+  //     this.postObj.bankDetails[flag] = obj;
+  //     flag = false;
+  //   } else {
+  //     this.postObj.bankDetails.push(obj);
+  //   }
+  // }
 
   render() {
     const {id, title, namePlaceholder, areaPlaceholder, selects} = this.props;
+
+    console.log(this.choiceUrl());
 
     return (
       <form className="form" action="#" onSubmit={e => this.onSubmit(e)}>

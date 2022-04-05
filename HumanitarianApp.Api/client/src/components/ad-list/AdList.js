@@ -24,7 +24,7 @@ class AdList extends Component {
             <p className="ad-list__contact"><span className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
             <p className="ad-list__contact"><span className="ad-list__bold">Телефон: </span>{telephone}</p>
             {email.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Email: </span>{email}</p>: null}
-            <p className="ad-list__contact"><span className="ad-list__bold">Адреса: </span>м. {city}{ (address ).length > 0 ? `, ${address}` : ''}</p>
+            <p className="ad-list__contact"><span className="ad-list__bold">Адреса: </span>м. {city}{ address.length > 0 ? `, ${address}` : ''}</p>
             {id === 0 && cardnumber.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Номер картки: </span>{cardnumber}</p>: null}
             {id === 0 && fullbankname.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Повна назва банку: </span>{fullbankname}</p>: null}
             {id === 0 && shortbankname.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Скорочена назва банку: </span>{shortbankname}</p>: null}
@@ -38,6 +38,10 @@ class AdList extends Component {
     });
 
     return elements;
+  }
+
+  componentDidMount() {
+    this.createAdsElements();
   }
 
   createElementsPages = () => {

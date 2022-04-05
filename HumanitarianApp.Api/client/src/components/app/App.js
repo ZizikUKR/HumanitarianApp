@@ -303,6 +303,7 @@ class App extends Component {
             text: item.description,
           };
         });
+        
 
         let newsectionsData = Object.assign({}, this.state.sectionsData);
         newsectionsData[2].ads = announcements;
