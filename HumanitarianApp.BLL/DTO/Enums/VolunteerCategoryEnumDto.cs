@@ -2,9 +2,9 @@
 {
     public enum VolunteerCategoryEnumDto
     {
-        Transportation,
-        Medicine,
-        HumanitarianAid,
-        Other
+        Transportation = 1,
+        Medicine = 2,
+        HumanitarianAid = 3,
+        Other = 4
     }
 }

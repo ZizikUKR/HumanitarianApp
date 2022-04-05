@@ -30,10 +30,10 @@ namespace HumanitarianApp.BLL.Services
             await _announcementRepository.Create(entityForCreate);
         }
 
-        public async Task<IEnumerable<AnnouncementDto>> GetAllAnnouncements()
+        public async Task<IEnumerable<AnnouncementDto>> GetAllAnnouncements(int pageNumber)
         {
             var organizationsDto = new List<AnnouncementDto>();
-            var organizations = await _announcementRepository.GetAll();
+            var organizations = await _announcementRepository.GetAll(pageNumber);
 
             foreach (var organization in organizations)
             {

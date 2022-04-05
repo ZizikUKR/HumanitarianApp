@@ -32,10 +32,10 @@ namespace HumanitarianApp.BLL.Services
             await _volunteerRepository.Create(entityForCreate);
         }
 
-        public async Task<IEnumerable<VolunteerDto>> GetAllEntities()
+        public async Task<IEnumerable<VolunteerDto>> GetAll(int pageNumber)
         {
             var entitiesDto = new List<VolunteerDto>();
-            var entities = await _volunteerRepository.GetAll();
+            var entities = await _volunteerRepository.GetAll(pageNumber);
 
             foreach (var entity in entities)
             {
@@ -74,7 +74,7 @@ namespace HumanitarianApp.BLL.Services
 
         public async Task<VolunteerDto> GetByEmail(string email)
         {
-            var entity = _volunteerRepository.GetByEmail(email);
+            var entity = await _volunteerRepository.GetByEmail(email);
 
             if (entity == null)
             {
@@ -87,7 +87,7 @@ namespace HumanitarianApp.BLL.Services
 
         public async Task<VolunteerDto> GetByAddress(string address)
         {
-            var entity = _volunteerRepository.GetByAddress(address);
+            var entity = await _volunteerRepository.GetByAddress(address);
 
             if (entity == null)
             {
@@ -113,6 +113,13 @@ namespace HumanitarianApp.BLL.Services
             entity.Address = entityDto.Address;
             entity.Description = entityDto.Description;
             entity.Category = (VolunteerCategory)entityDto.Category;
+            entity.BankDetails.AccountNumber = entityDto.BankDetails.AccountNumber;
+            entity.BankDetails.CardNumber = entityDto.BankDetails.CardNumber;
+            entity.BankDetails.EDRPO = entityDto.BankDetails.EDRPO;
+            entity.BankDetails.FullBankName= entityDto.BankDetails.FullBankName;
+            entity.BankDetails.IBAN = entityDto.BankDetails.IBAN;
+            entity.BankDetails.MFO = entityDto.BankDetails.MFO;
+            entity.BankDetails.ShortBankName= entityDto.BankDetails.ShortBankName;
 
             await _volunteerRepository.Update(entity);
         }
