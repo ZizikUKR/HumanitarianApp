@@ -1,5 +1,6 @@
 ﻿using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.BLL.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HumanitarianApp.Api.Controllers
@@ -21,7 +22,7 @@ namespace HumanitarianApp.Api.Controllers
             if (entityDto == null)
             {
                 return NoContent();
-                
+
             }
             await _entityService.AddEntity(entityDto);
 
@@ -29,15 +30,22 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VolunteerDto>> GetAll(int pageNumber)
+        public async Task<IEnumerable<VolunteerDto>> GetAllActive(int pageNumber)
         {
-            return await _entityService.GetAll(pageNumber);
+            return await _entityService.GetAllActiveVolunteer(pageNumber);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IEnumerable<VolunteerDto>> GetAllUnActive(int pageNumber)
+        {
+            return await _entityService.GetAllUnActiveVolunteer(pageNumber);
         }
 
         [HttpGet]
         public async Task<ActionResult<VolunteerDto>> GetById(Guid id)
         {
-            return  Ok(await  _entityService.GetById(id));
+            return Ok(await _entityService.GetById(id));
         }
 
         [HttpGet]
@@ -55,10 +63,11 @@ namespace HumanitarianApp.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<VolunteerDto>> GetByEmail(string email)
         {
-            return  Ok(await _entityService.GetByEmail(email));
+            return Ok(await _entityService.GetByEmail(email));
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Update(VolunteerDto entity)
         {
             await _entityService.UpdateEntity(entity);
@@ -69,7 +78,7 @@ namespace HumanitarianApp.Api.Controllers
         [HttpDelete]
         public async Task<ActionResult> Delete(Guid id)
         {
-           await _entityService.DeleteEntity(id);
+            await _entityService.DeleteEntity(id);
 
             return Ok();
         }

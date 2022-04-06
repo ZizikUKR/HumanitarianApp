@@ -27,10 +27,24 @@ namespace HumanitarianApp.BLL.Services
             await _organizationRepository.Create(entityForCreate);
         }
 
-        public async Task<IEnumerable<OrganizationDto>> GetAllOrganizations(int pageNumber)
+        public async Task<IEnumerable<OrganizationDto>> GetAllActiveOrganizations(int pageNumber)
         {
             var organizationsDto = new List<OrganizationDto>();
-            var organizations = await _organizationRepository.GetAll(pageNumber);
+            var organizations = await _organizationRepository.GetAllActiveRecord(pageNumber);
+
+            foreach (var organization in organizations)
+            {
+                var organizationDto = _mapper.Map<OrganizationDto>(organization);
+                organizationsDto.Add(organizationDto);
+            }
+
+            return organizationsDto;
+        }
+
+        public async Task<IEnumerable<OrganizationDto>> GetAllUnActiveOrganizations(int pageNumber)
+        {
+            var organizationsDto = new List<OrganizationDto>();
+            var organizations = await _organizationRepository.GetAllUnActiveRecord(pageNumber);
 
             foreach (var organization in organizations)
             {
@@ -66,6 +80,7 @@ namespace HumanitarianApp.BLL.Services
             organization.Email = entityDto.Email;
             organization.PhoneNumber = entityDto.PhoneNumber;
             organization.Name = entityDto.Name;
+            organization.IsActive = entityDto.IsActive;
             organization.City = entityDto.City;
             organization.Address = entityDto.Address;
             organization.Description = entityDto.Description;

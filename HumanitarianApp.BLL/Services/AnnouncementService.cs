@@ -30,18 +30,32 @@ namespace HumanitarianApp.BLL.Services
             await _announcementRepository.Create(entityForCreate);
         }
 
-        public async Task<IEnumerable<AnnouncementDto>> GetAllAnnouncements(int pageNumber)
+        public async Task<IEnumerable<AnnouncementDto>> GetAllActiveAnnouncements(int pageNumber)
         {
-            var organizationsDto = new List<AnnouncementDto>();
-            var organizations = await _announcementRepository.GetAll(pageNumber);
+            var announcementsDto = new List<AnnouncementDto>();
+            var announcements = await _announcementRepository.GetAllActiveRecord(pageNumber);
 
-            foreach (var organization in organizations)
+            foreach (var announcement in announcements)
             {
-                var organizationDto = _mapper.Map<AnnouncementDto>(organization);
-                organizationsDto.Add(organizationDto);
+                var announcementDto = _mapper.Map<AnnouncementDto>(announcement);
+                announcementsDto.Add(announcementDto);
             }
 
-            return organizationsDto;
+            return announcementsDto;
+        }
+
+        public async Task<IEnumerable<AnnouncementDto>> GetAllUnActiveAnnouncements(int pageNumber)
+        {
+            var announcementsDto = new List<AnnouncementDto>();
+            var announcements = await _announcementRepository.GetAllUnActiveRecord(pageNumber);
+
+            foreach (var announcement in announcements)
+            {
+                var announcementDto = _mapper.Map<AnnouncementDto>(announcement);
+                announcementsDto.Add(announcementDto);
+            }
+
+            return announcementsDto;
         }
 
         public async Task<AnnouncementDto> GetById(Guid id)
@@ -68,6 +82,7 @@ namespace HumanitarianApp.BLL.Services
             organization.Email = entityDto.Email;
             organization.PhoneNumber = entityDto.PhoneNumber;
             organization.Name = entityDto.Name;
+            organization.IsActive = entityDto.IsActive;
             organization.City = entityDto.City;
             organization.Address = entityDto.Address;
             organization.Description = entityDto.Description;
