@@ -32,10 +32,23 @@ namespace HumanitarianApp.BLL.Services
             await _volunteerRepository.Create(entityForCreate);
         }
 
-        public async Task<IEnumerable<VolunteerDto>> GetAll(int pageNumber)
+        public async Task<IEnumerable<VolunteerDto>> GetAllActiveVolunteer(int pageNumber)
         {
             var entitiesDto = new List<VolunteerDto>();
-            var entities = await _volunteerRepository.GetAll(pageNumber);
+            var entities = await _volunteerRepository.GetAllActiveRecord(pageNumber);
+
+            foreach (var entity in entities)
+            {
+                var entityDto = _mapper.Map<VolunteerDto>(entity);
+                entitiesDto.Add(entityDto);
+            }
+
+            return entitiesDto;
+        }
+        public async Task<IEnumerable<VolunteerDto>> GetAllUnActiveVolunteer(int pageNumber)
+        {
+            var entitiesDto = new List<VolunteerDto>();
+            var entities = await _volunteerRepository.GetAllUnActiveRecord(pageNumber);
 
             foreach (var entity in entities)
             {
@@ -109,6 +122,7 @@ namespace HumanitarianApp.BLL.Services
             entity.Email = entityDto.Email;
             entity.PhoneNumber = entityDto.PhoneNumber;
             entity.Name = entityDto.Name;
+            entity.IsActive = entityDto.IsActive;
             entity.City = entityDto.City;
             entity.Address = entityDto.Address;
             entity.Description = entityDto.Description;

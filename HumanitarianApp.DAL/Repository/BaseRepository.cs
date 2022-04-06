@@ -24,11 +24,21 @@ namespace HumanitarianApp.DAL.Repository
             return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll(int pageNumber)
+        public async Task<IEnumerable<TEntity>> GetAllActiveRecord(int pageNumber)
         {
             return await _dbContext.Set<TEntity>()
                 .Skip((pageNumber - 1) * 10)
                 .Take(10)
+                .Where(c=>c.IsActive)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllUnActiveRecord(int pageNumber)
+        {
+            return await _dbContext.Set<TEntity>()
+                .Skip((pageNumber - 1) * 10)
+                .Take(10)
+                .Where(c=>!c.IsActive)
                 .ToListAsync();
         }
 

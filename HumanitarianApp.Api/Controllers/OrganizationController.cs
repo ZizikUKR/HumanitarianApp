@@ -1,5 +1,6 @@
 ﻿using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.BLL.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HumanitarianApp.Api.Controllers
@@ -30,9 +31,16 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<OrganizationDto>> GetAll(int pageNumber)
+        public async Task<IEnumerable<OrganizationDto>> GetAllActive(int pageNumber)
         {
-            return await _organizationService.GetAllOrganizations(pageNumber);
+            return await _organizationService.GetAllActiveOrganizations(pageNumber);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IEnumerable<OrganizationDto>> GetAllUnActive(int pageNumber)
+        {
+            return await _organizationService.GetAllUnActiveOrganizations(pageNumber);
         }
 
         [HttpGet]
@@ -42,6 +50,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Update(UpdateOrganizationDto entity)
         {
             await _organizationService.UpdateOrganization(entity);

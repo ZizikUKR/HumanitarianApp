@@ -4,6 +4,7 @@ namespace HumanitarianApp.Bll.DTO
 {
     public class BankDetailDto 
     {
+        public bool IsActive { get; set; }
         public string FullBankName { get; set; } // полное имя банка
         public string ShortBankName { get; set; } // сокращенное имя банка 
         public string IBAN { get; set; } //IBAN номер
