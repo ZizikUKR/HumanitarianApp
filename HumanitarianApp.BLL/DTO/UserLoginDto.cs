@@ -14,5 +14,8 @@ namespace HumanitarianApp.BLL.DTO
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
