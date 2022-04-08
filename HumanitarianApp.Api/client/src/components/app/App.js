@@ -239,27 +239,27 @@ class App extends Component {
 
   getAllVolunteers = () => {
     this.service
-      .get("https://localhost:7057/api/Volunteer/GetAll?pageNumber=1")
+      .get("https://localhost:7057/api/Volunteer/GetAllActive?pageNumber=1")
       .then((response) => {
         const volonteers = response.map((item) => {
           return {
             select: this.setVolunteersCategory(item.category),
-            name: item.name,
-            telephone: item.phoneNumber,
-            email: item.email,
-            city: item.city,
-            address: item.address,
-            text: item.description,
-            cardnumber: item.bankDetails?.cardNumber,
-            fullbankname: item.bankDetails?.fullBankName,
-            shortbankname: item.bankDetails?.shortBankName,
-            mfo: item.bankDetails?.mfo,
-            iban: item.bankDetails?.iban,
-            edrpou: item.bankDetails?.edrpo,
-            accountnumber: item.bankDetails?.accountNumber,
+            name: this.isEmpty(item.name),
+            telephone: this.isEmpty(item.phoneNumber),
+            email: this.isEmpty(item.email),
+            city: this.isEmpty(item.city),
+            address: this.isEmpty(item.address),
+            text: this.isEmpty(item.description),
+            cardnumber: this.isEmpty(item.bankDetails?.cardNumber),
+            fullbankname: this.isEmpty(item.bankDetails?.fullBankName),
+            shortbankname: this.isEmpty(item.bankDetails?.shortBankName),
+            mfo: this.isEmpty(item.bankDetails?.mfo),
+            iban: this.isEmpty(item.bankDetails?.iban),
+            edrpou: this.isEmpty(item.bankDetails?.edrpo),
+            accountnumber: this.isEmpty(item.bankDetails?.accountNumber),
           };
         });
-
+        debugger;
         let newsectionsData = Object.assign({}, this.state.sectionsData);
         newsectionsData[0].ads = volonteers;
 
@@ -269,18 +269,25 @@ class App extends Component {
       
   };
 
+  isEmpty = (inputStr) => {
+    if(inputStr){
+      return inputStr;
+    }
+    return "";
+  }
+
   getAllOrganizations = () => {
     this.service
-      .get("https://localhost:7057/api/Organization/GetAll?pageNumber=1")
+      .get("https://localhost:7057/api/Organization/GetAllActive?pageNumber=1")
       .then((response) => {
         const organizations = response.map((item) => {
           return {
-            name: item.name,
-            telephone: item.phoneNumber,
-            email: item.email,
-            city: item.city,
-            address: item.address,
-            text: item.description,
+            name: this.isEmpty(item.name),
+            telephone: this.isEmpty(item.phoneNumber),
+            email: this.isEmpty(item.email),
+            city: this.isEmpty(item.city),
+            address: this.isEmpty(item.address),
+            text: this.isEmpty(item.description),
           };
         });
 
@@ -295,17 +302,17 @@ class App extends Component {
 
   getAllAnnouncements = () => {
     this.service
-      .get("https://localhost:7057/api/Announcement/GetAll?pageNumber=1")
+      .get("https://localhost:7057/api/Announcement/GetAllActive?pageNumber=1")
       .then((response) => {
         const announcements = response.map((item) => {
           return {
             select: this.setAnnouncementCategory(item.category),
-            name: item.name,
-            telephone: item.phoneNumber,
-            email: item.email,
-            city: item.city,
-            address: item.address,
-            text: item.description,
+            name: this.isEmpty(item.name),
+            telephone: this.isEmpty(item.phoneNumber),
+            email: this.isEmpty(item.email),
+            city: this.isEmpty(item.city),
+            address: this.isEmpty(item.address),
+            text: this.isEmpty(item.description),
           };
         });
         
