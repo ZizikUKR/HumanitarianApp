@@ -9,18 +9,7 @@ class Form extends Component {
     activeSubmit: false
   }
 
-  choiceUrl = () => {
-    switch (this.props.id) {
-      case 0:
-        return 'https://localhost:7057/api/Volunteer/Create';
-      case 1:
-        return 'https://localhost:7057/api/Organization/Create';
-      case 2:
-        return 'https://localhost:7057/api/Announcement/Create';
-    }
-  }
-
-  postObj = {
+  volunteerPostObj = {
     name: '',
     phoneNumber: '',
     email: '',
@@ -37,12 +26,53 @@ class Form extends Component {
       edrpo: '',
       cardNumber: ''
     }
-  };  
+  };
+
+  organizationPostObj = {
+    name: '',
+    telephone: '',
+    email: '',
+    city: '',
+    address: '',
+    text: ''
+  }
+
+  announcementPostObj = {
+    select: '',
+    name: '',
+    telephone: '',
+    email: '',
+    city: '',
+    address: '',
+    text: ''
+  }
 
   onActiveSubmit = () => {
     this.setState(({activeSubmit}) => ({
       activeSubmit: !activeSubmit
     }))
+  }
+
+  choiceUrl = () => {
+    switch (this.props.id) {
+      case 0:
+        return 'https://localhost:7057/api/Volunteer/Create';
+      case 1:
+        return 'https://localhost:7057/api/Organization/Create';
+      case 2:
+        return 'https://localhost:7057/api/Announcement/Create';
+    }
+  }
+
+  choicePostObj = () => {
+    switch (this.props.id) {
+      case 0:
+        return this.volunteerPostObj;
+      case 1:
+        return this.organizationPostObj;
+      case 2:
+        return this.announcementPostObj;
+    }
   }
 
   postService = new Service();
@@ -65,47 +95,22 @@ class Form extends Component {
     if (key === 'category') {
       value = +value;
     }
-    this.postObj[key] = value;
-    console.log(this.postObj);
+    this.choicePostObj()[key] = value;
+    console.log(this.choicePostObj());
   }
 
   onUpdateBankForm = e => {
     const key = e.target.name;
     const value = e.target.value;
-    this.postObj.bankDetails[key] = value;
-    console.log(this.postObj);
+    this.choicePostObj().bankDetails[key] = value;
+    console.log(this.volunteerPostObj);
   }
-
-  // onUpdateBankForm = e => {
-  //   const key = e.target.name;
-  //   const value = e.target.value;
-  //   const obj = {};
-  //   let flag = 'false';
-  //   obj[key] = value;
-
-  //   if (this.postObj.bankDetails.length > 0) {
-  //     this.postObj.bankDetails.forEach((detail, i) => {
-  //       if (Object.entries(detail)[0][0] === Object.entries(obj)[0][0]) {
-  //         flag = i;
-  //       }
-  //     })
-  //   }
-
-  //   if (flag !== 'false') {
-  //     this.postObj.bankDetails[flag] = obj;
-  //     flag = false;
-  //   } else {
-  //     this.postObj.bankDetails.push(obj);
-  //   }
-  // }
 
   render() {
     const {id, title, namePlaceholder, areaPlaceholder, selects} = this.props;
 
-    console.log(this.choiceUrl());
-
     return (
-      <form className="form" action="#" onSubmit={e => this.onSubmit(e)}>
+      <form className="form" action="#" onSubmit={e => {this.onSubmit(e); this.onActiveSubmit()}}>
         <h2 className="subtitle">{title}</h2>
         <div className="form__inputs">
           <FormCategories selects={selects} onUpdateMainForm={this.onUpdateMainForm} />
@@ -143,7 +148,7 @@ class Form extends Component {
         {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
         <textarea className="form__input form__input--services"
           name="description"
-          maxLength={500}
+          max="500"
           required
           placeholder={'*' + (areaPlaceholder || 'Напишіть, які послуги надаєте...')}
           onChange={e => this.onUpdateMainForm(e)} />
@@ -192,9 +197,10 @@ const FormBankAccount = ({onUpdateBankForm}) => {
     <div className="form__bank-block">
       <input className="form__input"
           name="cardNumber"
-          type="text"
-          minLength={16}
-          maxLength={16}
+          type="number"
+          inputMode="numeric"
+          min="16"
+          max="16"
           placeholder="Номер банківської картки"
           onChange={e => onUpdateBankForm(e)} />
       <p className="form__bank-data">Банківські реквізити</p>
@@ -212,24 +218,24 @@ const FormBankAccount = ({onUpdateBankForm}) => {
         <input className="form__input" 
           name="mfo"
           type="number"
-          inputMode='numeric'
-          minLength={6}
-          maxLength={6}
+          inputMode="numeric"
+          min="6"
+          max="6"
           placeholder="МФО"
           onChange={e => onUpdateBankForm(e)} />
         <input className="form__input" 
           name="iban"
           type="number"
           inputMode='numeric'
-          maxLength={31}
+          max="31"
           placeholder="IBAN"
           onChange={e => onUpdateBankForm(e)} />
         <input className="form__input" 
           name="edrpo"
           type="number"
           inputMode='numeric'
-          minLength={8}
-          maxLength={10}
+          min="8"
+          max="10"
           placeholder="ІПН/ЄДРПОУ"
           onChange={e => onUpdateBankForm(e)} />
         <input className="form__input" 
