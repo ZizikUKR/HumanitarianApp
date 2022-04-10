@@ -11,6 +11,8 @@ import Service from '../../services/Service';
 
 import './app.scss';
 
+import { ToastContainer } from 'react-toastify';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -382,6 +384,7 @@ class App extends Component {
     
     return (
       <>
+      <ToastContainer />
         <Header
           headerButtons={headerButtons}
           visibleBurger={this.visibleBurger}
