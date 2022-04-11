@@ -11,21 +11,21 @@ export const showInfo = (message) => {
 };
 
 
-export const showInfoError = (message) => {
+export const showError = (message) => {
   toast.error(message, {
     position: "top-right",
     theme: "colored",
   });
 };
 
-export const showInfoSuccess = (message) => {
+export const showSuccess = (message) => {
   toast.success(message, {
     position: "top-right",
     theme: "colored",
   });
 };
 
-export const showInfoWarn = (message) => {
+export const showWarn = (message) => {
   toast.warn(message, {
     position: "top-right",
     theme: "colored",
