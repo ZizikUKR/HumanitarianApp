@@ -11,4 +11,23 @@ export const showInfo = (message) => {
 };
 
 
-// добавить 3 функции эрор саксес и варнинг 
+export const showInfoError = (message) => {
+  toast.error(message, {
+    position: "top-right",
+    theme: "colored",
+  });
+};
+
+export const showInfoSuccess = (message) => {
+  toast.success(message, {
+    position: "top-right",
+    theme: "colored",
+  });
+};
+
+export const showInfoWarn = (message) => {
+  toast.warn(message, {
+    position: "top-right",
+    theme: "colored",
+  });
+};

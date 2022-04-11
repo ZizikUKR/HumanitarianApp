@@ -3,7 +3,7 @@ import { Component } from "react";
 import Service from "../../services/Service";
 
 import "./form.scss";
-import { showInfo } from "../toast/notification";
+import { showInfo, showInfoError, showInfoSuccess, showInfoWarn } from "../toast/notification";
 
 
 class Form extends Component {
