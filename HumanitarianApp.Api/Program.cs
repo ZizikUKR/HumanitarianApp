@@ -38,7 +38,7 @@ builder.Services.AddSwaggerGen();
 }
 
 builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("HumanitarianConnection"),
+    opt.UseSqlite(builder.Configuration.GetConnectionString("HumanitarianConnection"),
         b => b.MigrationsAssembly("HumanitarianApp.Api")));
 
 builder.Services.AddScoped<IVolunteerService, VolunteerService>();
