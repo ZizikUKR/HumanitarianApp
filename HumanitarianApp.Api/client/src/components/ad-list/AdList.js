@@ -15,7 +15,7 @@ class AdList extends Component {
     const elements = this.props.ads.reverse().map(element => {
       const {select, name, telephone, email, city, address, text, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber} = element;
       const {id} = this.props;
-//строка 21 не может найти проперти length даже если не обращатся к нему, преобразования в стринг тоже ни к чему не привели 
+      
       return (
         <div key={this.keyCount++} className="ad-list__item">
           <h3 className="subtitle">{select || name} - {city}</h3>
@@ -48,15 +48,15 @@ class AdList extends Component {
     this.adsBlocks = [];
     let afterArray = this.createAdsElements();
     let array = [];
-    let numberAdsPages = 2;
+    let numberAdsOnPages = 10;
     let count = 0;
 
     afterArray.forEach((element, i) => {
-      if (i % numberAdsPages === 0) {
+      if (i % numberAdsOnPages === 0) {
         for (let i = 0; i < afterArray.length; i++) {
           array.push(afterArray[count])
           count++;
-          if (array.length % numberAdsPages === 0) {
+          if (array.length % numberAdsOnPages === 0) {
             break;
           };
         }

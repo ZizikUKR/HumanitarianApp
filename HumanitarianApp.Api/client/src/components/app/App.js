@@ -1,11 +1,16 @@
 import { Component } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import BurgerMenu from "../burger-menu/BurgerMenu";
 
 import Header from "../header/Header";
 import Section from "../section/Section";
 import Footer from "../footer/Footer";
-import Agreement from "../../agreement/Agreement";
+import Agreement from '../agreement/Agreement';
+
+import AdminLogin from "../admin-login/AdminLogin";
+import Page404 from "../page-404/Page404";
+import AdminPanel from '../admin-panel/AdminPanel';
 
 import Service from '../../services/Service';
 
@@ -382,21 +387,31 @@ class App extends Component {
     }
     
     return (
-      <>
+
       <ToastContainer />
-        <Header
-          headerButtons={headerButtons}
-          visibleBurger={this.visibleBurger}
-          activeSection={this.state.activeSection}
-          selectSection={this.selectSection}
-        />
-        <main>
-          {visibleBurgerMenu ? <BurgerMenu headerButtons={headerButtons} visibleBurger={this.visibleBurger} selectSection={this.selectSection} /> : null}
-          {openAgreement ? <Agreement onOpenAgreement={this.onOpenAgreement} /> : null}
-          {this.renderSection(sectionsData[activeSection])}
-        </main>
-        <Footer />
-      </>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header
+                headerButtons={headerButtons}
+                visibleBurger={this.visibleBurger}
+                activeSection={this.state.activeSection}
+                selectSection={this.selectSection}
+              />
+              <main>
+                {visibleBurgerMenu ? <BurgerMenu headerButtons={headerButtons} visibleBurger={this.visibleBurger} selectSection={this.selectSection} /> : null}
+                {openAgreement ? <Agreement onOpenAgreement={this.onOpenAgreement} /> : null}
+                {this.renderSection(sectionsData[activeSection])}
+              </main>
+              <Footer />
+            </>
+          } />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin-panel" element ={<AdminPanel />} />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
     );
   }
 };
