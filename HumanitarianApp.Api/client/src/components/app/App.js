@@ -256,7 +256,6 @@ class App extends Component {
             accountnumber: this.isEmpty(item.bankDetails?.accountNumber),
           };
         });
-        debugger;
         let newsectionsData = Object.assign({}, this.state.sectionsData);
         newsectionsData[0].ads = volonteers;
 

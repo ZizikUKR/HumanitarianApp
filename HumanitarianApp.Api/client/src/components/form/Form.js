@@ -49,13 +49,11 @@ class Form extends Component {
 
   postService = new Service();
   onSubmit = (e) => {
-    debugger;
     e.preventDefault();
 
     const json = JSON.stringify(this.postObj);
 
     this.postService.post(this.choiceUrl(), json).then((response) => {
-      debugger;
       showInfo(`Ваша заявка на створення ${this.getName()} була прийнята!`);
     });
 
