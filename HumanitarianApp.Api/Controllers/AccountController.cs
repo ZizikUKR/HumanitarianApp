@@ -58,7 +58,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+      //  [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
             if (!ModelState.IsValid)
@@ -74,7 +74,7 @@ namespace HumanitarianApp.Api.Controllers
             }
 
             var result = await _userSignInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, userLoginDto.RememberMe, false);
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var  fullUser = await _userManager.FindByEmailAsync(userLoginDto.Email);
 
             if (!result.Succeeded)
             {
@@ -95,16 +95,14 @@ namespace HumanitarianApp.Api.Controllers
             await _userService.SaveRefreshToken(
                 new UserTokenDto
                 {
-                    Id = userId,
+                    Id = fullUser.Id,
                     RefreshToken = refreshToken,
                     RefreshTokenExpiryTime = DateTime.Now.AddHours(4)
                 });
 
-            return Ok(new
-            {
-                Token = accessToken,
-                RefreshToken = refreshToken
-            });
+            var resultToken = new TokenModel {AccessToken = accessToken, RefreshToken = refreshToken};
+
+            return Ok(resultToken);
         }
 
         [HttpPost]
