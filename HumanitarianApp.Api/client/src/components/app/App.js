@@ -16,6 +16,8 @@ import Service from '../../services/Service';
 
 import './app.scss';
 
+import { ToastContainer } from 'react-toastify';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -259,7 +261,6 @@ class App extends Component {
             accountnumber: this.isEmpty(item.bankDetails?.accountNumber),
           };
         });
-        debugger;
         let newsectionsData = Object.assign({}, this.state.sectionsData);
         newsectionsData[0].ads = volonteers;
 
@@ -386,6 +387,8 @@ class App extends Component {
     }
     
     return (
+
+      <ToastContainer />
       <Routes>
         <Route
           path="/"
