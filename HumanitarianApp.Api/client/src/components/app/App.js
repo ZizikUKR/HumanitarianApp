@@ -388,12 +388,12 @@ class App extends Component {
     
     return (
 
-      <ToastContainer />
       <Routes>
         <Route
           path="/"
           element={
             <>
+            <ToastContainer />
               <Header
                 headerButtons={headerButtons}
                 visibleBurger={this.visibleBurger}
