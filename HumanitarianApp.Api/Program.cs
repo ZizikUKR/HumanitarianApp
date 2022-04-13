@@ -44,7 +44,10 @@ builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbConte
 builder.Services.AddScoped<IVolunteerService, VolunteerService>();
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IVolunteerRepository, HumanitarianApp.DAL.Repository.VolunteerRepository > ();
+builder.Services.AddScoped <HumanitarianApp.DAL.Repository.Interfaces.IUserRepository, HumanitarianApp.DAL.Repository.UserRepository > ();
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IOrganizationRepository, HumanitarianApp.DAL.Repository.OrganizationRepository > ();
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IAnnouncementRepository, HumanitarianApp.DAL.Repository.AnnouncementRepository > ();
 builder.Services.AddScoped <HumanitarianApp.DAL.Repository.IBankDetailRepository, HumanitarianApp.DAL.Repository.BankDetailRepository> ();
