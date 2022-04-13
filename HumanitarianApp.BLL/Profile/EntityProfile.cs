@@ -34,11 +34,6 @@ namespace HumanitarianApp.BLL.Profile
                 .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
             CreateMap<User, UserRegistrationDto>();
 
-            //CreateMap<UserTokenDto, User>();
-            //CreateMap<User, UserTokenDto>();
-
-            CreateMap<UserLoginDto, User>();
-            CreateMap<User, UserLoginDto>();
         }
     }
 }

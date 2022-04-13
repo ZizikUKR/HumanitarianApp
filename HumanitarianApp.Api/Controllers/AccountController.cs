@@ -2,8 +2,8 @@
 using AutoMapper;
 using HumanitarianApp.BLL.DTO;
 using HumanitarianApp.BLL.Models;
-using HumanitarianApp.BLL.Services;
 using HumanitarianApp.DAL.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,22 +16,15 @@ namespace HumanitarianApp.Api.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _userSignInManager;
         private readonly IMapper _mapper;
-        private readonly ITokenService _tokenService;
-        private readonly IUserService _userService;
 
-        public AccountController(IMapper mapper, UserManager<User> userManager,
-            SignInManager<User> userSignInManager,
-            ITokenService tokenService,
-            IUserService userService)
+        public AccountController(IMapper mapper, UserManager<User> userManager, SignInManager<User> userSignInManager)
         {
             _userManager = userManager;
             _userSignInManager = userSignInManager;
             _mapper = mapper;
-            _tokenService = tokenService;
-            _userService = userService;
         }
 
-        [HttpPost] 
+        [HttpPost]
         [ValidateAntiForgeryToken] //используется для сравнения Cookie формы и ендпоинта, если они не совпадают то не дает доступ к данным
         public async Task<IActionResult> Registration(UserRegistrationDto registrationDto)
         {
@@ -58,23 +51,15 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost]
-      //  [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(UserLoginDto userLoginDto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(UserLoginDto userLogin)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            var user = _mapper.Map<User>(userLoginDto);
-
-            if (user == null)
-            {
-                throw new Exception("Can`t map object to User");
-            }
-
-            var result = await _userSignInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, userLoginDto.RememberMe, false);
-            var  fullUser = await _userManager.FindByEmailAsync(userLoginDto.Email);
+            var result = await _userSignInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, userLogin.RememberMe, false);
 
             if (!result.Succeeded)
             {
@@ -83,26 +68,7 @@ namespace HumanitarianApp.Api.Controllers
                 return BadRequest();
             }
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, userLoginDto.Email),
-                new Claim(ClaimTypes.Role, "Administrator")
-            };
-
-            var accessToken = _tokenService.GenerateAccessToken(claims);
-            var refreshToken = _tokenService.GenerateRefreshToken();
-
-            await _userService.SaveRefreshToken(
-                new UserTokenDto
-                {
-                    Id = fullUser.Id,
-                    RefreshToken = refreshToken,
-                    RefreshTokenExpiryTime = DateTime.Now.AddHours(4)
-                });
-
-            var resultToken = new TokenModel {AccessToken = accessToken, RefreshToken = refreshToken};
-
-            return Ok(resultToken);
+            return Ok($"User Successful login");
         }
 
         [HttpPost]
