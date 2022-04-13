@@ -1,14 +1,14 @@
 @import '../../styles/variables.scss';
 
 .footer {
-  padding: 10px;
+  padding: 3px;
   margin: 0 auto;
   margin-top: 10px;
   max-width: 97%;
   background-color: $blue;
   border-radius: 0 0 15px 15px;
   &__wrapper {
-    height: 100px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +17,7 @@
   }
   &__copyright {
     color: $yellow;
+    text-align: center;
   }
   &__email {
     text-decoration: none;
@@ -48,8 +49,8 @@
   -ms-user-select: none;
   user-select: none;
   transition: background-color .3s ease-in-out;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: .25rem;
 }
 
@@ -62,8 +63,8 @@
   position: absolute;
   width: 1.2rem;
   height: 1.2rem;
-  left: .65rem;
-  top: .65rem;
+  left: .33rem;
+  top: .33rem;
   background: transparent no-repeat center center;
   background-size: 100% 100%;
   
@@ -83,4 +84,8 @@
 
 .social-icons .social-icon-instagram::before {
   background-image: url("Instagram_logo_2016.svg");
+}
+
+.social-icons .social-icon-email::before {
+  background-image: url("email.svg");
 }
