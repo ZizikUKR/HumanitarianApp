@@ -84,6 +84,7 @@ namespace HumanitarianApp.BLL.Services
             organization.City = entityDto.City;
             organization.Address = entityDto.Address;
             organization.Description = entityDto.Description;
+            organization.WebSite = entityDto.WebSite;
 
             await _organizationRepository.Update(organization);
         }
