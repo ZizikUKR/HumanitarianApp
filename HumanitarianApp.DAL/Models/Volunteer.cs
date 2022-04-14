@@ -10,6 +10,9 @@ namespace HumanitarianApp.DAL.Models
         public string City { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
+        public string Facebook { get; set; }
+        public string Instagram { get; set; }
+        public string Telegram { get; set; }
         public virtual VolunteerCategory Category { get; set; }
 
         //Reverse Navigation

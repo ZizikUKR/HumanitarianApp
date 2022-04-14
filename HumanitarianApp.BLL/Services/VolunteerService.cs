@@ -126,6 +126,9 @@ namespace HumanitarianApp.BLL.Services
             entity.City = entityDto.City;
             entity.Address = entityDto.Address;
             entity.Description = entityDto.Description;
+            entity.Facebook= entityDto.Facebook;
+            entity.Instagram = entityDto.Instagram;
+            entity.Telegram = entityDto.Telegram;
             entity.Category = (VolunteerCategory)entityDto.Category;
             entity.BankDetails.AccountNumber = entityDto.BankDetails.AccountNumber;
             entity.BankDetails.CardNumber = entityDto.BankDetails.CardNumber;
