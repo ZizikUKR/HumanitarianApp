@@ -19,6 +19,9 @@ class Form extends Component {
     address: '',
     description: '',
     category: '',
+    telegram: '',
+    instagram: '',
+    facebook: '',
     bankDetails: {
       fullBankName: '',
       shortBankName: '',
@@ -36,6 +39,7 @@ class Form extends Component {
     email: '',
     city: '',
     address: '',
+    website: '',
     text: ''
   }
 
@@ -120,7 +124,7 @@ class Form extends Component {
     this.choicePostObj().bankDetails[key] = value;
     console.log(this.volunteerPostObj);
   }
-
+  
   render() {
     const { id, title, namePlaceholder, areaPlaceholder, selects } = this.props;
 
@@ -173,6 +177,38 @@ class Form extends Component {
             placeholder="Адреса"
             onChange={(e) => this.onUpdateMainForm(e)}
           />
+          <input
+            style={{display: this.props.id==0 ? "block" : "none"}}
+            className="form__input"
+            name="instagram"
+            type="url"
+            placeholder="Instagram"
+            onChange={(e) => this.onUpdateMainForm(e)}
+          /> 
+          <input
+            style={{display: this.props.id==0 ? "block" : "none"}}
+            className="form__input"
+            name="telegram"
+            type="url"
+            placeholder="Telegram"
+            onChange={(e) => this.onUpdateMainForm(e)}
+          /> 
+          <input
+            style={{display: this.props.id==0 ? "block" : "none"}}
+            className="form__input"
+            name="facebook"
+            type="url"
+            placeholder="Facebook"
+            onChange={(e) => this.onUpdateMainForm(e)}
+          /> 
+          <input
+            style={{display: this.props.id==1 ? "block" : "none"}}
+            className="form__input"
+            name="website"
+            type="url"
+            placeholder="Website"
+            onChange={(e) => this.onUpdateMainForm(e)}
+          /> 
         </div>
         {id === 0 ? (
           <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} />
