@@ -48,7 +48,7 @@ class Section extends Component {
             {this.state.openForm ? 'Закрити форму' : 'Додати ' + this.openButtonName()}
           </button>
         </div>
-        <div className="section__info">
+        <div className="section__info">        
           <div className="container">
             <div className="section__wrapper">
               <h2 className="subtitle subtitle--white">{this.props.name}: {this.props.ads.length}</h2>

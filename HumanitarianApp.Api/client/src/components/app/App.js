@@ -42,7 +42,19 @@ class App extends Component {
             {id: 1, name: 'Перевезення'},
             {id: 2, name: 'Медицина'},
             {id: 3, name: 'Гуманітарна допомога'},
-            {id: 4, name: 'Інше'}
+            {id: 4, name: 'Пошук автоволонтерів'},
+            {id: 5, name: 'Ліки'},
+            {id: 6, name: 'Їжа та продукті'},
+            {id: 7, name: 'Допомога переселенцям'},
+            {id: 8, name: 'Допомга дітям'},
+            {id: 9, name: 'Допомога тваринам'},
+            {id: 10, name: 'Допомога літнім'},
+            {id: 11, name: 'Допомога захистникам'},
+            {id: 12, name: 'Консультація лікаря'},
+            {id: 13, name: 'Евакуація з міста'},
+            {id: 14, name: 'Донорство крові'},
+            {id: 15, name: 'Інше'},
+
           ],
           ads: [
             {
@@ -78,7 +90,7 @@ class App extends Component {
               "accountnumber": ""
             },
             {
-              "select": "Інше",
+              "select": "Допомога тваринам",
               "name": "Фомін Віталій Володимирович",
               "telephone": "+380674445566",
               "email": "fomin@qwerty.com",
@@ -329,16 +341,60 @@ class App extends Component {
     if (category == 1) {
       return "Перевезення";
     }
-
-    if (category == 2) {
-      return "Медицина";
-    }
-
-    if (category == 3) {
-      return "Гуманітарна допомога";
-    }
+    
+        if (category == 2) {
+          return "Медицина";
+        }
+        
+        if (category == 3) {
+          return "Гуманітарна допомога";
+        }
 
     if (category == 4) {
+      return "Пошук автоволонтерів";
+    }
+
+    if (category == 5) {
+      return "Ліки";
+    }
+
+    if (category == 6) {
+      return "Їжа та продукті";
+    }
+
+    if (category == 7) {
+      return "Допомога переселенцям";
+    }
+
+    if (category == 8) {
+      return "Допомга дітям";
+    }
+
+    if (category == 9) {
+      return "Допомога тваринам";
+    }
+
+    if (category == 10) {
+      return "Допомога літнім";
+    }
+
+    if (category == 11) {
+      return "Допомога захистникам";
+    }
+
+    if (category == 12) {
+      return "Консультація лікаря";
+    }
+
+    if (category == 13) {
+      return "Евакуація з міста";
+    }
+
+    if (category == 14) {
+      return "Донорство крові";
+    }
+
+    if (category == 15) {
       return "Інше";
     }
 
