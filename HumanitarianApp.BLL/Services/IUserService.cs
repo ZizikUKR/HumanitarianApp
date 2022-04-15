@@ -4,6 +4,6 @@ namespace HumanitarianApp.BLL.Services
 {
     public interface IUserService
     {
-        Task SaveRefreshToken(UserTokenDto token);
+      //  Task SaveRefreshToken(UserTokenDto token);
     }
 }
