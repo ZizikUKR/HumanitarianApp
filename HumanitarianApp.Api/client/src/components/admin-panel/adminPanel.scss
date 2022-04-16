@@ -1,0 +1,45 @@
+@import '../../styles/variables.scss';
+
+.admin {
+  &-header{
+    margin: 0 auto;
+    border: 3px solid $blue;
+    max-width: 1200px;
+    border-radius: 15px 15px 0 0;
+    user-select: none;
+    &__wrapper {
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__buttons {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    &__button {
+      padding: 10px;
+      height: 40px;
+      color: $white;
+      background-color: transparent;
+      font-size: 15px;
+      border: 1px solid $blue;
+      transition: all .3s ease;
+      cursor: pointer;
+      &:last-child {
+        border-top-right-radius: 8px;
+      }
+      &:hover {
+        transition: all .3s ease;
+        background-color: $white;
+        color: $blue;
+      }
+      &--active {
+        background-color: $white;
+        color: $black;
+        cursor: auto;
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
-import leftArrow from '../../assets/icons/left_arrow.svg';
-import rightArrow from '../../assets/icons/right_arrow.svg';
+import leftArrow from '../../assets/icons/slider-icons/left_arrow.svg';
+import rightArrow from '../../assets/icons/slider-icons/right_arrow.svg';
 
 import './adList.scss';
 import './carousel.scss';

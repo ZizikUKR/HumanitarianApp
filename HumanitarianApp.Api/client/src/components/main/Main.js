@@ -1,10 +1,19 @@
 import { Component } from "react";
 
+import BurgerMenu from "../burger-menu/BurgerMenu";
+
+import Header from "../header/Header";
+import Section from "../section/Section";
+import Footer from "../footer/Footer";
+import Agreement from '../agreement/Agreement';
+
 import Service from '../../services/Service';
 
-import './adminPanel.scss';
+import './main.scss';
 
-export default class AdminPanel extends Component {
+import { ToastContainer } from 'react-toastify';
+
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,12 +21,24 @@ export default class AdminPanel extends Component {
         {id: 0, name: 'Волонтери'},
         {id: 1, name: 'Підприємства'},
         {id: 2, name: 'Оголошення'},
+        // {id: 3, name: 'Допомогти'}
       ],
+      visibleBurgerMenu: false,
       activeSection: 0,
+      openAgreement: false,
       sectionsData: [
         {
           id: 0,
           name: 'Волонтери',
+          searchResult: '',
+          filter: 'Усі категорії',
+          filterButtons: [
+            {id: 0, name: 'Усі категорії'},
+            {id: 1, name: 'Перевезення'},
+            {id: 2, name: 'Медицина'},
+            {id: 3, name: 'Гуманітарна допомога'},
+            {id: 4, name: 'Інше'}
+          ],
           ads: [
             {
               "select": "Перевезення",
@@ -34,6 +55,38 @@ export default class AdminPanel extends Component {
               "iban": "2546542544",
               "edrpou": "12345678",
               "accountnumber": "484654654465454845"
+            },
+            {
+              "select": "Гуманітарна допомога",
+              "name": "Олександров Василь Петрович",
+              "telephone": "+380669998877",
+              "email": "oleksandrov@qwerty.com",
+              "city": "Днепр",
+              "address": "пр. Свободи, 47/12",
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiis.",
+              "cardnumber": "",
+              "fullbankname": "",
+              "shortbankname": "",
+              "mfo": "",
+              "iban": "",
+              "edrpou": "",
+              "accountnumber": ""
+            },
+            {
+              "select": "Інше",
+              "name": "Фомін Віталій Володимирович",
+              "telephone": "+380674445566",
+              "email": "fomin@qwerty.com",
+              "city": "Запоріжжя",
+              "address": "",
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiisa nulla ipsa sapiente doloribus officiis qwertyuiopas.",
+              "cardnumber": "",
+              "fullbankname": "",
+              "shortbankname": "",
+              "mfo": "",
+              "iban": "",
+              "edrpou": "",
+              "accountnumber": ""
             },
             {
               "select": "Гуманітарна допомога",
@@ -72,6 +125,9 @@ export default class AdminPanel extends Component {
         {
           id: 1,
           name: 'Підприємства',
+          searchResult: '',
+          filter: 'Усі категорії',
+          filterButtons: [],
           ads: [
             {
               "name": "Фірма",
@@ -86,10 +142,28 @@ export default class AdminPanel extends Component {
         {
           id: 2,
           name: 'Оголошення',
+          searchResult: '',
+          filter: 'Усі категорії',
+          filterButtons: [
+            {id: 0, name: 'Усі категорії'},
+            {id: 1, name: 'Шукаю'},
+            {id: 2, name: 'Знайшов'},
+            {id: 3, name: 'Продам'},
+            {id: 4, name: 'Придбаю'},
+            {id: 5, name: 'Віддам'},
+            {id: 6, name: 'Прийму'},
+            {id: 7, name: 'Інше'}
+          ],
           ads: []
         }
       ]
     }
+  }
+
+  body = document.querySelector('body');
+
+  visibleBurger = (visibleBurgerMenu) => {
+    this.setState({visibleBurgerMenu});
   }
 
   selectSection = (id) => {
@@ -98,18 +172,60 @@ export default class AdminPanel extends Component {
     })
   }
 
-  // renderSection = (section) => {
-  //   const {id, name, ads} = section;
+  renderSection = (section) => {
+    const {id, name, filterButtons, ads, searchResult, filter} = section;
 
-  //   return(
-  //     <AdminPanelSection
-  //       key={id}
-  //       name={name}
-  //       ads={ads}
-  //       activeSection={this.state.activeSection}
-  //       id={id} />
-  //   );
-  // }
+      const onUpdateSearch = searchResult => {
+        section.searchResult = searchResult;
+        this.setState({section});
+      };
+
+      const onFilterSelect = (filter) => {
+        section.filter = filter;
+        this.setState({section});
+      };
+
+      const search = (items, searchResult) => {
+        if (searchResult.length === 0) {
+          return items;
+        }
+    
+        return items.filter(item => {
+          return item.city.toLowerCase().indexOf(searchResult.toLowerCase()) > -1;
+        });
+      };
+
+      const select = (items, filter) => {
+        if (filter === 'Усі категорії') {
+          return items;
+        } else {
+          return items.filter(item => item.select === filter);
+        }
+      };
+
+      const visibleData = select(search(ads, searchResult), filter);
+
+      return(
+        <Section
+          key={id}
+          name={name}
+          filterButtons={filterButtons}
+          ads={visibleData}
+          onUpdateSearch={onUpdateSearch}
+          searchResult={searchResult}
+          filter={filter}
+          onFilterSelect={onFilterSelect}
+          activeSection={this.state.activeSection}
+          id={id}
+          onOpenAgreement={this.onOpenAgreement} />
+      );
+  }
+
+  onOpenAgreement = () => {
+    this.setState(({openAgreement}) => ({
+      openAgreement: !openAgreement
+    }))
+  }
 
   service = new Service();
   componentDidMount() {
@@ -150,7 +266,7 @@ export default class AdminPanel extends Component {
   };
 
   isEmpty = (inputStr) => {
-    if (inputStr) {
+    if(inputStr){
       return inputStr;
     }
     return "";
@@ -176,6 +292,8 @@ export default class AdminPanel extends Component {
 
         this.setState({ sectionsData: newsectionsData });
       });
+
+      
   };
 
   getAllAnnouncements = () => {
@@ -255,97 +373,32 @@ export default class AdminPanel extends Component {
   };
 
   render() {
-    const {headerButtons, sectionsData, activeSection} = this.state;
+    const {headerButtons, visibleBurgerMenu, sectionsData, activeSection, openAgreement} = this.state;
+
+    if (visibleBurgerMenu || openAgreement) {
+      this.body.style.overflow = 'hidden';
+    } else {
+      this.body.removeAttribute('style');
+    }
     
     return (
       <>
-        <AdminPanelHeader
+        <ToastContainer />
+        <Header
           headerButtons={headerButtons}
+          visibleBurger={this.visibleBurger}
           activeSection={this.state.activeSection}
           selectSection={this.selectSection}
         />
         <main>
-          {/* {this.renderSection(sectionsData[activeSection])} */}
+          {visibleBurgerMenu ? <BurgerMenu headerButtons={headerButtons} visibleBurger={this.visibleBurger} selectSection={this.selectSection} /> : null}
+          {openAgreement ? <Agreement onOpenAgreement={this.onOpenAgreement} /> : null}
+          {this.renderSection(sectionsData[activeSection])}
         </main>
+        <Footer />
       </>
     );
   }
 };
 
-const AdminPanelHeader = ({headerButtons, activeSection, selectSection, visibleBurger}) => {
-  function HeaderButton({headerButtons, activeSection, selectSection}) {
-    const buttons = headerButtons.map(item => {
-      const clazz = activeSection === item.id ? 'admin-header__button admin-header__button--active' : 'admin-header__button';
-  
-      return (
-        <button className={clazz} type='button' key={item.id} onClick={() => {selectSection(item.id)}}>{item.name}</button>
-      );
-    });
-  
-    return buttons;
-  }
-
-  return (
-    <header className="admin-header">
-      <div className="container">
-        <div className="admin-header__wrapper">
-          <div className="admin-header__buttons">
-            <HeaderButton headerButtons={headerButtons} activeSection={activeSection} selectSection={selectSection} />
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-};
-
-// const AdminPanelSection = ({name, ads, id, numberAdsOfPages}) => {
-//   return(
-//     <section className="section">
-//       <div className="container">
-//         <div className="section__wrapper">
-//           <h2 className="subtitle subtitle--white">{this.props.name}: {this.props.ads.length}</h2>
-//         </div>
-//         <AdminPanelAdList id={this.props.id} ads={this.props.ads} numberAdsOfPages={this.props.numberAdsOfPages} />
-//       </div>
-//     </section>
-//   );
-// };
-
-// const AdminPanelAdList = () => {
-//   let keyCount = 0;
-
-//   function createAdsElements() {
-//     const elements = this.props.ads.reverse().map(element => {
-//       const {select, name, telephone, email, city, address, text, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber} = element;
-//       const {id} = this.props;
-      
-//       return (
-//         <div key={keyCount++} className="ad-list__item">
-//           <h3 className="subtitle">{select || name} - {city}</h3>
-//           <p className="ad-list__text">{text}</p>
-//           <div className="ad-list__contacts">
-//             <p className="ad-list__contact"><span className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
-//             <p className="ad-list__contact"><span className="ad-list__bold">Телефон: </span>{telephone}</p>
-//             {email.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Email: </span>{email}</p>: null}
-//             <p className="ad-list__contact"><span className="ad-list__bold">Адреса: </span>м. {city}{ address.length > 0 ? `, ${address}` : ''}</p>
-//             {id === 0 && cardnumber.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Номер картки: </span>{cardnumber}</p>: null}
-//             {id === 0 && fullbankname.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Повна назва банку: </span>{fullbankname}</p>: null}
-//             {id === 0 && shortbankname.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Скорочена назва банку: </span>{shortbankname}</p>: null}
-//             {id === 0 && mfo.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">МФО: </span>{mfo}</p>: null}
-//             {id === 0 && iban.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">IBAN: </span>{iban}</p>: null}
-//             {id === 0 && edrpou.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">{edrpou.length === 8 ? 'ЄДРПОУ' : 'ІПН'}: </span>{edrpou}</p>: null}
-//             {id === 0 && accountnumber.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Розрахунковий рахунок: </span>{accountnumber}</p>: null}
-//           </div>
-//         </div>
-//       )
-//     });
-
-//     return elements;
-//   }
-
-//   return (
-//     <ul className="ad-list">
-//       {createAdsElements}
-//     </ul>
-//   );
-// }
+export default Main;
