@@ -1,5 +1,8 @@
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hook/useAuth';
+
 import './adminLogin.scss';
-import {AuthService} from '../../services/auth.service.js';
+import { AuthService } from '../../services/auth.service.js';
 
 const loginData ={
   login:'',
@@ -39,21 +42,37 @@ const onCheck = e => {
   } 
 
 const AdminLogin = () => {
-debugger;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {signin} = useAuth();
+
+  const fromPage = location.state?.from?.pathname || '/admin-panel';
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const admin = {
+      login: form.login.value,
+      password: form.password.value
+    }
+
+    signin(admin, () => navigate(fromPage, {replace: true}));
+  }
+
   return (
-    <form className="admin-login">
+    <form className="admin-login" onSubmit={handleSubmit}>
       <div className="admin-login__block">
         <label className="admin-login__label" htmlFor="login">Login</label>
-        <input className="admin-login__input" name="login" id="login" type="text" onChange={e => onInputLogin(e)}/>
+        <input className="admin-login__input" name="login" id="login" type="text" />
       </div>
       <div className="admin-login__block">
         <label className="admin-login__label" htmlFor="password">Password</label>
-        <input className="admin-login__input" name="password" id="password" type="password" onChange={e => onInputPassword(e)}/>
+        <input className="admin-login__input" name="password" id="password" type="password" />
       </div>
       <div className="admin-login__submit">
-        <input className="admin-login__checkbox" name="check" id="check" type="checkbox" onChange={e => onCheck(e)} />
+        <input className="admin-login__checkbox" name="check" id="check" type="checkbox" />
         <label className="admin-login__label" htmlFor="check">Check me out</label>
-        <button className="admin-login__button" onClick={()=>onLogIn()}>Enter</button>
+        <button className="admin-login__button" type='submit'>Enter</button>
       </div>
     </form>
   );

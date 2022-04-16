@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../hook/useAuth";
 
 import Service from '../../services/Service';
 
@@ -272,7 +274,10 @@ export default class AdminPanel extends Component {
   }
 };
 
-const AdminPanelHeader = ({headerButtons, activeSection, selectSection, visibleBurger}) => {
+const AdminPanelHeader = ({headerButtons, activeSection, selectSection}) => {
+  const {signout} = useAuth();
+  const navigate = useNavigate();
+
   function HeaderButton({headerButtons, activeSection, selectSection}) {
     const buttons = headerButtons.map(item => {
       const clazz = activeSection === item.id ? 'admin-header__button admin-header__button--active' : 'admin-header__button';
@@ -293,6 +298,7 @@ const AdminPanelHeader = ({headerButtons, activeSection, selectSection, visibleB
             <HeaderButton headerButtons={headerButtons} activeSection={activeSection} selectSection={selectSection} />
           </div>
         </div>
+        <button onClick={() => signout(() => navigate('/admin-login', {replace: true}))}>Exit</button>
       </div>
     </header>
   );
