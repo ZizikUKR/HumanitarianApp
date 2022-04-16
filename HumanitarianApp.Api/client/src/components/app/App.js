@@ -167,7 +167,7 @@ class App extends Component {
               "email": "firma@qwerty.com",
               "city": "Львів",
               "address": "",
-              "website": "www.ruskiy-korabl.idi.na.xyi",
+              "website": "https://www.ruskiy-korabl.idi.na.xyi",
               "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi?."
             },
             {
