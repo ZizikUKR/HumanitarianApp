@@ -39,7 +39,6 @@ const onCheck = e => {
   } 
 
 const AdminLogin = () => {
-debugger;
   return (
     <form className="admin-login">
       <div className="admin-login__block">

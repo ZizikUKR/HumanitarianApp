@@ -17,10 +17,9 @@ export class AuthService extends Component {
     let json = JSON.stringify(loginDto);
 
    
-return this.service.post('https://localhost:7057/api/Account/Login', json)
+return this.service.post(`${process.env.REACT_APP_API_URL}Account/Login`, json)
 .then(response => response.json())
     .then(data => {
-      debugger;
       if (data.accessToken) {
               TokenService.setUser(data);
             }

@@ -39,7 +39,7 @@ class Form extends Component {
     email: '',
     city: '',
     address: '',
-    website: '',
+    webSite: '',
     text: ''
   }
 
@@ -62,11 +62,11 @@ class Form extends Component {
   choiceUrl = () => {
     switch (this.props.id) {
       case 0:
-        return 'https://localhost:7057/api/Volunteer/Create';
+        return `${process.env.REACT_APP_API_URL}Volunteer/Create`;
       case 1:
-        return 'https://localhost:7057/api/Organization/Create';
+        return `${process.env.REACT_APP_API_URL}Organization/Create`;
       case 2:
-        return 'https://localhost:7057/api/Announcement/Create';
+        return `${process.env.REACT_APP_API_URL}Announcement/Create`;
     }
   }
 
@@ -84,8 +84,7 @@ class Form extends Component {
   postService = new Service();
   onSubmit = (e) => {
     e.preventDefault();
-
-    const json = JSON.stringify(this.postObj);
+    const json = JSON.stringify(this.choicePostObj());
 
     this.postService.post(this.choiceUrl(), json).then((response) => {
       showInfo(`Ваша заявка на створення ${this.getName()} була прийнята!`);
@@ -204,7 +203,7 @@ class Form extends Component {
           <input
             style={{display: this.props.id==1 ? "block" : "none"}}
             className="form__input"
-            name="website"
+            name="webSite"
             type="url"
             placeholder="Website"
             onChange={(e) => this.onUpdateMainForm(e)}
