@@ -45,14 +45,12 @@ class AdList extends Component {
   }
 
   removeHttpFromUrl = (url) => {
-    const x = url;
+    const site = url;
 
-    const xxx = x.split('https://')[1];
+    const newSite = site.split('https://')[1];
 
-    return xxx
-
-
-    }
+    return newSite
+  }
 
   componentDidMount() {
     this.createAdsElements();
