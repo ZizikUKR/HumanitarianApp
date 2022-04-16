@@ -54,7 +54,10 @@ class Main extends Component {
               "mfo": "8465",
               "iban": "2546542544",
               "edrpou": "12345678",
-              "accountnumber": "484654654465454845"
+              "accountnumber": "484654654465454845",
+              "instagram": "",
+              "telegram": "https://t.me/kolomiiitsev",
+              "facebook": "https://www.facebook.com/kolomiiitsev/",
             },
             {
               "select": "Гуманітарна допомога",
@@ -70,7 +73,10 @@ class Main extends Component {
               "mfo": "",
               "iban": "",
               "edrpou": "",
-              "accountnumber": ""
+              "accountnumber": "",
+              "instagram": "https://www.instagram.com/kolomiiitsev",
+              "telegram": "",
+              "facebook": "https://www.facebook.com/kolomiiitsev/",
             },
             {
               "select": "Інше",
@@ -86,7 +92,10 @@ class Main extends Component {
               "mfo": "",
               "iban": "",
               "edrpou": "",
-              "accountnumber": ""
+              "accountnumber": "",
+              "instagram": "https://www.instagram.com/kolomiiitsev",
+              "telegram": "https://t.me/kolomiiitsev",
+              "facebook": "",
             },
             {
               "select": "Гуманітарна допомога",
@@ -102,7 +111,10 @@ class Main extends Component {
               "mfo": "8465",
               "iban": "2546542544",
               "edrpou": "0123456789",
-              "accountnumber": "484654654465454845"
+              "accountnumber": "484654654465454845",
+              "instagram": "https://www.instagram.com/kolomiiitsev",
+              "telegram": "https://t.me/kolomiiitsev",
+              "facebook": "https://www.facebook.com/kolomiiitsev/",
             },
             {
               "select": "Медицина",
@@ -118,7 +130,10 @@ class Main extends Component {
               "mfo": "123456566654546",
               "iban": "64654654465465465465",
               "edrpou": "0123456789",
-              "accountnumber": "апу65+5+65ппукпук5п565пку546"
+              "accountnumber": "апу65+5+65ппукпук5п565пку546",
+              "instagram": "https://www.instagram.com/kolomiiitsev",
+              "telegram": "https://t.me/kolomiiitsev",
+              "facebook": "https://www.facebook.com/kolomiiitsev/",
             }
           ]
         },
@@ -135,7 +150,17 @@ class Main extends Component {
               "email": "firma@qwerty.com",
               "city": "Львів",
               "address": "",
+              "website": "www.ruskiy-korabl.idi.na.xyi",
               "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi?."
+            },
+            {
+              "name": "Фірма",
+              "telephone": "+380674445566",
+              "email": "firma@qwerty.com",
+              "city": "Львів",
+              "address": "",
+              "website": "",
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi?."
             }
           ]
         },
@@ -236,7 +261,7 @@ class Main extends Component {
 
   getAllVolunteers = () => {
     this.service
-      .get("https://localhost:7057/api/Volunteer/GetAllActive?pageNumber=1")
+      .get(`${process.env.REACT_APP_API_URL}Volunteer/GetAllActive?pageNumber=1`)
       .then((response) => {
         const volonteers = response.map((item) => {
           return {
@@ -246,7 +271,10 @@ class Main extends Component {
             email: this.isEmpty(item.email),
             city: this.isEmpty(item.city),
             address: this.isEmpty(item.address),
-            text: this.isEmpty(item.description),
+            text: this.isEmpty(item.description),  
+            instagram: this.isEmpty(item.instagram),
+            telegram: this.isEmpty(item.telegram),
+            facebook: this.isEmpty(item.facebook),
             cardnumber: this.isEmpty(item.bankDetails?.cardNumber),
             fullbankname: this.isEmpty(item.bankDetails?.fullBankName),
             shortbankname: this.isEmpty(item.bankDetails?.shortBankName),
@@ -274,7 +302,7 @@ class Main extends Component {
 
   getAllOrganizations = () => {
     this.service
-      .get("https://localhost:7057/api/Organization/GetAllActive?pageNumber=1")
+      .get(`${process.env.REACT_APP_API_URL}Organization/GetAllActive?pageNumber=1`)
       .then((response) => {
         const organizations = response.map((item) => {
           return {
@@ -284,6 +312,7 @@ class Main extends Component {
             city: this.isEmpty(item.city),
             address: this.isEmpty(item.address),
             text: this.isEmpty(item.description),
+            website: this.isEmpty(item.website),
           };
         });
 
@@ -298,7 +327,7 @@ class Main extends Component {
 
   getAllAnnouncements = () => {
     this.service
-      .get("https://localhost:7057/api/Announcement/GetAllActive?pageNumber=1")
+      .get(`${process.env.REACT_APP_API_URL}Announcement/GetAllActive?pageNumber=1`)
       .then((response) => {
         const announcements = response.map((item) => {
           return {
