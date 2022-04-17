@@ -5,7 +5,7 @@ const RequireAuth = ({children}) => {
   const location = useLocation();
   const {admin} = useAuth();
 
-  if (admin.login === 'login'&& admin.password === 'password') {
+  if (admin.login !=null && admin.password !=null) {
     return children;
   }
 

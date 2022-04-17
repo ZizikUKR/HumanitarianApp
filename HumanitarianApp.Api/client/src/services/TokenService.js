@@ -1,4 +1,4 @@
-class TokenService {
+export class TokenService {
     getLocalRefreshToken() {
       const user = JSON.parse(localStorage.getItem("user"));
       return user?.refreshToken;
@@ -22,5 +22,13 @@ class TokenService {
     removeUser() {
       localStorage.removeItem("user");
     }
+
+     parseJwt = (token) => {
+      try {
+        return JSON.parse(atob(token.split(".")[1]));
+      } catch (e) {
+        return null;
+      }
+    };
   }
-  export default new TokenService();
+  export default  TokenService;
