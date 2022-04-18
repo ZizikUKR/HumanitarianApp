@@ -6,6 +6,9 @@ import Service from '../../services/Service';
 
 import './adminPanel.scss';
 
+import { TokenService } from '../../services/TokenService';
+import { AuthService } from '../../services/auth.service.js';
+
 export default class AdminPanel extends Component {
   constructor(props) {
     super(props);
@@ -130,10 +133,27 @@ export default class AdminPanel extends Component {
   // }
 
   service = new Service();
+  tokenService = new TokenService();
+  authService = new AuthService();
+
+  refreshAccessToken = async () => {
+    debugger;
+    var accessToken = this.tokenService.getLocalAccessToken();
+    let expirationDate = this.tokenService.parseJwt(accessToken).exp;
+
+    if (expirationDate * 1000 < Date.now()) {
+
+      let tokens = await this.authService.GenerateToken();
+      this.tokenService.updateLocalAccessToken(tokens.accessToken);
+
+    }    
+  }
+
   componentDidMount() {
     this.getAllVolunteers();
     this.getAllOrganizations();
     this.getAllAnnouncements();
+    this.refreshAccessToken();
   }
 
   getAllVolunteers = () => {

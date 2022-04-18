@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HumanitarianApp.Api.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,6 +81,7 @@ namespace HumanitarianApp.Api.Migrations
                     City = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
+                    WebSite = table.Column<string>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
@@ -100,6 +101,9 @@ namespace HumanitarianApp.Api.Migrations
                     City = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Facebook = table.Column<string>(type: "TEXT", nullable: false),
+                    Instagram = table.Column<string>(type: "TEXT", nullable: false),
+                    Telegram = table.Column<string>(type: "TEXT", nullable: false),
                     Category = table.Column<int>(type: "INTEGER", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -245,7 +249,7 @@ namespace HumanitarianApp.Api.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "7dd5c85b-70f9-4f08-bf6f-690287078244", "b679bd5c-1b64-4469-afaa-f6810e3a623a", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "ee36e8db-99af-4587-8dfa-978dc3857472", "77dd7b8d-3a79-431a-b05e-884025015e83", "Administrator", "ADMINISTRATOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

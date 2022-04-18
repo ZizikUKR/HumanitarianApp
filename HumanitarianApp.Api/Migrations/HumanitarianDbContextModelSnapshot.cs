@@ -207,13 +207,6 @@ namespace HumanitarianApp.Api.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("RefreshToken")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("RefreshTokenExpiryTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
@@ -320,8 +313,8 @@ namespace HumanitarianApp.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8df95748-fca2-4085-9824-e7446894d0ce",
-                            ConcurrencyStamp = "3ead56c6-2623-4f84-9ad7-036b93ca264d",
+                            Id = "ee36e8db-99af-4587-8dfa-978dc3857472",
+                            ConcurrencyStamp = "77dd7b8d-3a79-431a-b05e-884025015e83",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

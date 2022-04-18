@@ -32,7 +32,7 @@ namespace HumanitarianApp.Api.Controllers
         }
 
         [HttpPost] 
-        [ValidateAntiForgeryToken] //используется для сравнения Cookie формы и ендпоинта, если они не совпадают то не дает доступ к данным
+        //[ValidateAntiForgeryToken] //используется для сравнения Cookie формы и ендпоинта, если они не совпадают то не дает доступ к данным
         public async Task<IActionResult> Registration(UserRegistrationDto registrationDto)
         {
             if (!ModelState.IsValid)
@@ -73,8 +73,8 @@ namespace HumanitarianApp.Api.Controllers
                 throw new Exception("Can`t map object to User");
             }
 
-            var result = await _userSignInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, userLoginDto.RememberMe, false);
-            var  fullUser = await _userManager.FindByEmailAsync(userLoginDto.Email);
+            var result = await _userSignInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password,
+                userLoginDto.RememberMe, false);
 
             if (!result.Succeeded)
             {
@@ -92,14 +92,6 @@ namespace HumanitarianApp.Api.Controllers
             var accessToken = _tokenService.GenerateAccessToken(claims);
             var refreshToken = _tokenService.GenerateRefreshToken();
 
-            await _userService.SaveRefreshToken(
-                new UserTokenDto
-                {
-                    Id = fullUser.Id,
-                    RefreshToken = refreshToken,
-                    RefreshTokenExpiryTime = DateTime.Now.AddHours(4)
-                });
-
             var resultToken = new TokenModel {AccessToken = accessToken, RefreshToken = refreshToken};
 
             return Ok(resultToken);
@@ -112,5 +104,21 @@ namespace HumanitarianApp.Api.Controllers
 
             return Ok("User sign out from the system");
         }
-    }
+
+        [HttpPost]
+        public async Task<IActionResult> GenerateTokens()
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Role, "Administrator")
+            };
+
+            var accessToken = _tokenService.GenerateAccessToken(claims);
+            var refreshToken = _tokenService.GenerateRefreshToken();
+
+            var resultToken = new TokenModel { AccessToken = accessToken, RefreshToken = refreshToken };
+
+            return Ok(resultToken);
+        }
+    } 
 }
