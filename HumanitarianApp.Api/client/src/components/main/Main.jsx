@@ -37,7 +37,18 @@ class Main extends Component {
             {id: 1, name: 'Перевезення'},
             {id: 2, name: 'Медицина'},
             {id: 3, name: 'Гуманітарна допомога'},
-            {id: 4, name: 'Інше'}
+            {id: 4, name: 'Допомога переселенцям'},
+            {id: 5, name: 'Допомога дітям'},
+            {id: 6, name: 'Допомога тваринам'},
+            {id: 7, name: 'Допомога літнім'},
+            {id: 8, name: 'Допомога захисникам'},
+            {id: 9, name: 'Їжа та продукти'},
+            {id: 10, name: 'Ліки'},
+            {id: 11, name: 'Консультація лікаря'},
+            {id: 12, name: 'Евакуація з міста'},
+            {id: 13, name: 'Пошук автоволонтерів'},
+            {id: 14, name: 'Донорство крові'},
+            {id: 15, name: 'Інше'}
           ],
           ads: [
             {
@@ -118,6 +129,25 @@ class Main extends Component {
             },
             {
               "select": "Медицина",
+              "name": "Дубровський Георгій В'ячеславович",
+              "telephone": "+380633211221",
+              "email": "heorhii@qwerty.com",
+              "city": "Хмельницький",
+              "address": "мм. Квітневий, 27/80",
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiisa nulla ipsa sapiente doloribus officiis qwertyuiopas.",
+              "cardnumber": "12345678",
+              "fullbankname": "йфяцічувскамепинртгоьшлбщд",
+              "shortbankname": "йфяцічусскам",
+              "mfo": "123456566654546",
+              "iban": "64654654465465465465",
+              "edrpou": "0123456789",
+              "accountnumber": "апу65+5+65ппукпук5п565пку546",
+              "instagram": "https://www.instagram.com/kolomiiitsev",
+              "telegram": "https://t.me/kolomiiitsev",
+              "facebook": "https://www.facebook.com/kolomiiitsev/",
+            },
+            {
+              "select": "Ліки",
               "name": "Дубровський Георгій В'ячеславович",
               "telephone": "+380633211221",
               "email": "heorhii@qwerty.com",
@@ -363,6 +393,50 @@ class Main extends Component {
     }
 
     if (category == 4) {
+      return "Допомога переселенцям";
+    }
+
+    if (category == 5) {
+      return "Допомога дітям";
+    }
+
+    if (category == 6) {
+      return "Допомога тваринам";
+    }
+
+    if (category == 7) {
+      return "Допомога літнім";
+    }
+
+    if (category == 8) {
+      return "Допомога захисникам";
+    }
+
+    if (category == 9) {
+      return "Їжа та продукти";
+    }
+
+    if (category == 10) {
+      return "Ліки";
+    }
+
+    if (category == 11) {
+      return "Консультація лікаря";
+    }
+
+    if (category == 12) {
+      return "Евакуація з міста";
+    }
+
+    if (category == 13) {
+      return "Пошук автоволонтерів";
+    }
+
+    if (category == 14) {
+      return "Донорство крові";
+    }
+
+    if (category == 15) {
       return "Інше";
     }
 
