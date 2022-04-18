@@ -176,30 +176,9 @@ class Form extends Component {
             placeholder="Адреса"
             onChange={(e) => this.onUpdateMainForm(e)}
           />
-          <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
-            className="form__input"
-            name="instagram"
-            type="url"
-            placeholder="Instagram"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
-          <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
-            className="form__input"
-            name="telegram"
-            type="url"
-            placeholder="Telegram"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
-          <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
-            className="form__input"
-            name="facebook"
-            type="url"
-            placeholder="Facebook"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
+          </div>
+            {id === 0 ? <FormSocialMedia onUpdateCosialMedia={this.onUpdateCosialMedia} />: null}
+            <div className="form__inputs">
           <input
             style={{display: this.props.id==1 ? "block" : "none"}}
             className="form__input"
@@ -207,8 +186,8 @@ class Form extends Component {
             type="url"
             placeholder="Website"
             onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
-        </div>
+          />  
+          </div>   
         {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
         <textarea
           className="form__input form__input--services"
@@ -272,6 +251,37 @@ const FormCategories = ({ selects, onUpdateMainForm }) => {
 
   return null;
 };
+
+const FormSocialMedia = ({ onUpdateCosialMedia }) => {
+  return(
+    <div className="form__bank-block">
+    <input
+            style={{display: this.props.id==0 ? "block" : "none"}}
+            className="form__input"
+            name="instagram"
+            type="url"
+            placeholder="Instagram"
+            onChange={(e) => this.onUpdateCosialMedia(e)}
+          /> 
+          <input
+            style={{display: this.props.id==0 ? "block" : "none"}}
+            className="form__input"
+            name="telegram"
+            type="url"
+            placeholder="Telegram"
+            onChange={(e) => this.onUpdateCosialMedia(e)}
+          /> 
+          <input
+            style={{display: this.props.id==0 ? "block" : "none"}}
+            className="form__input"
+            name="facebook"
+            type="url"
+            placeholder="Facebook"
+            onChange={(e) => this.onUpdateCosialMedia(e)}
+          /> 
+    </div>
+  )
+}
 
 const FormBankAccount = ({ onUpdateBankForm }) => {
   return (
