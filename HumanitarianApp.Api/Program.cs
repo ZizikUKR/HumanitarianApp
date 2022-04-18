@@ -37,7 +37,9 @@ builder.Services.AddSwaggerGen();
     });
 }
 
-builder.Services.AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbContext>(opt =>
+builder.Services
+    .AddEntityFrameworkSqlite()
+    .AddDbContext<HumanitarianApp.DAL.HumanityDb.HumanitarianDbContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("HumanitarianConnection"),
         b => b.MigrationsAssembly("HumanitarianApp.Api")));
 

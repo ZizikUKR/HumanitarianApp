@@ -4,51 +4,15 @@ import { useAuth } from '../../hook/useAuth';
 import './adminLogin.scss';
 import AuthService from '../../services/auth.service.js';
 
-const loginData ={
-  login:'',
-  password:'',
-  rememberMe: false
-}
-
-const onInputLogin = e => {
-  const key = e.target.name;
-  let value = e.target.value;
-  if (key === 'category') {
-    value = +value;
-  }
-
- return loginData.login=value;
-}
-
-const onInputPassword = e => {
-  const key = e.target.name;
-  let value = e.target.value;
-  if (key === 'category') {
-    value = +value;
-  }
-  
-  return loginData.password=value;
-}
-
-const onCheck = e => {
-  const key = e.target.checked; 
-  return loginData.rememberMe=key;
-}
-
-  const onLogIn = ()=>{
- let service = new AuthService();
-
-  service.login(loginData.login, loginData.password, loginData.rememberMe);
-  } 
-
 const AdminLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {signin} = useAuth();
+  const { signin } = useAuth();
+  let service = new AuthService();
 
   const fromPage = location.state?.from?.pathname || '/admin-panel';
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const admin = {
@@ -56,7 +20,13 @@ const AdminLogin = () => {
       password: form.password.value
     }
 
-    signin(admin, () => navigate(fromPage, {replace: true}));
+    let tokens = await service.login(form.login.value, form.password.value);
+
+    if (tokens.accessToken != null && tokens.refreshToken != null) {
+
+      signin(admin, () => navigate(fromPage, { replace: true }));
+      
+    }
   }
 
   return (

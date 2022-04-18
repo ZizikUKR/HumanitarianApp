@@ -6,6 +6,9 @@ import Service from '../../services/Service';
 
 import './adminPanel.scss';
 
+import { TokenService } from '../../services/TokenService';
+import { AuthService } from '../../services/auth.service.js';
+
 export default class AdminPanel extends Component {
   constructor(props) {
     super(props);
@@ -68,6 +71,22 @@ export default class AdminPanel extends Component {
               "iban": "64654654465465465465",
               "edrpou": "0123456789",
               "accountnumber": "апу65+5+65ппукпук5п565пку546"
+            },
+            {
+              "select": "Допомога захисникам",
+              "name": "Дубровський Георгій В'ячеславович",
+              "telephone": "+380633211221",
+              "email": "heorhii@qwerty.com",
+              "city": "Хмельницький",
+              "address": "мм. Квітневий, 27/80",
+              "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi? Nesciunt reiciendis, autem deleniti debitis asperiores nulla ipsa sapiente doloribus officiisa nulla ipsa sapiente doloribus officiis qwertyuiopas.",
+              "cardnumber": "12345678",
+              "fullbankname": "йфяцічувскамепинртгоьшлбщд",
+              "shortbankname": "йфяцічусскам",
+              "mfo": "123456566654546",
+              "iban": "64654654465465465465",
+              "edrpou": "0123456789",
+              "accountnumber": "апу65+5+65ппукпук5п565пку546"
             }
           ]
         },
@@ -114,10 +133,27 @@ export default class AdminPanel extends Component {
   }
 
   service = new Service();
+  tokenService = new TokenService();
+  authService = new AuthService();
+
+  refreshAccessToken = async () => {
+    debugger;
+    var accessToken = this.tokenService.getLocalAccessToken();
+    let expirationDate = this.tokenService.parseJwt(accessToken).exp;
+
+    if (expirationDate * 1000 < Date.now()) {
+
+      let tokens = await this.authService.GenerateToken();
+      this.tokenService.updateLocalAccessToken(tokens.accessToken);
+
+    }    
+  }
+
   componentDidMount() {
     this.getAllVolunteers();
     this.getAllOrganizations();
     this.getAllAnnouncements();
+    this.refreshAccessToken();
   }
 
   getAllVolunteers = () => {
@@ -218,6 +254,50 @@ export default class AdminPanel extends Component {
     }
 
     if (category == 4) {
+      return "Допомога переселенцям";
+    }
+
+    if (category == 5) {
+      return "Допомога дітям";
+    }
+
+    if (category == 6) {
+      return "Допомога тваринам";
+    }
+
+    if (category == 7) {
+      return "Допомога літнім";
+    }
+
+    if (category == 8) {
+      return "Допомога захисникам";
+    }
+
+    if (category == 9) {
+      return "Їжа та продукти";
+    }
+
+    if (category == 10) {
+      return "Ліки";
+    }
+
+    if (category == 11) {
+      return "Консультація лікаря";
+    }
+
+    if (category == 12) {
+      return "Евакуація з міста";
+    }
+
+    if (category == 13) {
+      return "Пошук автоволонтерів";
+    }
+
+    if (category == 14) {
+      return "Донорство крові";
+    }
+
+    if (category == 15) {
       return "Інше";
     }
 

@@ -32,4 +32,8 @@
     <ProjectReference Include="..\HumanitarianApp.BLL\HumanitarianApp.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

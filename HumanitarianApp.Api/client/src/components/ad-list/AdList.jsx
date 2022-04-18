@@ -22,11 +22,11 @@ class AdList extends Component {
           <p className="ad-list__text">{text}</p>
           <div className="ad-list__contacts">
             <p className="ad-list__contact"><span className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
-            {id === 1 && website.length > 0 ? <p className="list__bold"><span className="ad-list__bold">Website: </span>{website}</p> : null}
+            {id === 1 && website.length > 0 ? <p className="list__bold"><span className="ad-list__bold">Website: </span><a href={website} target="_blank">{this.removeHttpFromUrl(website)}</a></p> : null}
             <p className="ad-list__contact"><span className="ad-list__bold">Телефон: </span>{telephone}</p>
-            {id === 0 && instagram.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Instagram: </span>{instagram}</p>: null}
-            {id === 0 && telegram.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Telegram: </span>{telegram}</p>: null}
-            {id === 0 && facebook.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Facebook: </span>{facebook}</p>: null}
+            {id === 0 && instagram.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Instagram: </span><a href={instagram} target="_blank">{this.removeHttpFromUrl(instagram)}</a></p>: null}
+            {id === 0 && telegram.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Telegram: </span><a href={telegram} target="_blank">{this.removeHttpFromUrl(telegram)}</a></p>: null}
+            {id === 0 && facebook.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Facebook: </span><a href={facebook} target="_blank">{this.removeHttpFromUrl(facebook)}</a></p>: null}
             {email.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Email: </span>{email}</p>: null}
             <p className="ad-list__contact"><span className="ad-list__bold">Адреса: </span>м. {city}{ address.length > 0 ? `, ${address}` : ''}</p>
             {id === 0 && cardnumber.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Номер картки: </span>{cardnumber}</p>: null}
@@ -43,6 +43,15 @@ class AdList extends Component {
 
     return elements;
   }
+
+  removeHttpFromUrl = (url) => {
+    const site = url;
+
+    const newSite = site.split('https://')[1];
+
+    return newSite
+  }
+
 
   createElementsPages = () => {
     this.adsBlocks = [];
