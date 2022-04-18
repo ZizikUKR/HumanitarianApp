@@ -177,8 +177,8 @@ class Form extends Component {
             onChange={(e) => this.onUpdateMainForm(e)}
           />
           </div>
-            {id === 0 ? <FormSocialMedia onUpdateCosialMedia={this.onUpdateCosialMedia} />: null}
-            <div className="form__inputs">
+          {id === 0 ? <FormSocialMedia onUpdateBankForm={this.onUpdateBankForm} />: null}
+          <div className="form__inputs">
           <input
             style={{display: this.props.id==1 ? "block" : "none"}}
             className="form__input"
@@ -252,36 +252,33 @@ const FormCategories = ({ selects, onUpdateMainForm }) => {
   return null;
 };
 
-const FormSocialMedia = ({ onUpdateCosialMedia }) => {
+const FormSocialMedia = ({ onUpdateBankForm }) => {
   return(
     <div className="form__bank-block">
     <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
             className="form__input"
             name="instagram"
             type="url"
             placeholder="Instagram"
-            onChange={(e) => this.onUpdateCosialMedia(e)}
+            onChange={(e) => onUpdateBankForm(e)}
           /> 
           <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
             className="form__input"
             name="telegram"
             type="url"
             placeholder="Telegram"
-            onChange={(e) => this.onUpdateCosialMedia(e)}
+            onChange={(e) => onUpdateBankForm(e)}
           /> 
           <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
             className="form__input"
             name="facebook"
             type="url"
             placeholder="Facebook"
-            onChange={(e) => this.onUpdateCosialMedia(e)}
+            onChange={(e) => onUpdateBankForm(e)}
           /> 
     </div>
-  )
-}
+  );
+};
 
 const FormBankAccount = ({ onUpdateBankForm }) => {
   return (
