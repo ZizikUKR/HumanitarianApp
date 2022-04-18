@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hook/useAuth';
 
 import './adminLogin.scss';
-import { AuthService } from '../../services/auth.service.js';
+import AuthService from '../../services/auth.service.js';
 
 const loginData ={
   login:'',

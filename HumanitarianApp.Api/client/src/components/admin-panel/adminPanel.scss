@@ -20,26 +20,64 @@
     }
     &__button {
       padding: 10px;
-      height: 40px;
-      color: $white;
-      background-color: transparent;
+      color: $black;
+      background-color: lighten($blue, 35%);
       font-size: 15px;
-      border: 1px solid $blue;
+      border: 2px solid $blue;
       transition: all .3s ease;
       cursor: pointer;
-      &:last-child {
-        border-top-right-radius: 8px;
-      }
-      &:hover {
-        transition: all .3s ease;
-        background-color: $white;
-        color: $blue;
+      &:first-child {
+        border-top-left-radius: 8px;
       }
       &--active {
         background-color: $white;
         color: $black;
         cursor: auto;
       }
+      &--exit {
+        border-top-right-radius: 8px;
+        font-weight: 700;
+      }
+    }
+  }
+  &-section {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1200px;
+    &__info {
+      margin-top: 10px;
+      padding: 15px;
+      border: 3px solid $blue;
+      user-select: none;
+    }
+  }
+  &-ad-list {
+    margin-top: 10px;
+    &__item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 3px solid $blue;
+      border-radius: 15px;
+    }
+    &__text {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 20px;
+      text-align: left;
+    }
+    &__contacts {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      column-gap: 25px;
+      row-gap: 5px;
+    }
+    &__contact {
+      font-size: 15px;
+    }
+    &__bold {
+      font-weight: 700;
     }
   }
 }

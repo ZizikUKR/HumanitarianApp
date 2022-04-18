@@ -17,9 +17,10 @@ const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-panel" element={
-          <RequireAuth>
-            <AdminPanel />
-          </RequireAuth>
+          // <RequireAuth>
+          //   <AdminPanel />
+          // </RequireAuth>
+          <AdminPanel />
         } />
         <Route path="*" element={<Page404 />} />
       </Routes>

@@ -14,6 +14,9 @@
     color: $white;
     text-align: left;
   }
+  &--black {
+    color: $black;
+  }
 }
 
 @import '../../styles/media.scss';

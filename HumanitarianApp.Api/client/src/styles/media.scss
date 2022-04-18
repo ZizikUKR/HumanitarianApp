@@ -112,4 +112,23 @@
       gap: 15px;
     }
   }
+  .admin {
+    &-header {
+      &__wrapper {
+        padding-top: 10px;
+        height: 120px;
+        flex-direction: column-reverse;
+      }
+      &__button {
+        padding: 10px 1px;
+        &:first-child {
+          border-top-left-radius: 0;
+        }
+        &--exit {
+          border-radius: 8px 8px 0 0;
+          padding: 10px;
+        }
+      }
+    }
+  }
 }

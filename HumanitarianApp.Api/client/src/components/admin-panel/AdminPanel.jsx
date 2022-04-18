@@ -100,18 +100,18 @@ export default class AdminPanel extends Component {
     })
   }
 
-  // renderSection = (section) => {
-  //   const {id, name, ads} = section;
+  renderSection = (section) => {
+    const {id, name, ads} = section;
 
-  //   return(
-  //     <AdminPanelSection
-  //       key={id}
-  //       name={name}
-  //       ads={ads}
-  //       activeSection={this.state.activeSection}
-  //       id={id} />
-  //   );
-  // }
+    return(
+      <AdminPanelSection
+        key={id}
+        name={name}
+        ads={ads}
+        activeSection={this.state.activeSection}
+        id={id} />
+    );
+  }
 
   service = new Service();
   componentDidMount() {
@@ -267,7 +267,7 @@ export default class AdminPanel extends Component {
           selectSection={this.selectSection}
         />
         <main>
-          {/* {this.renderSection(sectionsData[activeSection])} */}
+          {this.renderSection(sectionsData[activeSection])}
         </main>
       </>
     );
@@ -297,61 +297,61 @@ const AdminPanelHeader = ({headerButtons, activeSection, selectSection}) => {
           <div className="admin-header__buttons">
             <HeaderButton headerButtons={headerButtons} activeSection={activeSection} selectSection={selectSection} />
           </div>
+          <button className="admin-header__button admin-header__button--exit" onClick={() => signout(() => navigate('/admin-login', {replace: true}))}>Log Out</button>
         </div>
-        <button onClick={() => signout(() => navigate('/admin-login', {replace: true}))}>Exit</button>
       </div>
     </header>
   );
 };
 
-// const AdminPanelSection = ({name, ads, id, numberAdsOfPages}) => {
-//   return(
-//     <section className="section">
-//       <div className="container">
-//         <div className="section__wrapper">
-//           <h2 className="subtitle subtitle--white">{this.props.name}: {this.props.ads.length}</h2>
-//         </div>
-//         <AdminPanelAdList id={this.props.id} ads={this.props.ads} numberAdsOfPages={this.props.numberAdsOfPages} />
-//       </div>
-//     </section>
-//   );
-// };
+const AdminPanelSection = ({name, ads, id, numberAdsOfPages}) => {
+  return(
+    <section className="admin-section">
+      <div className="admin-section__info">
+        <div className="container">
+          <div className="admin-section__wrapper">
+            <h2 className="subtitle subtitle--black">{name}: {ads.length}</h2>
+          </div>
+        </div>
+      </div>
+      <div className="container">
+        <AdminPanelAdList id={id} ads={ads} numberAdsOfPages={numberAdsOfPages} />
+      </div>
+    </section>
+  );
+};
 
-// const AdminPanelAdList = () => {
-//   let keyCount = 0;
+const AdminPanelAdList = (props) => {
+  let keyCount = 0;
 
-//   function createAdsElements() {
-//     const elements = this.props.ads.reverse().map(element => {
-//       const {select, name, telephone, email, city, address, text, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber} = element;
-//       const {id} = this.props;
-      
-//       return (
-//         <div key={keyCount++} className="ad-list__item">
-//           <h3 className="subtitle">{select || name} - {city}</h3>
-//           <p className="ad-list__text">{text}</p>
-//           <div className="ad-list__contacts">
-//             <p className="ad-list__contact"><span className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
-//             <p className="ad-list__contact"><span className="ad-list__bold">Телефон: </span>{telephone}</p>
-//             {email.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Email: </span>{email}</p>: null}
-//             <p className="ad-list__contact"><span className="ad-list__bold">Адреса: </span>м. {city}{ address.length > 0 ? `, ${address}` : ''}</p>
-//             {id === 0 && cardnumber.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Номер картки: </span>{cardnumber}</p>: null}
-//             {id === 0 && fullbankname.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Повна назва банку: </span>{fullbankname}</p>: null}
-//             {id === 0 && shortbankname.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Скорочена назва банку: </span>{shortbankname}</p>: null}
-//             {id === 0 && mfo.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">МФО: </span>{mfo}</p>: null}
-//             {id === 0 && iban.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">IBAN: </span>{iban}</p>: null}
-//             {id === 0 && edrpou.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">{edrpou.length === 8 ? 'ЄДРПОУ' : 'ІПН'}: </span>{edrpou}</p>: null}
-//             {id === 0 && accountnumber.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Розрахунковий рахунок: </span>{accountnumber}</p>: null}
-//           </div>
-//         </div>
-//       )
-//     });
+  const elements = props.ads.reverse().map(element => {
+    const {select, name, telephone, email, city, address, text, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber} = element;
+    const {id} = props;
+    
+    return (
+      <div key={keyCount++} className="admin-ad-list__item">
+        <h3 className="subtitle">{select || name} - {city}</h3>
+        <p className="admin-ad-list__text">{text}</p>
+        <div className="admin-ad-list__contacts">
+          <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
+          <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Телефон: </span>{telephone}</p>
+          {email.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Email: </span>{email}</p>: null}
+          <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Адреса: </span>м. {city}{ address.length > 0 ? `, ${address}` : ''}</p>
+          {id === 0 && cardnumber.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Номер картки: </span>{cardnumber}</p>: null}
+          {id === 0 && fullbankname.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Повна назва банку: </span>{fullbankname}</p>: null}
+          {id === 0 && shortbankname.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Скорочена назва банку: </span>{shortbankname}</p>: null}
+          {id === 0 && mfo.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">МФО: </span>{mfo}</p>: null}
+          {id === 0 && iban.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">IBAN: </span>{iban}</p>: null}
+          {id === 0 && edrpou.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">{edrpou.length === 8 ? 'ЄДРПОУ' : 'ІПН'}: </span>{edrpou}</p>: null}
+          {id === 0 && accountnumber.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Розрахунковий рахунок: </span>{accountnumber}</p>: null}
+        </div>
+      </div>
+    )
+  });
 
-//     return elements;
-//   }
-
-//   return (
-//     <ul className="ad-list">
-//       {createAdsElements}
-//     </ul>
-//   );
-// }
+  return (
+    <ul className="admin-ad-list">
+      {elements}
+    </ul>
+  );
+}
