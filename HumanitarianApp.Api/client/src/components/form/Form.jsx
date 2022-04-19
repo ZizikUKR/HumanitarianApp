@@ -176,9 +176,6 @@ class Form extends Component {
             placeholder="Адреса"
             onChange={(e) => this.onUpdateMainForm(e)}
           />
-          </div>
-          {id === 0 ? <FormSocialMedia onUpdateBankForm={this.onUpdateBankForm} />: null}
-          <div className="form__inputs">
           <input
             style={{display: this.props.id==1 ? "block" : "none"}}
             className="form__input"
@@ -187,8 +184,9 @@ class Form extends Component {
             placeholder="Website"
             onChange={(e) => this.onUpdateMainForm(e)}
           />  
-          </div>   
-        {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
+          </div>
+          {id === 0 ? <FormSocialMedia onUpdateMainForm={this.onUpdateMainForm} />: null}
+          {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
         <textarea
           className="form__input form__input--services"
           name="description"
@@ -252,29 +250,29 @@ const FormCategories = ({ selects, onUpdateMainForm }) => {
   return null;
 };
 
-const FormSocialMedia = ({ onUpdateBankForm }) => {
+const FormSocialMedia = ({ onUpdateMainForm }) => {
   return(
-    <div className="form__bank-block">
+    <div className="form__inputs">
     <input
             className="form__input"
             name="instagram"
             type="url"
             placeholder="Instagram"
-            onChange={(e) => onUpdateBankForm(e)}
+            onChange={(e) => onUpdateMainForm(e)}
           /> 
           <input
             className="form__input"
             name="telegram"
             type="url"
             placeholder="Telegram"
-            onChange={(e) => onUpdateBankForm(e)}
+            onChange={(e) => onUpdateMainForm(e)}
           /> 
           <input
             className="form__input"
             name="facebook"
             type="url"
             placeholder="Facebook"
-            onChange={(e) => onUpdateBankForm(e)}
+            onChange={(e) => onUpdateMainForm(e)}
           /> 
     </div>
   );
