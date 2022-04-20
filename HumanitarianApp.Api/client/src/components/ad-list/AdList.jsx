@@ -22,7 +22,7 @@ class AdList extends Component {
           <p className="ad-list__text">{text}</p>
           <div className="ad-list__contacts">
             <p className="ad-list__contact"><span className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
-            {id === 1 && website.length > 0 ? <p className="list__bold"><span className="ad-list__bold">Website: </span>{website}</p> : null}
+            {id === 1 && website.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Website: </span>{website}</p> : null}
             <p className="ad-list__contact"><span className="ad-list__bold">Телефон: </span>{telephone}</p>
             {id === 0 && instagram.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Instagram: </span>{instagram}</p>: null}
             {id === 0 && telegram.length > 0 ? <p className="ad-list__contact"><span className="ad-list__bold">Telegram: </span>{telegram}</p>: null}

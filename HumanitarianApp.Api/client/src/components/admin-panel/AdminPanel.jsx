@@ -122,7 +122,7 @@ export default class AdminPanel extends Component {
 
   getAllVolunteers = () => {
     this.service
-      .get("https://localhost:7057/api/Volunteer/GetAllActive?pageNumber=1")
+      .get(`${process.env.REACT_APP_API_URL}Volunteer/GetAllActive?pageNumber=1`)
       .then((response) => {
         const volonteers = response.map((item) => {
           return {
@@ -132,7 +132,10 @@ export default class AdminPanel extends Component {
             email: this.isEmpty(item.email),
             city: this.isEmpty(item.city),
             address: this.isEmpty(item.address),
-            text: this.isEmpty(item.description),
+            text: this.isEmpty(item.description),  
+            instagram: this.isEmpty(item.instagram),
+            telegram: this.isEmpty(item.telegram),
+            facebook: this.isEmpty(item.facebook),
             cardnumber: this.isEmpty(item.bankDetails?.cardNumber),
             fullbankname: this.isEmpty(item.bankDetails?.fullBankName),
             shortbankname: this.isEmpty(item.bankDetails?.shortBankName),
@@ -152,7 +155,7 @@ export default class AdminPanel extends Component {
   };
 
   isEmpty = (inputStr) => {
-    if (inputStr) {
+    if(inputStr){
       return inputStr;
     }
     return "";
@@ -160,7 +163,7 @@ export default class AdminPanel extends Component {
 
   getAllOrganizations = () => {
     this.service
-      .get("https://localhost:7057/api/Organization/GetAllActive?pageNumber=1")
+      .get(`${process.env.REACT_APP_API_URL}Organization/GetAllActive?pageNumber=1`)
       .then((response) => {
         const organizations = response.map((item) => {
           return {
@@ -170,6 +173,7 @@ export default class AdminPanel extends Component {
             city: this.isEmpty(item.city),
             address: this.isEmpty(item.address),
             text: this.isEmpty(item.description),
+            website: this.isEmpty(item.website),
           };
         });
 
@@ -178,11 +182,13 @@ export default class AdminPanel extends Component {
 
         this.setState({ sectionsData: newsectionsData });
       });
+
+      
   };
 
   getAllAnnouncements = () => {
     this.service
-      .get("https://localhost:7057/api/Announcement/GetAllActive?pageNumber=1")
+      .get(`${process.env.REACT_APP_API_URL}Announcement/GetAllActive?pageNumber=1`)
       .then((response) => {
         const announcements = response.map((item) => {
           return {
@@ -325,16 +331,24 @@ const AdminPanelAdList = (props) => {
   let keyCount = 0;
 
   const elements = props.ads.reverse().map(element => {
-    const {select, name, telephone, email, city, address, text, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber} = element;
+    const {select, name, telephone, email, city, address, text, website, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber, instagram, telegram, facebook} = element;
     const {id} = props;
     
     return (
       <div key={keyCount++} className="admin-ad-list__item">
+        <div className="admin-ad-list__buttons">
+          <button className="admin-ad-list__button">-</button>
+          <button className="admin-ad-list__button">+</button>
+        </div>
         <h3 className="subtitle">{select || name} - {city}</h3>
         <p className="admin-ad-list__text">{text}</p>
         <div className="admin-ad-list__contacts">
           <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
+          {id === 1 && website.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Website: </span>{website}</p> : null}
           <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Телефон: </span>{telephone}</p>
+          {id === 0 && instagram.length > 0 ? <p className="admin-ad-list__contact"><span className="ad-list__bold">Instagram: </span>{instagram}</p>: null}
+          {id === 0 && telegram.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Telegram: </span>{telegram}</p>: null}
+          {id === 0 && facebook.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Facebook: </span>{facebook}</p>: null}
           {email.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Email: </span>{email}</p>: null}
           <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Адреса: </span>м. {city}{ address.length > 0 ? `, ${address}` : ''}</p>
           {id === 0 && cardnumber.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Номер картки: </span>{cardnumber}</p>: null}
