@@ -176,17 +176,16 @@ class Form extends Component {
             placeholder="Адреса"
             onChange={(e) => this.onUpdateMainForm(e)}
           />
-          <input
-            style={{display: this.props.id==1 ? "block" : "none"}}
+          { id === 1 ? <input            
             className="form__input"
             name="webSite"
             type="url"
             placeholder="Website"
             onChange={(e) => this.onUpdateMainForm(e)}
-          />  
-          </div>
-          {id === 0 ? <FormSocialMedia onUpdateMainForm={this.onUpdateMainForm} />: null}
-          {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
+          /> : null}
+          {id === 0 ? <FormSocialMedia onUpdateMainForm={this.onUpdateMainForm} />: null}                
+        </div>
+        {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}    
         <textarea
           className="form__input form__input--services"
           name="description"
@@ -252,29 +251,29 @@ const FormCategories = ({ selects, onUpdateMainForm }) => {
 
 const FormSocialMedia = ({ onUpdateMainForm }) => {
   return(
-    <div className="form__inputs">
-    <input
-            className="form__input"
-            name="instagram"
-            type="url"
-            placeholder="Instagram"
-            onChange={(e) => onUpdateMainForm(e)}
-          /> 
-          <input
-            className="form__input"
-            name="telegram"
-            type="url"
-            placeholder="Telegram"
-            onChange={(e) => onUpdateMainForm(e)}
-          /> 
-          <input
-            className="form__input"
-            name="facebook"
-            type="url"
-            placeholder="Facebook"
-            onChange={(e) => onUpdateMainForm(e)}
-          /> 
-    </div>
+    <>
+      <input
+        className="form__input"
+        name="instagram"
+        type="url"
+        placeholder="Instagram"
+        onChange={(e) => onUpdateMainForm(e)}
+      /> 
+      <input
+        className="form__input"
+        name="telegram"
+        type="url"
+        placeholder="Telegram"
+        onChange={(e) => onUpdateMainForm(e)}
+      /> 
+      <input
+        className="form__input"
+        name="facebook"
+        type="url"
+        placeholder="Facebook"
+        onChange={(e) => onUpdateMainForm(e)}
+      /> 
+    </>
   );
 };
 
