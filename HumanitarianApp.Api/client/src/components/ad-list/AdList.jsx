@@ -18,8 +18,13 @@ class AdList extends Component {
       
       return (
         <div key={this.keyCount++} className="ad-list__item">
-          <h3 className="subtitle">{select || name} - {city}</h3>
-          <p className="ad-list__text">{text}</p>
+          <div className="subtitle">{select || name} - {city}</div>
+          <div className='share'>
+          <li><a className="social-icon-fb"><p className='second_block'>Поділитися:</p></a></li>
+          <li><a className="social-icon-instagram"><p className='second_block'>Поділитися:</p></a></li>
+          <li><a className="social-icon-telegram" ><p className='second_block'>Поділитися:</p></a></li>
+          </div>
+          <p className="ad-list__text">{text}</p>          
           <div className="ad-list__contacts">
             <p className="ad-list__contact"><span className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
             {id === 1 && website.length > 0 ? <p className="list__bold"><span className="ad-list__bold">Website: </span><a href={website} target="_blank">{this.removeHttpFromUrl(website)}</a></p> : null}
