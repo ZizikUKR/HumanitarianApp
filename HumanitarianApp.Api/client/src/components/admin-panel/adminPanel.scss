@@ -46,7 +46,7 @@
     max-width: 1200px;
     &__info {
       margin-top: 10px;
-      padding: 15px;
+      padding: 15px 0;
       border: 3px solid $blue;
       user-select: none;
     }
@@ -58,6 +58,29 @@
       padding: 10px;
       border: 3px solid $blue;
       border-radius: 15px;
+    }
+    &__buttons {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__button {
+      padding: 10px 0;
+      width: 50px;
+      color: $black;
+      background-color: lighten($blue, 35%);
+      font-size: 15px;
+      border: 2px solid $blue;
+      transition: all .3s ease;
+      font-weight: 700;
+      cursor: pointer;
+      &:first-child {
+        border-top-left-radius: 8px;
+      }
+      &:last-child {
+        border-top-right-radius: 8px;
+      }
     }
     &__text {
       margin-top: 10px;
