@@ -134,16 +134,14 @@ class Form extends Component {
         <div className="form__inputs">
           <FormCategories
             selects={selects}
-            onUpdateMainForm={this.onUpdateMainForm}
-          />
+            onUpdateMainForm={this.onUpdateMainForm} />
           <input
             className="form__input"
             name="name"
             type="text"
             required
             placeholder={"*" + namePlaceholder}
-            onChange={(e) => this.onUpdateMainForm(e)}
-          />
+            onChange={(e) => this.onUpdateMainForm(e)} />
           <input
             className="form__input"
             name="phoneNumber"
@@ -152,72 +150,55 @@ class Form extends Component {
             maxLength={25}
             required
             placeholder="*Телефон"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          />
+            onChange={(e) => this.onUpdateMainForm(e)} />
           <input
             className="form__input"
             name="email"
             type="email"
             placeholder="Email-адреса..."
-            onChange={(e) => this.onUpdateMainForm(e)}
-          />
+            onChange={(e) => this.onUpdateMainForm(e)} />
           <input
             className="form__input"
             name="city"
             type="text"
             required
             placeholder="*Місто"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          />
+            onChange={(e) => this.onUpdateMainForm(e)} />
           <input
             className="form__input"
             name="address"
             type="text"
             placeholder="Адреса"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          />
-          <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
-            className="form__input"
-            name="instagram"
-            type="url"
-            placeholder="Instagram"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
-          <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
-            className="form__input"
-            name="telegram"
-            type="url"
-            placeholder="Telegram"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
-          <input
-            style={{display: this.props.id==0 ? "block" : "none"}}
-            className="form__input"
-            name="facebook"
-            type="url"
-            placeholder="Facebook"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
-          <input
-            style={{display: this.props.id==1 ? "block" : "none"}}
-            className="form__input"
-            name="webSite"
-            type="url"
-            placeholder="Website"
-            onChange={(e) => this.onUpdateMainForm(e)}
-          /> 
-        </div>
-        {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
+            onChange={(e) => this.onUpdateMainForm(e)} />
+          {id === 1 ?
+            <input
+              className="form__input"
+              name="webSite"
+              type="url"
+              placeholder="Website"
+              onChange={(e) => this.onUpdateMainForm(e)} />
+          : null}
+          {id === 0 ? <FormSocialMedia onUpdateMainForm={this.onUpdateMainForm} />: null}
+          {id === 0 ?
+            <input
+              className="form__input"
+              name="cardNumber"
+              type="number"
+              inputMode="numeric"
+              min="16"
+              max="16"
+              placeholder="Номер банківської картки"
+              onChange={e => this.onUpdateBankForm(e)} />
+          : null}
+          {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
+        </div> 
         <textarea
           className="form__input form__input--services"
           name="description"
           max="500"
           required
           placeholder={"*" + (areaPlaceholder || "Напишіть, які послуги надаєте...")}
-          onChange={(e) => this.onUpdateMainForm(e)}
-        />
+          onChange={(e) => this.onUpdateMainForm(e)} />
         <div className="form__submit">
           <div className="form__rules">
             <input
@@ -225,17 +206,9 @@ class Form extends Component {
               name="checkbox"
               required
               type="checkbox"
-              onChange={this.onActiveSubmit}
-            />
+              onChange={this.onActiveSubmit} />
             <label className="form__checkbox-label">
-              Я ознайомився з{" "}
-              <span
-                className="form__condition"
-                onClick={() => this.props.onOpenAgreement()}
-              >
-                умовами
-              </span>{" "}
-              та погоджуюсь
+              Я ознайомився з <span className="form__condition" onClick={() => this.props.onOpenAgreement()}>умовами</span> та погоджуюсь
             </label>
           </div>
           {this.state.activeSubmit ? <button className="form__button" type="submit">Додати</button> : null}
@@ -262,8 +235,7 @@ const FormCategories = ({ selects, onUpdateMainForm }) => {
         className="form__input form__select"
         name="category"
         required
-        onChange={(e) => onUpdateMainForm(e)}
-      >
+        onChange={(e) => onUpdateMainForm(e)}>
         <option value="">*Виберіть категорію</option>
         {options}
       </select>
@@ -273,17 +245,34 @@ const FormCategories = ({ selects, onUpdateMainForm }) => {
   return null;
 };
 
+const FormSocialMedia = ({ onUpdateMainForm }) => {
+  return (
+    <>
+      <input
+        className="form__input"
+        name="instagram"
+        type="url"
+        placeholder="Instagram"
+        onChange={(e) => onUpdateMainForm(e)} /> 
+      <input
+        className="form__input"
+        name="telegram"
+        type="url"
+        placeholder="Telegram"
+        onChange={(e) => onUpdateMainForm(e)} /> 
+      <input
+        className="form__input"
+        name="facebook"
+        type="url"
+        placeholder="Facebook"
+        onChange={(e) => onUpdateMainForm(e)} /> 
+    </>
+  );
+};
+
 const FormBankAccount = ({ onUpdateBankForm }) => {
   return (
     <div className="form__bank-block">
-      <input className="form__input"
-          name="cardNumber"
-          type="number"
-          inputMode="numeric"
-          min="16"
-          max="16"
-          placeholder="Номер банківської картки"
-          onChange={e => onUpdateBankForm(e)} />
       <p className="form__bank-data">Банківські реквізити</p>
       <div className="form__bank-account">
         <input
@@ -291,15 +280,13 @@ const FormBankAccount = ({ onUpdateBankForm }) => {
           name="fullBankName"
           type="text"
           placeholder="Повне ім'я банку"
-          onChange={(e) => onUpdateBankForm(e)}
-        />
+          onChange={(e) => onUpdateBankForm(e)} />
         <input
           className="form__input"
           name="shortBankName"
           type="text"
           placeholder="Скорочене ім'я банку"
-          onChange={(e) => onUpdateBankForm(e)}
-        />
+          onChange={(e) => onUpdateBankForm(e)} />
         <input
           className="form__input"
           name="mfo"
@@ -308,8 +295,7 @@ const FormBankAccount = ({ onUpdateBankForm }) => {
           min="6"
           max="6"
           placeholder="МФО"
-          onChange={(e) => onUpdateBankForm(e)}
-        />
+          onChange={(e) => onUpdateBankForm(e)} />
         <input
           className="form__input"
           name="iban"
@@ -327,16 +313,14 @@ const FormBankAccount = ({ onUpdateBankForm }) => {
           min="8"
           max="10"
           placeholder="ІПН/ЄДРПОУ"
-          onChange={(e) => onUpdateBankForm(e)}
-        />
+          onChange={(e) => onUpdateBankForm(e)} />
         <input
           className="form__input"
           name="accountNumber"
           type="number"
           inputMode="numeric"
           placeholder="Розрахунковий рахунок"
-          onChange={(e) => onUpdateBankForm(e)}
-        />
+          onChange={(e) => onUpdateBankForm(e)} />
       </div>
     </div>
   );
