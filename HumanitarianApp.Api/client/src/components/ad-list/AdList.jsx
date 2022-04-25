@@ -1,12 +1,12 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {Carousel} from 'react-responsive-carousel';
-
 import leftArrow from 'assets/icons/slider-icons/left_arrow.svg';
 import rightArrow from 'assets/icons/slider-icons/right_arrow.svg';
-
 import './adList.scss';
 import './carousel.scss';
 
+//TODO: Read about React.Memo hook
+//TODO: Change file type to typescript, transform class in function component
 class AdList extends Component {
     keyCount = 0;
     adsBlocks = [];
@@ -111,7 +111,6 @@ class AdList extends Component {
         return newSite
     }
 
-
     createElementsPages = () => {
         this.adsBlocks = [];
         let afterArray = this.createAdsElements();
@@ -124,10 +123,7 @@ class AdList extends Component {
                 for (let i = 0; i < afterArray.length; i++) {
                     array.push(afterArray[count])
                     count++;
-                    if (array.length % numberAdsOnPages === 0) {
-                        break;
-                    }
-                    ;
+                    if (array.length % numberAdsOnPages === 0) break;
                 }
                 this.adsBlocks.push(array);
                 array = [];
@@ -138,15 +134,13 @@ class AdList extends Component {
     renderPages = () => {
         this.createElementsPages();
 
-        const blocks = this.adsBlocks.map((block, i) => {
+        return this.adsBlocks.map((block, i) => {
             return (
                 <div key={i} className="ad-list__block">
                     {block}
                 </div>
             );
         });
-
-        return blocks;
     }
 
     render() {
@@ -157,6 +151,7 @@ class AdList extends Component {
                 dynamicHeight={true}
                 swipeable={false}
                 statusFormatter={(current, total) => `Стор. ${current} - ${total}`}
+                //TODO: Create one component from same render arrow
                 renderArrowPrev={(onClickHandler, hasPrev, label) => hasPrev && (
                     <button className="ad-list__carousel-button ad-list__carousel-button--prev" type="button"
                             onClick={onClickHandler} title={label}>
@@ -175,6 +170,6 @@ class AdList extends Component {
             </Carousel>
         );
     }
-};
+}
 
 export default AdList;

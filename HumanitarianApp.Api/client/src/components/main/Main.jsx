@@ -2,6 +2,7 @@ import {Component} from "react";
 import Section from "../section/Section";
 import Service from '../../shared/services/Service';
 
+//TODO: Delete this file after merge
 class Main extends Component {
     constructor(props) {
         super(props);

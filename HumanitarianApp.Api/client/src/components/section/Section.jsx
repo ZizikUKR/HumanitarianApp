@@ -3,6 +3,7 @@ import Form from '../form/Form';
 import AdList from '../ad-list/AdList';
 import './section.scss';
 
+//TODO: Delete this file after merge
 const SectionCategories = ({filterButtons, onFilterSelect}) => {
     const categories = filterButtons.map(({id, name}) => (<option key={id} value={name}>{name}</option>))
 
