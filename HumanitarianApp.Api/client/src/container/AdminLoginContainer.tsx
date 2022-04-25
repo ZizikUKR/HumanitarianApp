@@ -1,8 +1,8 @@
 import React, {FormEvent} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useAuth} from "../shared/hook/useAuth";
-import AuthService from "../shared/services/auth.service";
-import AdminLoginComponent from "../components/admin-login/AdminLogin";
+import {useAuth} from "shared/hook/useAuth";
+import AuthService from "shared/services/auth.service";
+import AdminLoginComponent from "components/admin-login/AdminLogin";
 
 export const AdminLoginContainer = () => {
     const navigate = useNavigate();

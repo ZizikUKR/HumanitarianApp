@@ -1,9 +1,8 @@
-// @ts-ignore
-import logo from "../../../../assets/icons/humanitarian_logo.svg"
+import logo from "assets/icons/humanitarian_logo.svg"
 import './header.scss';
 import React from "react";
 import {HeaderButton} from "../headerButton/HeaderButton";
-import {HeaderButtonsText} from "../../../../shared/modules/layout/layout.type";
+import {HeaderButtonsText} from "shared/modules/layout/layout.type";
 
 interface Props {
     headerButtonsText: Readonly<HeaderButtonsText[]>;

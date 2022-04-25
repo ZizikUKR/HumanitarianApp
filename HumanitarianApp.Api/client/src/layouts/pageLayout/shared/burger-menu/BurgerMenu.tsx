@@ -1,6 +1,6 @@
 import React from "react";
 import './burgerMenu.scss';
-import {HeaderButtonsText} from "../../../../shared/modules/layout/layout.type";
+import {HeaderButtonsText} from "shared/modules/layout/layout.type";
 
 interface Props {
     headerButtons: Readonly<HeaderButtonsText[]>;

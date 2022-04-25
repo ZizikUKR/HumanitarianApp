@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import Form from '../../../../components/form/Form';
+import Form from 'components/form/Form';
 import './section.scss';
 import {SectionCategories} from "../sectionCategories/SectionCategories";
-import {HeaderButtonsText} from "../../../../shared/modules/layout/layout.type";
+import {HeaderButtonsText} from "shared/modules/layout/layout.type";
 
 const formOptions: Record<HeaderButtonsText, FormOptions> = {
     'Волонтери': {

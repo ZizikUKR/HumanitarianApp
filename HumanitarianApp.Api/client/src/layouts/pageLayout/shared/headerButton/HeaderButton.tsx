@@ -1,6 +1,6 @@
 import React from "react";
 import './headerButton.scss';
-import {HeaderButtonsText} from "../../../../shared/modules/layout/layout.type";
+import {HeaderButtonsText} from "shared/modules/layout/layout.type";
 
 interface Props {
     isActive: boolean;

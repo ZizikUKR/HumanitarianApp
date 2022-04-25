@@ -1,7 +1,7 @@
 import {Component} from "react"
 import Service from "../../shared/services/Service";
 import "./form.scss";
-import {showInfo} from "../toast/notification";
+import {showInfo} from "../../shared/toast/notification";
 
 class Form extends Component {
   state = {

@@ -5,9 +5,9 @@ import {ToastContainer} from 'react-toastify';
 import BurgerMenu from "./shared/burger-menu/BurgerMenu";
 import Agreement from "./shared/agreement/Agreement";
 import {Section} from "./shared/section/Section";
-import {headerButtonsText} from "../../shared/modules/layout/layout.const";
-import {HeaderButtonsText} from "../../shared/modules/layout/layout.type";
-import {sectionMoc} from "../../shared/modules/layout/layoutData.moc";
+import {headerButtonsText} from "shared/modules/layout/layout.const";
+import {HeaderButtonsText} from "shared/modules/layout/layout.type";
+import {sectionMoc} from "shared/modules/layout/layoutData.moc";
 import {useNavigate} from "react-router-dom";
 
 interface Props {
