@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router-dom";
-import {PUBLIC_URL} from "../shared/modules/url/publicUrl.const";
+import {VOLUNTEER_URL} from "../shared/modules/url/publicUrl.const";
 import {PublicNavigation} from "./PublicNavigation";
 import {ADMIN_URL} from "../shared/modules/url/adminUrl.const";
 import {AdminRoute} from "../routes/AdminRoute";
@@ -8,7 +8,7 @@ import React from "react";
 
 export const AppNavigation=()=>(
     <Routes>
-        <Route path={PUBLIC_URL}>
+        <Route path={VOLUNTEER_URL}>
             {PublicNavigation}
         </Route>
         <Route path={ADMIN_URL} element={<AdminRoute/>}>
