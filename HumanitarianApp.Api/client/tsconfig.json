@@ -9,8 +9,14 @@
     "skipLibCheck": true,
     "jsx": "react",
     "allowJs": true,
+    "baseUrl": "./src"
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "react-app.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }
