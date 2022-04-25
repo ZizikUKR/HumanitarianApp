@@ -3,17 +3,18 @@ import logo from "../../../../assets/icons/humanitarian_logo.svg"
 import './header.scss';
 import React from "react";
 import {HeaderButton} from "../headerButton/HeaderButton";
+import {HeaderButtonsText} from "../../../../shared/modules/layout/layout.type";
 
 interface Props {
-    headerButtonsText: Readonly<string[]>;
+    headerButtonsText: Readonly<HeaderButtonsText[]>;
     activeBtn: string;
-    selectSectionHandler: (value: string) => void;
+    selectSectionHandler: (value: HeaderButtonsText) => void;
     visibleBurgerHandler: (value: boolean) => void;
 }
 
 const Header = ({activeBtn, selectSectionHandler, visibleBurgerHandler, headerButtonsText}: Props) => {
     const headerButtons = () => {
-        return headerButtonsText.map((item: string, index: number) => (
+        return headerButtonsText.map((item: HeaderButtonsText, index: number) => (
             <HeaderButton
                 key={`${index} HeaderBtn`}
                 isActive={item === activeBtn}

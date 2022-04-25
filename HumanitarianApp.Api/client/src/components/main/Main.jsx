@@ -205,7 +205,7 @@ class Main extends Component {
     }
 
     renderSection = (section) => {
-        const {id, name,  ads, searchResult, filter} = section;
+        const {id, name, filterButtons, ads, searchResult, filter} = section;
 
         const onUpdateSearch = searchResult => {
             section.searchResult = searchResult;

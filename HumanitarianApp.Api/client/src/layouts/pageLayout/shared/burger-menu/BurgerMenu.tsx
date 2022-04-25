@@ -1,15 +1,16 @@
 import React from "react";
 import './burgerMenu.scss';
+import {HeaderButtonsText} from "../../../../shared/modules/layout/layout.type";
 
 interface Props {
-    headerButtons: Readonly<string[]>;
+    headerButtons: Readonly<HeaderButtonsText[]>;
     visibleBurger: boolean;
     visibleBurgerHandler: (visible: boolean) => void;
-    selectSection: (value: string) => void;
+    selectSection: (value: HeaderButtonsText) => void;
 }
 
 const BurgerMenu = ({headerButtons, visibleBurgerHandler, visibleBurger, selectSection}: Props) => {
-    const clickHandle = (value: string) => {
+    const clickHandle = (value: HeaderButtonsText) => {
         visibleBurgerHandler(false);
         selectSection(value);
     }
@@ -19,7 +20,7 @@ const BurgerMenu = ({headerButtons, visibleBurgerHandler, visibleBurger, selectS
             {visibleBurger && (
                 <div className="burger-menu">
                     <div className="burger-menu__wrapper">
-                        {headerButtons.map(item => (
+                        {headerButtons.map((item:HeaderButtonsText) => (
                             <button className="burger-menu__button" type='button' key={item}
                                     onClick={() => clickHandle(item)}>{item}</button>
                         ))}
