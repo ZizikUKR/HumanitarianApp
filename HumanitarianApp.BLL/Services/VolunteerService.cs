@@ -23,6 +23,7 @@ namespace HumanitarianApp.BLL.Services
         {
             var entityForCreate = _mapper.Map<Volunteer>(entity);
             entityForCreate.CreationDate = DateTime.Now;
+            entityForCreate.IsActive = true;
 
             if (entityForCreate == null)
             {
