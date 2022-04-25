@@ -1,9 +1,7 @@
-import { Component } from "react";
-
 import TokenService from "./TokenService";
 import Service from './Service';
 
-export class AuthService extends Component {
+export class AuthService {
   service = new Service();
 
   async login(username, password) {
@@ -16,7 +14,7 @@ export class AuthService extends Component {
 
     let json = JSON.stringify(loginDto);
     let tokenService = new TokenService();
-  
+
      return await  this.service.post(`${process.env.REACT_APP_API_URL}Account/Login`, json)
       .then(response => response.json())
       .then(data => {
@@ -28,7 +26,7 @@ export class AuthService extends Component {
      }
 
      async GenerateToken() {
-    
+
        return await  this.service.post(`${process.env.REACT_APP_API_URL}Account/GenerateTokens`)
         .then(response => response.json())
         .then(data => {

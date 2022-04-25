@@ -1,6 +1,6 @@
 import {BrowserRouter} from "react-router-dom";
 import React from 'react';
-import AuthProvider from "./services/AuthProvider"
+import AuthProvider from "./shared/services/AuthProvider"
 import './styles/app.scss';
 import "./styles/app.scss";
 import {AppNavigation} from "./navigation/Navigation";
