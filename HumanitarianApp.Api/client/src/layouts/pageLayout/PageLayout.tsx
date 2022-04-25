@@ -4,7 +4,7 @@ import {Footer} from "./shared/footer/Footer"
 import {ToastContainer} from 'react-toastify';
 import BurgerMenu from "./shared/burger-menu/BurgerMenu";
 import Agreement from "./shared/agreement/Agreement";
-import {Section} from "./shared/section/Section";
+import Section from "./shared/section/Section";
 import {headerButtonsText} from "shared/modules/layout/layout.const";
 import {HeaderButtonsText} from "shared/modules/layout/layout.type";
 import {sectionMoc} from "shared/modules/layout/layoutData.moc";
@@ -21,6 +21,7 @@ export const PageLayout = ({children, pageName}: Props) => {
     const [visibleBurger, setVisibleBirger] = React.useState(false);
     const [openAgreement, setOpenAgreement] = useState(false);
     const [openForm, setOpenForm] = useState(false);
+    const [ filter, setFilter] = useState("")
     const [section] = useState(sectionMoc[pageName]);
 
     const selectSectionHandler = React.useCallback((activeBtnText: HeaderButtonsText) => {
@@ -43,9 +44,9 @@ export const PageLayout = ({children, pageName}: Props) => {
         setSearchValue(value);
     }, [searchValue])
 
-    const onFilterSelect = (filter: string) => {
-        console.log("Not understand what this func do")
-    };
+    const onFilterSelect = React.useCallback((value: string) => {
+       setFilter(value)
+    },[filter]);
 
     return (
         <div>

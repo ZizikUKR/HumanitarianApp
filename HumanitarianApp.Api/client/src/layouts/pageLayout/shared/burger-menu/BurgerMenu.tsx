@@ -20,7 +20,7 @@ const BurgerMenu = ({headerButtons, visibleBurgerHandler, visibleBurger, selectS
             {visibleBurger && (
                 <div className="burger-menu">
                     <div className="burger-menu__wrapper">
-                        {headerButtons.map((item:HeaderButtonsText) => (
+                        {headerButtons.map((item: HeaderButtonsText) => (
                             <button className="burger-menu__button" type='button' key={item}
                                     onClick={() => clickHandle(item)}>{item}</button>
                         ))}
@@ -33,4 +33,4 @@ const BurgerMenu = ({headerButtons, visibleBurgerHandler, visibleBurger, selectS
 }
 
 
-export default BurgerMenu;
+export default React.memo(BurgerMenu);

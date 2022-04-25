@@ -44,4 +44,4 @@ const Header = ({activeBtn, selectSectionHandler, visibleBurgerHandler, headerBu
     );
 };
 
-export default Header;
+export default React.memo(Header);

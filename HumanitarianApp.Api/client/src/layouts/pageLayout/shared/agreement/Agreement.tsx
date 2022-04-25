@@ -81,10 +81,10 @@ const Agreement = ({onOpenAgreement, openAgreement}: Props) => (
             </ol>
             <br/>
             <span>Користувач <strong>підтверджує</strong>, що ознайомлений з усіма пунктами цієї угоди і <strong>безумовно приймає</strong> їх.</span>
-            <button className="agreement__close" onClick={() => onOpenAgreement()}>Погоджуюсь</button>
+            <button className="agreement__close" onClick={onOpenAgreement}>Погоджуюсь</button>
         </div>)}
     </>
 );
 
 
-export default Agreement;
+export default React.memo(Agreement);

@@ -41,7 +41,7 @@ interface Props {
     id: number;
 }
 
-export const Section = ({
+const Section = ({
                             filterButtons,
                             onFilterSelect,
                             ads,
@@ -64,7 +64,7 @@ export const Section = ({
                                onOpenAgreement={onOpenAgreement}/> : null}
                 </div>
                 <button className="section__open" onClick={openFormHandle}>
-                    {openForm ? 'Закрити форму' : 'Додати ' + buttonName}
+                    {openForm ? 'Закрити форму' : `Додати ${buttonName}`}
                 </button>
             </div>
             <div className="section__info">
@@ -87,3 +87,5 @@ export const Section = ({
         </section>
     )
 }
+
+export default React.memo(Section)
