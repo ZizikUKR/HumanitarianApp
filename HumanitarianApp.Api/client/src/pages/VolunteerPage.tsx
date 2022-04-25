@@ -3,7 +3,7 @@ import {PageLayout} from "../layouts/pageLayout/PageLayout";
 import {VolunteerContainer} from "../container/VolunteerContainer";
 
 export const VolunteerPage = () => (
-    <PageLayout>
+    <PageLayout pageName={"Волонтери"}>
         <VolunteerContainer/>
     </PageLayout>
 )
