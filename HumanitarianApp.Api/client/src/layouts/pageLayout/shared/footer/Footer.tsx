@@ -1,7 +1,7 @@
 import React from "react";
 import './footer.scss';
 
-export const Footer = (): React.ReactElement => (
+export const Footer = React.memo((): React.ReactElement => (
     <footer className="footer">
         <div className="container">
             <div className="footer__wrapper">
@@ -21,5 +21,5 @@ export const Footer = (): React.ReactElement => (
             </ul>
         </div>
     </footer>
-);
+));
 

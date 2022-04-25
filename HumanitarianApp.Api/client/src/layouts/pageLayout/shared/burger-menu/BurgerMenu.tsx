@@ -32,5 +32,4 @@ const BurgerMenu = ({headerButtons, visibleBurgerHandler, visibleBurger, selectS
     );
 }
 
-
 export default React.memo(BurgerMenu);
