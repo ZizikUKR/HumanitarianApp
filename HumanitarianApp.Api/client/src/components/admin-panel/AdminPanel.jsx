@@ -1,13 +1,13 @@
-import { Component } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../../hook/useAuth";
+import {Component} from "react";
+import {useNavigate} from 'react-router-dom';
+import {useAuth} from "../../shared/hook/useAuth";
 
-import Service from '../../services/Service';
+import Service from '../../shared/services/Service';
 
 import './adminPanel.scss';
 
-import { TokenService } from '../../services/TokenService';
-import { AuthService } from '../../services/auth.service.js';
+import {TokenService} from '../../shared/services/TokenService';
+import {AuthService} from '../../shared/services/auth.service.js';
 
 export default class AdminPanel extends Component {
   constructor(props) {
@@ -146,7 +146,7 @@ export default class AdminPanel extends Component {
       let tokens = await this.authService.GenerateToken();
       this.tokenService.updateLocalAccessToken(tokens.accessToken);
 
-    }    
+    }
   }
 
   componentDidMount() {
@@ -168,7 +168,7 @@ export default class AdminPanel extends Component {
             email: this.isEmpty(item.email),
             city: this.isEmpty(item.city),
             address: this.isEmpty(item.address),
-            text: this.isEmpty(item.description),  
+            text: this.isEmpty(item.description),
             instagram: this.isEmpty(item.instagram),
             telegram: this.isEmpty(item.telegram),
             facebook: this.isEmpty(item.facebook),
@@ -187,7 +187,7 @@ export default class AdminPanel extends Component {
         this.setState({ sectionsData: newsectionsData });
       });
 
-      
+
   };
 
   isEmpty = (inputStr) => {
@@ -219,7 +219,7 @@ export default class AdminPanel extends Component {
         this.setState({ sectionsData: newsectionsData });
       });
 
-      
+
   };
 
   getAllAnnouncements = () => {
@@ -237,7 +237,7 @@ export default class AdminPanel extends Component {
             text: this.isEmpty(item.description),
           };
         });
-        
+
 
         let newsectionsData = Object.assign({}, this.state.sectionsData);
         newsectionsData[2].ads = announcements;
@@ -344,7 +344,7 @@ export default class AdminPanel extends Component {
 
   render() {
     const {headerButtons, sectionsData, activeSection} = this.state;
-    
+
     return (
       <>
         <AdminPanelHeader
@@ -365,15 +365,15 @@ const AdminPanelHeader = ({headerButtons, activeSection, selectSection}) => {
   const navigate = useNavigate();
 
   function HeaderButton({headerButtons, activeSection, selectSection}) {
-    const buttons = headerButtons.map(item => {
+    return headerButtons.map(item => {
       const clazz = activeSection === item.id ? 'admin-header__button admin-header__button--active' : 'admin-header__button';
-  
+
       return (
-        <button className={clazz} type='button' key={item.id} onClick={() => {selectSection(item.id)}}>{item.name}</button>
+          <button className={clazz} type='button' key={item.id} onClick={() => {
+            selectSection(item.id)
+          }}>{item.name}</button>
       );
     });
-  
-    return buttons;
   }
 
   return (
@@ -413,7 +413,7 @@ const AdminPanelAdList = (props) => {
   const elements = props.ads.reverse().map(element => {
     const {select, name, telephone, email, city, address, text, website, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber, instagram, telegram, facebook} = element;
     const {id} = props;
-    
+
     return (
       <div key={keyCount++} className="admin-ad-list__item">
         <div className="admin-ad-list__buttons">

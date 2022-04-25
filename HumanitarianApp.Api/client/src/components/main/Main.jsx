@@ -1,7 +1,6 @@
 import {Component} from "react";
 import Section from "../section/Section";
-
-import Service from '../../services/Service';
+import Service from '../../shared/services/Service';
 
 class Main extends Component {
     constructor(props) {
@@ -205,14 +204,8 @@ class Main extends Component {
         this.setState({visibleBurgerMenu});
     }
 
-    selectSection = (id) => {
-        this.setState({
-            activeSection: id
-        })
-    }
-
     renderSection = (section) => {
-        const {id, name, filterButtons, ads, searchResult, filter} = section;
+        const {id, name,  ads, searchResult, filter} = section;
 
         const onUpdateSearch = searchResult => {
             section.searchResult = searchResult;

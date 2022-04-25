@@ -1,10 +1,7 @@
-import { Component } from "react";
-
-import Service from "../../services/Service";
-
+import {Component} from "react"
+import Service from "../../shared/services/Service";
 import "./form.scss";
-import { showInfo, showError, showSuccess, showWarn } from "../toast/notification";
-
+import {showInfo} from "../toast/notification";
 
 class Form extends Component {
   state = {
@@ -86,7 +83,7 @@ class Form extends Component {
     e.preventDefault();
     const json = JSON.stringify(this.choicePostObj());
 
-    this.postService.post(this.choiceUrl(), json).then((response) => {
+    this.postService.post(this.choiceUrl(), json).then(() => {
       showInfo(`Ваша заявка на створення ${this.getName()} була прийнята!`);
     });
 
@@ -102,7 +99,7 @@ class Form extends Component {
         return "організації";
       case 2:
         return "підприємства";
-    } 
+    }
   }
 
   onUpdateMainForm = (e) => {
@@ -118,17 +115,14 @@ class Form extends Component {
 
   onUpdateBankForm = (e) => {
     const key = e.target.name;
-    const value = e.target.value;
-
-    this.choicePostObj().bankDetails[key] = value;
+    this.choicePostObj().bankDetails[key] = e.target.value;
     console.log(this.volunteerPostObj);
   }
-  
+
   render() {
     const { id, title, namePlaceholder, areaPlaceholder, selects } = this.props;
 
     return (
-
       <form className="form" action="#" onSubmit={e => {this.onSubmit(e); this.onActiveSubmit()}}>
         <h2 className="subtitle">{title}</h2>
         <div className="form__inputs">
@@ -191,11 +185,11 @@ class Form extends Component {
               onChange={e => this.onUpdateBankForm(e)} />
           : null}
           {id === 0 ? <FormBankAccount onUpdateBankForm={this.onUpdateBankForm} /> : null}
-        </div> 
+        </div>
         <textarea
           className="form__input form__input--services"
           name="description"
-          max="500"
+          maxLength={500}
           required
           placeholder={"*" + (areaPlaceholder || "Напишіть, які послуги надаєте...")}
           onChange={(e) => this.onUpdateMainForm(e)} />
@@ -253,19 +247,19 @@ const FormSocialMedia = ({ onUpdateMainForm }) => {
         name="instagram"
         type="url"
         placeholder="Instagram"
-        onChange={(e) => onUpdateMainForm(e)} /> 
+        onChange={(e) => onUpdateMainForm(e)} />
       <input
         className="form__input"
         name="telegram"
         type="url"
         placeholder="Telegram"
-        onChange={(e) => onUpdateMainForm(e)} /> 
+        onChange={(e) => onUpdateMainForm(e)} />
       <input
         className="form__input"
         name="facebook"
         type="url"
         placeholder="Facebook"
-        onChange={(e) => onUpdateMainForm(e)} /> 
+        onChange={(e) => onUpdateMainForm(e)} />
     </>
   );
 };
