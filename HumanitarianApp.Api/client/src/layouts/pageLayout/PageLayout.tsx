@@ -26,6 +26,16 @@ export const PageLayout = ({children, pageName}: Props) => {
     const [openForm, setOpenForm] = React.useState(false);
     const [filter, setFilter] = React.useState("");
 
+    React.useEffect(() => {
+        if (visibleBurger || openAgreement) {
+            document.body.style.overflow = 'hidden';
+
+            return;
+        }
+
+        document.body.removeAttribute('style');
+    }, [visibleBurger, openAgreement])
+
     useTimeout(() => {
         addQueryHandler({search: searchValue})
     }, [searchValue], true, 2000);
@@ -59,8 +69,6 @@ export const PageLayout = ({children, pageName}: Props) => {
 
     const onFilterSelect = React.useCallback((value: string) => {
         setFilter(value);
-
-        addQueryHandler({filter: value})
     }, [filter]);
 
     return (
