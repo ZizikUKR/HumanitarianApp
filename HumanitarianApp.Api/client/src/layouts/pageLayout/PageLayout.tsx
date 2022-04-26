@@ -26,6 +26,12 @@ export const PageLayout = ({children, pageName}: Props) => {
     const [openForm, setOpenForm] = React.useState(false);
     const [filter, setFilter] = React.useState("");
 
+
+
+    React.useEffect(()=>{
+        //TODO: call services in him
+    },[])
+
     React.useEffect(() => {
         if (visibleBurger || openAgreement) {
             document.body.style.overflow = 'hidden';
