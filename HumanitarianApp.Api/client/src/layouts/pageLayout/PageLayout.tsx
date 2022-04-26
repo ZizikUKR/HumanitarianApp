@@ -29,7 +29,7 @@ export const PageLayout = ({children, pageName}: Props) => {
 
 
     React.useEffect(()=>{
-        //TODO: call services in him
+        //TODO: call services in him if you need
     },[])
 
     React.useEffect(() => {
