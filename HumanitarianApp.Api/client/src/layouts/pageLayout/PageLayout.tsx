@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useCallback} from "react"
 import Header from "./shared/header/Header"
 import {Footer} from "./shared/footer/Footer"
 import {ToastContainer} from 'react-toastify';
@@ -8,7 +8,8 @@ import Section from "./shared/section/Section";
 import {headerButtonsText} from "shared/modules/layout/layout.const";
 import {HeaderButtonsText} from "shared/modules/layout/layout.type";
 import {sectionMoc} from "shared/modules/layout/layoutData.moc";
-import {useNavigate} from "react-router-dom";
+import {createSearchParams, useLocation, useNavigate} from "react-router-dom";
+import {useTimeout} from "../../shared/hook/useTimeout";
 
 interface Props {
     children: JSX.Element;
@@ -16,17 +17,29 @@ interface Props {
 }
 
 export const PageLayout = ({children, pageName}: Props) => {
+    const location = useLocation();
     const navigation = useNavigate();
-    const [searchValue, setSearchValue] = useState("")
+    const sectionRef = React.useRef(sectionMoc[pageName]);
+    const [searchValue, setSearchValue] = React.useState("")
     const [visibleBurger, setVisibleBirger] = React.useState(false);
-    const [openAgreement, setOpenAgreement] = useState(false);
-    const [openForm, setOpenForm] = useState(false);
-    const [ filter, setFilter] = useState("")
-    const [section] = useState(sectionMoc[pageName]);
+    const [openAgreement, setOpenAgreement] = React.useState(false);
+    const [openForm, setOpenForm] = React.useState(false);
+    const [filter, setFilter] = React.useState("");
 
-    const selectSectionHandler = React.useCallback((activeBtnText: HeaderButtonsText) => {
+    useTimeout(() => {
+        addQueryHandler({search: searchValue})
+    }, [searchValue], true, 2000);
+
+    const selectSectionHandler = useCallback((activeBtnText: HeaderButtonsText) => {
         navigation(sectionMoc[activeBtnText].link)
     }, [])
+
+    const addQueryHandler = <T extends {}>(query: T): void => {
+        navigation({
+            pathname: location.pathname,
+            search: createSearchParams(query).toString()
+        });
+    }
 
     const visibleBurgerHandler = React.useCallback((visible: boolean) => {
         setVisibleBirger(visible);
@@ -45,8 +58,10 @@ export const PageLayout = ({children, pageName}: Props) => {
     }, [searchValue])
 
     const onFilterSelect = React.useCallback((value: string) => {
-       setFilter(value)
-    },[filter]);
+        setFilter(value);
+
+        addQueryHandler({filter: value})
+    }, [filter]);
 
     return (
         <div>
@@ -65,9 +80,9 @@ export const PageLayout = ({children, pageName}: Props) => {
                 <Section openForm={openForm} openFormHandle={openFormHandler} pageName={pageName}
                          onUpdateSearchValue={updateSearchValueHandler} searchValue={searchValue}
                          onOpenAgreement={openAgreementHandler}
-                         filterButtons={section.filterButtons}
-                         ads={section.ads}
-                         id={section.id}
+                         filterButtons={sectionRef.current.filterButtons}
+                         ads={sectionRef.current.ads}
+                         id={sectionRef.current.id}
                          onFilterSelect={onFilterSelect}
                 />
                 {children}
