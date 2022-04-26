@@ -1,4 +1,4 @@
-import React, {useCallback} from "react"
+import React from "react"
 import Header from "./shared/header/Header"
 import {Footer} from "./shared/footer/Footer"
 import {ToastContainer} from 'react-toastify';
@@ -30,7 +30,7 @@ export const PageLayout = ({children, pageName}: Props) => {
         addQueryHandler({search: searchValue})
     }, [searchValue], true, 2000);
 
-    const selectSectionHandler = useCallback((activeBtnText: HeaderButtonsText) => {
+    const selectSectionHandler = React.useCallback((activeBtnText: HeaderButtonsText) => {
         navigation(sectionMoc[activeBtnText].link)
     }, [])
 

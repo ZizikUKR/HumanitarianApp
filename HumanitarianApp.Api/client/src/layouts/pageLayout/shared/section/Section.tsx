@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Form from 'components/form/Form';
 import './section.scss';
 import {SectionCategories} from "../sectionCategories/SectionCategories";
@@ -42,18 +42,18 @@ interface Props {
 }
 
 const Section = ({
-                            filterButtons,
-                            onFilterSelect,
-                            ads,
-                            searchValue,
-                            onUpdateSearchValue,
-                            onOpenAgreement,
-                            pageName,
-                            openForm,
-                            openFormHandle,
-                            id
-                        }: Props) => {
-    const [buttonName] = useState(pageName === "Волонтери" ? 'волонтера' : pageName === "Підприємства" ? 'підприємство' : 'оголошення')
+                     filterButtons,
+                     onFilterSelect,
+                     ads,
+                     searchValue,
+                     onUpdateSearchValue,
+                     onOpenAgreement,
+                     pageName,
+                     openForm,
+                     openFormHandle,
+                     id
+                 }: Props) => {
+    const buttonName = React.useRef(pageName === "Волонтери" ? 'волонтера' : pageName === "Підприємства" ? 'підприємство' : 'оголошення')
 
     return (
         <section className="section">
@@ -64,7 +64,7 @@ const Section = ({
                                onOpenAgreement={onOpenAgreement}/> : null}
                 </div>
                 <button className="section__open" onClick={openFormHandle}>
-                    {openForm ? 'Закрити форму' : `Додати ${buttonName}`}
+                    {openForm ? 'Закрити форму' : `Додати ${buttonName.current}`}
                 </button>
             </div>
             <div className="section__info">
