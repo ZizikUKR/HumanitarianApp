@@ -1,71 +1,102 @@
 import { Component } from "react";
-import Footer from "../footer/Footer";
 import Service from "../../services/Service";
+import {isEmpty} from "./isEmpty.jsx";
+import {setVolunteersCategory} from "./setVolunteersCategory.jsx";
+import AdList from "../ad-list/AdList";
+
+import './card.scss';
+
 
 export default class Card extends Component {
-    Obj = {};
-    getAllVolunteersInId = (cardId) => {
-        this.service
-          .get(`${process.env.REACT_APP_API_URL}Volunteer/GetById?id=f76d397d-0318-4b41-b3e7-4a9dd4c4c210`)
-          .then() => {
-            const volonteers = () => {
-              return {
-                cardId: this.isEmpty(item.id),
-                select: this.setVolunteersCategory(item.category),
-                name: this.isEmpty(item.name),
-                telephone: this.isEmpty(item.phoneNumber),
-                email: this.isEmpty(item.email),
-                city: this.isEmpty(item.city),
-                address: this.isEmpty(item.address),
-                text: this.isEmpty(item.description),  
-                instagram: this.isEmpty(item.instagram),
-                telegram: this.isEmpty(item.telegram),
-                facebook: this.isEmpty(item.facebook),
-                cardnumber: this.isEmpty(item.bankDetails?.cardNumber),
-                fullbankname: this.isEmpty(item.bankDetails?.fullBankName),
-                shortbankname: this.isEmpty(item.bankDetails?.shortBankName),
-                mfo: this.isEmpty(item.bankDetails?.mfo),
-                iban: this.isEmpty(item.bankDetails?.iban),
-                edrpou: this.isEmpty(item.bankDetails?.edrpo),
-                accountnumber: this.isEmpty(item.bankDetails?.accountNumber),
-              };
-            };
-            let newsectionsData = Object.assign({}, this.state.sectionsData);
-            newsectionsData[0].ads = volonteers;
-    
-            this.setState({ sectionsData: newsectionsData });
-          });
-    
-          
-      };
+  constructor(props) {
+    super(props);
+    this.state = {
+      volunteerPostObj: {
+        cardId: "",
+        name: "",
+        phoneNumber: "",
+        email: "",
+        city: "",
+        address: "",
+        description: "",
+        category: "",
+        telegram: "",
+        instagram: "",
+        facebook: "",
+        bankDetails: {
+          fullBankName: "",
+          shortBankName: "",
+          iban: "",
+          accountNumber: "",
+          mfo: "",
+          edrpo: "",
+          cardNumber: "",
+        },
+      },
+    };
+  } 
 
-      serviceId = new Service();
-  componentDidMountId() {
-    this.getAllVolunteersInId()
+  getVolunteerById = (cardId) => {
+    this.service
+      .get(
+        `${process.env.REACT_APP_API_URL}Volunteer/GetById?id=${cardId}`
+      )
+      .then((item) => {
+        const volonteer = {
+          cardId: isEmpty(item.id),
+          select: setVolunteersCategory(item.category),
+          name: isEmpty(item.name),
+          telephone: isEmpty(item.phoneNumber),
+          email: isEmpty(item.email),
+          city: isEmpty(item.city),
+          address: isEmpty(item.address),
+          text: isEmpty(item.description),
+          instagram: isEmpty(item.instagram),
+          telegram: isEmpty(item.telegram),
+          facebook: isEmpty(item.facebook),
+          cardnumber: isEmpty(item.bankDetails?.cardNumber),
+          fullbankname: isEmpty(item.bankDetails?.fullBankName),
+          shortbankname: isEmpty(item.bankDetails?.shortBankName),
+          mfo: isEmpty(item.bankDetails?.mfo),
+          iban: isEmpty(item.bankDetails?.iban),
+          edrpou: isEmpty(item.bankDetails?.edrpo),
+          accountnumber: isEmpty(item.bankDetails?.accountNumber),
+        };
+        this.setState({ volunteerPostObj: volonteer });
+      });
+  };
+
+  service = new Service();
+  componentDidMount() {
+    this.getVolunteerById();
   }
-    componentDidMount(){
-        // const query = new URLSearchParams(this.props.location);
-        // debugger;
-        // const id = query.get('id')
-        debugger;
-        const id = window.location.search;
-    }
-    render() {
-        
-        return (
-            <>   
-            <div className='card'>
-                <div className='container'>
-                    <div className='card__name'>asdfasf
-                    </div>
-                    <div className='card__information'>
-                        <div className='card__text'>adas</div>
-                        <div className='card__contacts'>asdf</div>
-                    </div>   
-                </div>
+
+  render() {
+    return (
+      <>
+        <div className="card__item">
+          <div className="container">
+            <div className="card__name">{this.state.volunteerPostObj.name} - {this.state.volunteerPostObj.category}</div>
+            <div className="card__information">
+              <div className="card__text">{this.state.volunteerPostObj.text}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.telephone}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.email}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.city}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.address}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.instagram}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.telegram}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.facebook}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.cardnumber}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.fullbankname}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.shortbankname}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.mfo}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.iban}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.edrpo}</div>
+              <div className="card__contacts">{this.state.volunteerPostObj.accountNumber}</div>
             </div>
-            <Footer />
-            </>
-        )
-    }
+          </div>
+        </div>
+      </>
+    );
+  }
 }

@@ -16,10 +16,9 @@ class AdList extends Component {
     const elements = this.props.ads.reverse().map(element => {
       const {cardId, select, name, telephone, email, city, address, text, website, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber, instagram, telegram, facebook} = element;
       const {id} = this.props;
-      
       return (
         <div key={this.keyCount++} className="ad-list__item">
-          <div className="subtitle"><Link to={`/card/${cardId}`} activeClassName="active">{select || name} - {city}</Link></div>
+          <div className="subtitle"><Link to={`/card/${cardId}`}>{select || name} - {city}</Link></div>
           <ul className='ad-list__share'>
             <li>
               <a className="ad-list__share-link ad-list__share-link--fb" href="#">
@@ -58,6 +57,7 @@ class AdList extends Component {
         </div>
       )
     });
+  
 
     return elements;
   }

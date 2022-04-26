@@ -1,9 +1,17 @@
 @import '../../styles/variables.scss';
 
-.card{
-    &__name{
-        
+.card{    
+    &__item{
+        position: relative;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 3px solid $blue;
+        border-radius: 15px;
     }
+    &__name{
+        text-align: center;
+        font-size: 30px;
+    }           
     &__information{
         
     }    
@@ -12,6 +20,5 @@
     }
     &__contacts{
 
-    }
-    
+    }    
 }

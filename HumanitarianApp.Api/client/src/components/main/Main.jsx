@@ -320,6 +320,8 @@ class Main extends Component {
             iban: this.isEmpty(item.bankDetails?.iban),
             edrpou: this.isEmpty(item.bankDetails?.edrpo),
             accountnumber: this.isEmpty(item.bankDetails?.accountNumber),
+
+            
           };
         });
         let newsectionsData = Object.assign({}, this.state.sectionsData);
