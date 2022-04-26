@@ -1,5 +1,5 @@
 import React from "react";
-import Form from 'components/form/Form';
+import Form from 'shared/components/form/Form';
 import './section.scss';
 import {SectionCategories} from "../sectionCategories/SectionCategories";
 import {HeaderButtonsText} from "shared/modules/layout/layout.type";

@@ -1,7 +1,7 @@
 import {Component} from "react"
-import Service from "../../shared/services/Service";
+import Service from "../../services/Service";
 import "./form.scss";
-import {showInfo} from "../../shared/toast/notification";
+import {showInfo} from "../../toast/notification";
 
 //TODO: It is better to have one component in the file, max two component
 //TODO: Change file type to typescript, transform class in function component

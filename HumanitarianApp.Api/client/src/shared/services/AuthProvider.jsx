@@ -1,9 +1,9 @@
-import { createContext, useState } from 'react';
+import {createContext} from 'react';
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({children}) => {
-  const [admin, setAdmin] = useState({login: '', password: ''});
+  const [admin, setAdmin] = React.useState({login: '', password: ''});
 
   const signin = (newAdmin, cb) => {
     setAdmin(newAdmin);

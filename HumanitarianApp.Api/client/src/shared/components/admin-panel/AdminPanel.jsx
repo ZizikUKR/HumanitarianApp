@@ -1,13 +1,13 @@
 import {Component} from "react";
 import {useNavigate} from 'react-router-dom';
-import {useAuth} from "../../shared/hook/useAuth";
+import {useAuth} from "../../hook/useAuth";
 
-import Service from '../../shared/services/Service';
+import Service from '../../services/Service';
 
 import './adminPanel.scss';
 
-import {TokenService} from '../../shared/services/TokenService';
-import {AuthService} from '../../shared/services/auth.service.js';
+import {TokenService} from '../../services/TokenService';
+import {AuthService} from '../../services/auth.service.js';
 
 export default class AdminPanel extends Component {
   constructor(props) {

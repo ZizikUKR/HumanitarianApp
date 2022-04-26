@@ -4,7 +4,7 @@ import {VOLUNTEER_URL} from "shared/modules/url/publicUrl.const";
 import {PublicNavigation} from "./PublicNavigation";
 import {ADMIN_URL} from "shared/modules/url/adminUrl.const";
 import {AdminRoute} from "routes/AdminRoute";
-import Page404 from "components/page-404/Page404";
+import Page404 from "shared/components/page-404/Page404";
 
 export const AppNavigation = () => (
     <Routes>

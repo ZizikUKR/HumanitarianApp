@@ -1,9 +1,9 @@
 import React from "react";
-import AdList from "components/ad-list/AdList";
+import AdList from "shared/components/ad-list/AdList";
 import {sectionMoc} from "shared/modules/layout/layoutData.moc";
 
-const section = sectionMoc["Волонтери"];
+const section = sectionMoc["Підприємства"]
 
-export const VolunteerContainer = () => {
+export const EnterprisesContainer = () => {
     return (<AdList id={section.id} ads={section.ads} numberAdsOfPages={0}/>)
 }

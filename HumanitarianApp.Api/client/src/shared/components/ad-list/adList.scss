@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '../../../styles/variables';
 
 .ad-list {
   &__item {
@@ -91,7 +91,7 @@
       }
       &--instagram {
         &::before {
-          background: url("../../assets/icons/social-icons/Instagram_logo_2016.svg") center center/contain no-repeat;
+          background: url("../../../assets/icons/social-icons/Instagram_logo_2016.svg") center center/contain no-repeat;
         }
       }
       &--telegram {
