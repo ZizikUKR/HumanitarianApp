@@ -1,6 +1,8 @@
 import TokenService from "./TokenService";
 import Service from './Service';
 
+//TODO: Rewrite with axios
+
 export class AuthService {
   service = new Service();
 

@@ -1,26 +1,27 @@
+//TODO: Rewrite with axios instance
 class Service {
-  get = async (url) => {
-    const result = await fetch(url);
+    get = async (url) => {
+        const result = await fetch(url);
 
-    if (!result.ok) {
-      throw new Error(`Could not fetch ${url}, status: ${result.status}`);
+        if (!result.ok) {
+            throw new Error(`Could not fetch ${url}, status: ${result.status}`);
+        }
+
+        return await result.json();
     }
 
-    return await result.json();
-  }
+    post = async (url, data) => {
+        let result = await fetch(url, {
+            method: 'Post',
+            headers: {
+                accept: 'application/json',
+                "content-type": 'application/json'
+            },
+            body: data
+        });
 
-  post = async (url, data) => {
-    let result = await fetch(url, {
-        method: 'Post',
-        headers: {
-          accept: 'application/json',
-          "content-type": 'application/json'
-        },
-        body: data
-    });
-
-    return await result;
-};
+        return await result;
+    };
 }
 
 export default Service;

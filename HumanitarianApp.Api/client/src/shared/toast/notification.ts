@@ -9,7 +9,6 @@ export const showInfo = (message:string) => {
   });
 };
 
-
 export const showError = (message:string) => {
   toast.error(message, {
     position: "top-right",
