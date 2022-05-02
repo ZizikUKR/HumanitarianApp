@@ -6,7 +6,6 @@ import Header from "../header/Header";
 import Section from "../section/Section";
 import Footer from "../footer/Footer";
 import Agreement from '../agreement/Agreement';
-import Card from "../card/Card";
 
 import Service from '../../services/Service';
 

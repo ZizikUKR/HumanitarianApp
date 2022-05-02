@@ -4,12 +4,12 @@ import { isEmpty } from './isEmpty.jsx'
 import { setVolunteersCategory } from './setVolunteersCategory.jsx'
 import { removeHttpFromUrl } from "./removeHttpFromUrl";
 
-import './card.scss';
+import './volunteerСard.scss';
 import { useState, useEffect } from "react";
 import Footer from "../footer/Footer";
 
 
-const Card = () => {
+const VolunteerCard = () => {
 
   const [volunteerPostObj, setVolunteerPostObj ] = useState ({
     cardId: "",
@@ -123,7 +123,7 @@ const Card = () => {
                     <p className="card__contacts"><b>MFO:</b> {volunteerPostObj.mfo}</p>
                     <p className="card__contacts"><b>IBAN:</b> {volunteerPostObj.iban}</p>
                     <p className="card__contacts"><b>EDRPO:</b> {volunteerPostObj.edrpo}</p>
-                    {this.volunteerPostObj.accountnumber.length > 0 ?<p className="card__contacts"><b>PP:</b> {volunteerPostObj.accountNumber}</p> : null }
+                    <p className="card__contacts"><b>PP:</b> {volunteerPostObj.accountNumber}</p>
                 </div>
               </div>
             </div>
@@ -136,4 +136,4 @@ const Card = () => {
   );
   }
 
-  export default Card;
+  export default VolunteerCard;
