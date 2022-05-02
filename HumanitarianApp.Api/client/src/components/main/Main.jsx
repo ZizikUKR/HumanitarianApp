@@ -52,6 +52,7 @@ class Main extends Component {
           ],
           ads: [
             {
+              "cardId": "1",
               "select": "Перевезення",
               "name": "Петров Іван Сергійович",
               "telephone": "+38099112233",
@@ -71,6 +72,7 @@ class Main extends Component {
               "facebook": "https://www.facebook.com/kolomiiitsev/",
             },
             {
+              "cardId": "2",
               "select": "Гуманітарна допомога",
               "name": "Олександров Василь Петрович",
               "telephone": "+380669998877",
@@ -90,6 +92,7 @@ class Main extends Component {
               "facebook": "https://www.facebook.com/kolomiiitsev/",
             },
             {
+              "cardId": "3",
               "select": "Інше",
               "name": "Фомін Віталій Володимирович",
               "telephone": "+380674445566",
@@ -109,6 +112,7 @@ class Main extends Component {
               "facebook": "",
             },
             {
+              "cardId": "4",
               "select": "Гуманітарна допомога",
               "name": "Петров Александр Васильович",
               "telephone": "+380687778899",
@@ -128,6 +132,7 @@ class Main extends Component {
               "facebook": "https://www.facebook.com/kolomiiitsev/",
             },
             {
+              "cardId": "5",
               "select": "Медицина",
               "name": "Дубровський Георгій В'ячеславович",
               "telephone": "+380633211221",
@@ -147,6 +152,7 @@ class Main extends Component {
               "facebook": "https://www.facebook.com/kolomiiitsev/",
             },
             {
+              "cardId": "6",
               "select": "Ліки",
               "name": "Дубровський Георгій В'ячеславович",
               "telephone": "+380633211221",
@@ -295,6 +301,7 @@ class Main extends Component {
       .then((response) => {
         const volonteers = response.map((item) => {
           return {
+            cardId: this.isEmpty(item.id),
             select: this.setVolunteersCategory(item.category),
             name: this.isEmpty(item.name),
             telephone: this.isEmpty(item.phoneNumber),
@@ -312,6 +319,8 @@ class Main extends Component {
             iban: this.isEmpty(item.bankDetails?.iban),
             edrpou: this.isEmpty(item.bankDetails?.edrpo),
             accountnumber: this.isEmpty(item.bankDetails?.accountNumber),
+
+            
           };
         });
         let newsectionsData = Object.assign({}, this.state.sectionsData);
