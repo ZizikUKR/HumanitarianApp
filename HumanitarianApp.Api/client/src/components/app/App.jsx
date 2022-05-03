@@ -5,6 +5,7 @@ import AdminLogin from "../admin-login/AdminLogin";
 import VolunteerCard from "../volunteer-card/VolunteerCard";
 import AdminPanel from "../admin-panel/AdminPanel";
 import Page404 from "../page-404/Page404";
+import OrganizationCard from "../organization-card/OrganizationCard";
 
 import RequireAuth from "../../services/RequireAuth";
 import AuthProvider from "../../services/AuthProvider";
@@ -17,7 +18,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/card/:id" element={<VolunteerCard />} />
+        <Route path="/volunteer/:id" element={<VolunteerCard />} />
+        <Route path="/organization/:id" element={<OrganizationCard/>} />
         <Route path="/admin-panel" element={
           // <RequireAuth>
           //   <AdminPanel />
