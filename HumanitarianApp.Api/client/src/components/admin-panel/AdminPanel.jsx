@@ -209,7 +209,7 @@ export default class AdminPanel extends Component {
             city: this.isEmpty(item.city),
             address: this.isEmpty(item.address),
             text: this.isEmpty(item.description),
-            website: this.isEmpty(item.website),
+            webSite: this.isEmpty(item.webSite),
           };
         });
 
@@ -411,7 +411,7 @@ const AdminPanelAdList = (props) => {
   let keyCount = 0;
 
   const elements = props.ads.reverse().map(element => {
-    const {select, name, telephone, email, city, address, text, website, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber, instagram, telegram, facebook} = element;
+    const {select, name, telephone, email, city, address, text, webSite, cardnumber, fullbankname, shortbankname, mfo, iban, edrpou, accountnumber, instagram, telegram, facebook} = element;
     const {id} = props;
     
     return (
@@ -424,7 +424,7 @@ const AdminPanelAdList = (props) => {
         <p className="admin-ad-list__text">{text}</p>
         <div className="admin-ad-list__contacts">
           <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
-          {id === 1 && website.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Website: </span>{website}</p> : null}
+          {id === 1 && webSite.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">WebSite: </span>{webSite}</p> : null}
           <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Телефон: </span>{telephone}</p>
           {id === 0 && instagram.length > 0 ? <p className="admin-ad-list__contact"><span className="ad-list__bold">Instagram: </span>{instagram}</p>: null}
           {id === 0 && telegram.length > 0 ? <p className="admin-ad-list__contact"><span className="admin-ad-list__bold">Telegram: </span>{telegram}</p>: null}

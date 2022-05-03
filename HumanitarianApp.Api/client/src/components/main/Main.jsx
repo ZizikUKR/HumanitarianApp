@@ -181,21 +181,23 @@ class Main extends Component {
           filterButtons: [],
           ads: [
             {
+              "cardId": "1",
               "name": "Фірма",
               "telephone": "+380674445566",
               "email": "firma@qwerty.com",
               "city": "Львів",
               "address": "",
-              "website": "https://www.ruskiy-korabl.idi.na.xyi",
+              "webSite": "https://www.ruskiy-korabl.idi.na.xyi",
               "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sit ipsum neque. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi?."
             },
             {
+              "cardId": "2",
               "name": "Фірма",
               "telephone": "+380674445566",
               "email": "firma@qwerty.com",
               "city": "Львів",
               "address": "",
-              "website": "",
+              "webSite": "",
               "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore totam velit veniam eius a deleniti excepturi tenetur unde alias sunt quia aliquid, placeat aperiam odio voluptas. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam architecto numquam aliquam quas aspernatur voluptatibus harum non cumque excepturi?."
             }
           ]
@@ -345,13 +347,14 @@ class Main extends Component {
       .then((response) => {
         const organizations = response.map((item) => {
           return {
+            cardId: this.isEmpty(item.id),
             name: this.isEmpty(item.name),
             telephone: this.isEmpty(item.phoneNumber),
             email: this.isEmpty(item.email),
             city: this.isEmpty(item.city),
             address: this.isEmpty(item.address),
             text: this.isEmpty(item.description),
-            website: this.isEmpty(item.website),
+            webSite: this.isEmpty(item.webSite),
           };
         });
 

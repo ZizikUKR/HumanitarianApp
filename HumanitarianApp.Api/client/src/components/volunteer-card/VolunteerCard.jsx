@@ -1,4 +1,4 @@
-import Service from "../../services/Service";
+import Service from '../../services/Service.js';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from './isEmpty.jsx'
 import { setVolunteersCategory } from './setVolunteersCategory.jsx'
@@ -43,7 +43,7 @@ const VolunteerCard = () => {
         `${process.env.REACT_APP_API_URL}Volunteer/GetById?id=${id}`
       )
       .then((item) => {
-        const volonteer = {
+        const volunteer = {
           cardId: isEmpty(item.id),
           select: setVolunteersCategory(item.category),
           name: isEmpty(item.name),
@@ -63,7 +63,7 @@ const VolunteerCard = () => {
           edrpou: isEmpty(item.bankDetails?.edrpo),
           accountnumber: isEmpty(item.bankDetails?.accountNumber),
         };
-        setVolunteerPostObj(volonteer);
+        setVolunteerPostObj(volunteer);
       });
   };
 
@@ -116,7 +116,7 @@ const VolunteerCard = () => {
                     <p className="card__contacts"><b>Facebook: </b><a href={volunteerPostObj.facebook} target="_blank">{removeHttpFromUrl(volunteerPostObj.facebook)}</a></p>
                 </div>
                 <div className="card__information-mini">
-                  <p  className="card__information-title">Інформація банку</p>
+                  <p className="card__information-title">Інформація банку</p>
                     <p className="card__contacts"><b>Номер картки:</b> {volunteerPostObj.cardnumber}</p>
                     <p className="card__contacts"><b>Повна назва банку:</b> {volunteerPostObj.fullbankname}</p>
                     <p className="card__contacts"><b>Скорочена назва банку:</b> {volunteerPostObj.shortbankname}</p>
