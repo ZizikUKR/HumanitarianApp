@@ -1,12 +1,10 @@
-import Service from "../../services/Service";
+import Service from "shared/services/Service";
 import { useParams } from "react-router-dom";
 import { isEmpty } from "../volunteer-card/isEmpty";
 import { removeHttpFromUrl } from "../volunteer-card/removeHttpFromUrl";
 import { useState, useEffect } from "react";
 
 import './organizationCard.scss';
-import Footer from "../footer/Footer";
-import Header from "../header/Header";
 
 
 
@@ -95,7 +93,6 @@ const OrganizationCard = () => {
           </div>
         </div>
       </div>
-    <Footer />
     </>
     
   );

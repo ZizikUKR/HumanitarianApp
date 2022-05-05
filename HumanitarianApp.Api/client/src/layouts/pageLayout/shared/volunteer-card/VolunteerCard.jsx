@@ -1,4 +1,4 @@
-import Service from '../../services/Service.js';
+import Service from 'shared/services/Service.js';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from './isEmpty.jsx'
 import { setVolunteersCategory } from './setVolunteersCategory.jsx'
@@ -6,7 +6,6 @@ import { removeHttpFromUrl } from "./removeHttpFromUrl";
 
 import './volunteerСard.scss';
 import { useState, useEffect } from "react";
-import Footer from "../footer/Footer";
 
 
 const VolunteerCard = () => {
@@ -130,7 +129,6 @@ const VolunteerCard = () => {
           </div>
         </div>
       </div>
-    <Footer />
     </>
     
   );
