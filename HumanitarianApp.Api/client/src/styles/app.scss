@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'media';
+
+.container {
+  margin: 0 auto;
+  width: 1140px;
+}
+
+.subtitle {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+  color: $blue;
+  text-align: center;
+  &--white {
+    color: $white;
+    text-align: left;
+  }
+  &--black {
+    color: $black;
+  }
+}
