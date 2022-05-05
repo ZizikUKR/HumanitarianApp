@@ -1,9 +1,6 @@
+import VolunteerCard from "layouts/pageLayout/shared/volunteer-card/VolunteerCard";
 import React from "react";
-import {PageLayout} from "layouts/pageLayout/PageLayout";
-import {VolunteerContainer} from "container/volunteerConatiner/VolunteerContainer";
 
-export const VolunteerPage = () => (
-    <PageLayout pageName={"Волонтери"}>
-        <VolunteerContainer/>
-    </PageLayout>
-)
+export const VolunteerPage = () => {
+    return <VolunteerCard />
+}
