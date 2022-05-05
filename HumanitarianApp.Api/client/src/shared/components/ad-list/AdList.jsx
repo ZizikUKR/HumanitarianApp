@@ -36,65 +36,67 @@ class AdList extends Component {
             const {id} = this.props;
 
             return (
-                <div key={this.keyCount++} className="ad-list__item">
-                    <div className="subtitle">{select || name} - {city}</div>
-                    <ul className='ad-list__share'>
-                        <li>
-                            <a className="ad-list__share-link ad-list__share-link--fb" href="#">
-                                <span>Поділитися:</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a className="ad-list__share-link ad-list__share-link--telegram" href="#">
-                                <span>Поділитися:</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a className="ad-list__share-link ad-list__share-link--instagram" href="#">
-                                <span>Поділитися:</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p className="ad-list__text">{text}</p>
-                    <div className="ad-list__contacts">
-                        <p className="ad-list__contact"><span
-                            className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
-                        {id === 1 && website.length > 0 ?
-                            <p className="ad-list__contact"><span className="ad-list__bold">Website: </span><a
-                                href={website} target="_blank">{this.removeHttpFromUrl(website)}</a></p> : null}
-                        <p className="ad-list__contact"><span className="ad-list__bold">Телефон: </span>{telephone}</p>
-                        {id === 0 && instagram.length > 0 ?
-                            <p className="ad-list__contact"><span className="ad-list__bold">Instagram: </span><a
-                                href={instagram} target="_blank">{this.removeHttpFromUrl(instagram)}</a></p> : null}
-                        {id === 0 && telegram.length > 0 ?
-                            <p className="ad-list__contact"><span className="ad-list__bold">Telegram: </span><a
-                                href={telegram} target="_blank">{this.removeHttpFromUrl(telegram)}</a></p> : null}
-                        {id === 0 && facebook.length > 0 ?
-                            <p className="ad-list__contact"><span className="ad-list__bold">Facebook: </span><a
-                                href={facebook} target="_blank">{this.removeHttpFromUrl(facebook)}</a></p> : null}
-                        {email.length > 0 ?
-                            <p className="ad-list__contact"><span className="ad-list__bold">Email: </span>{email}
+                <div className="container">
+                    <div key={this.keyCount++} className="ad-list__item">
+                        <div className="subtitle">{select || name} - {city}</div>
+                        <ul className='ad-list__share'>
+                            <li>
+                                <a className="ad-list__share-link ad-list__share-link--fb" href="#">
+                                    <span>Поділитися:</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a className="ad-list__share-link ad-list__share-link--telegram" href="#">
+                                    <span>Поділитися:</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a className="ad-list__share-link ad-list__share-link--instagram" href="#">
+                                    <span>Поділитися:</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <p className="ad-list__text">{text}</p>
+                        <div className="ad-list__contacts">
+                            <p className="ad-list__contact"><span
+                                className="ad-list__bold">{id === 1 ? "Назва підприємства" : "Ім'я"}: </span>{name}</p>
+                            {id === 1 && website.length > 0 ?
+                                <p className="ad-list__contact"><span className="ad-list__bold">Website: </span><a
+                                    href={website} target="_blank">{this.removeHttpFromUrl(website)}</a></p> : null}
+                            <p className="ad-list__contact"><span className="ad-list__bold">Телефон: </span>{telephone}</p>
+                            {id === 0 && instagram.length > 0 ?
+                                <p className="ad-list__contact"><span className="ad-list__bold">Instagram: </span><a
+                                    href={instagram} target="_blank">{this.removeHttpFromUrl(instagram)}</a></p> : null}
+                            {id === 0 && telegram.length > 0 ?
+                                <p className="ad-list__contact"><span className="ad-list__bold">Telegram: </span><a
+                                    href={telegram} target="_blank">{this.removeHttpFromUrl(telegram)}</a></p> : null}
+                            {id === 0 && facebook.length > 0 ?
+                                <p className="ad-list__contact"><span className="ad-list__bold">Facebook: </span><a
+                                    href={facebook} target="_blank">{this.removeHttpFromUrl(facebook)}</a></p> : null}
+                            {email.length > 0 ?
+                                <p className="ad-list__contact"><span className="ad-list__bold">Email: </span>{email}
+                                </p> : null}
+                            <p className="ad-list__contact"><span
+                                className="ad-list__bold">Адреса: </span>м. {city}{address.length > 0 ? `, ${address}` : ''}
+                            </p>
+                            {id === 0 && cardnumber.length > 0 ? <p className="ad-list__contact"><span
+                                className="ad-list__bold">Номер картки: </span>{cardnumber}</p> : null}
+                            {id === 0 && fullbankname.length > 0 ? <p className="ad-list__contact"><span
+                                className="ad-list__bold">Повна назва банку: </span>{fullbankname}</p> : null}
+                            {id === 0 && shortbankname.length > 0 ? <p className="ad-list__contact"><span
+                                className="ad-list__bold">Скорочена назва банку: </span>{shortbankname}</p> : null}
+                            {id === 0 && mfo.length > 0 ?
+                                <p className="ad-list__contact"><span className="ad-list__bold">МФО: </span>{mfo}
+                                </p> : null}
+                            {id === 0 && iban.length > 0 ?
+                                <p className="ad-list__contact"><span className="ad-list__bold">IBAN: </span>{iban}
+                                </p> : null}
+                            {id === 0 && edrpou.length > 0 ? <p className="ad-list__contact"><span
+                                className="ad-list__bold">{edrpou.length === 8 ? 'ЄДРПОУ' : 'ІПН'}: </span>{edrpou}
                             </p> : null}
-                        <p className="ad-list__contact"><span
-                            className="ad-list__bold">Адреса: </span>м. {city}{address.length > 0 ? `, ${address}` : ''}
-                        </p>
-                        {id === 0 && cardnumber.length > 0 ? <p className="ad-list__contact"><span
-                            className="ad-list__bold">Номер картки: </span>{cardnumber}</p> : null}
-                        {id === 0 && fullbankname.length > 0 ? <p className="ad-list__contact"><span
-                            className="ad-list__bold">Повна назва банку: </span>{fullbankname}</p> : null}
-                        {id === 0 && shortbankname.length > 0 ? <p className="ad-list__contact"><span
-                            className="ad-list__bold">Скорочена назва банку: </span>{shortbankname}</p> : null}
-                        {id === 0 && mfo.length > 0 ?
-                            <p className="ad-list__contact"><span className="ad-list__bold">МФО: </span>{mfo}
-                            </p> : null}
-                        {id === 0 && iban.length > 0 ?
-                            <p className="ad-list__contact"><span className="ad-list__bold">IBAN: </span>{iban}
-                            </p> : null}
-                        {id === 0 && edrpou.length > 0 ? <p className="ad-list__contact"><span
-                            className="ad-list__bold">{edrpou.length === 8 ? 'ЄДРПОУ' : 'ІПН'}: </span>{edrpou}
-                        </p> : null}
-                        {id === 0 && accountnumber.length > 0 ? <p className="ad-list__contact"><span
-                            className="ad-list__bold">Розрахунковий рахунок: </span>{accountnumber}</p> : null}
+                            {id === 0 && accountnumber.length > 0 ? <p className="ad-list__contact"><span
+                                className="ad-list__bold">Розрахунковий рахунок: </span>{accountnumber}</p> : null}
+                        </div>
                     </div>
                 </div>
             )
