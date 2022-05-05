@@ -1,10 +1,10 @@
-import {ADVERTISEMENT_URL, ENTERPRISES_URL, VOLUNTEER_URL} from "../url/publicUrl.const";
+import {ADVERTISEMENT_URL, ENTERPRISES_URL, VOLUNTEERS_URL} from "../url/publicUrl.const";
 
 export const sectionMoc = {
     'Волонтери': {
         id: 0,
         name: 'Волонтери',
-        link:VOLUNTEER_URL,
+        link:VOLUNTEERS_URL,
         searchResult: '',
         filter: 'Усі категорії',
         filterButtons: [

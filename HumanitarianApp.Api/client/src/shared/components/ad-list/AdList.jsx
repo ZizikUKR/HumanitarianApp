@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Carousel} from 'react-responsive-carousel';
+import { Link } from 'react-router-dom';
 import leftArrow from 'assets/icons/slider-icons/left_arrow.svg';
 import rightArrow from 'assets/icons/slider-icons/right_arrow.svg';
 import './adList.scss';
@@ -14,6 +15,7 @@ class AdList extends Component {
     createAdsElements = () => {
         const elements = this.props.ads.reverse().map(element => {
             const {
+                cardId,
                 select,
                 name,
                 telephone,
@@ -38,7 +40,8 @@ class AdList extends Component {
             return (
                 <div className="container">
                     <div key={this.keyCount++} className="ad-list__item">
-                        <div className="subtitle">{select || name} - {city}</div>
+                    {id === 0  ? <div className="subtitle"><Link to={`/volunteer/${cardId}`}>{select || name} - {city}</Link></div> : null}
+                    {id === 1  ? <div className="subtitle"><Link to={`/organization/${cardId}`}>{select || name} - {city}</Link></div> : null}
                         <ul className='ad-list__share'>
                             <li>
                                 <a className="ad-list__share-link ad-list__share-link--fb" href="#">
